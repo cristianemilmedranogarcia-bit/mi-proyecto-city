@@ -11,7 +11,7 @@ import ItemCard from '@/components/ItemCard';
 import ScrollReveal from '@/components/ScrollReveal';
 import { Briefcase, Wrench, ShoppingBag, Building2, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
-export const revalidate = 0; // Dynamic rendering
+export const revalidate = 60;
 
 export default async function HomePage({ searchParams }: { searchParams: Promise<{ city?: string; state?: string }> }) {
   const resolvedParams = await searchParams;
