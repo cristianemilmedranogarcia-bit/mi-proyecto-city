@@ -37,49 +37,56 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
 
     const locationFilter = isAll ? {} : (city?.id ? { location: { cityId: city.id } } : {});
 
-    jobs = await prisma.job.findMany({
-      where: { status: 'active', ...locationFilter },
-      include: {
-        business: true,
-        category: true,
-        location: { include: { city: true } },
-      },
-      orderBy: { createdAt: 'desc' },
-      take: 6,
-    });
+    const [jobsRes, servicesRes, itemsRes, businessesRes, userSavedData] = await Promise.all([
+      prisma.job.findMany({
+        where: { status: 'active', ...locationFilter },
+        include: {
+          business: true,
+          category: true,
+          location: { include: { city: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+        take: 6,
+      }),
+      prisma.service.findMany({
+        where: { isActive: true, ...locationFilter },
+        include: {
+          provider: true,
+          category: true,
+          location: { include: { city: true } },
+        },
+        orderBy: { rating: 'desc' },
+        take: 6,
+      }),
+      prisma.marketplaceItem.findMany({
+        where: { status: 'AVAILABLE', ...locationFilter },
+        include: {
+          seller: true,
+          category: true,
+          location: { include: { city: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+        take: 8,
+      }),
+      prisma.business.findMany({
+        take: 4,
+        include: { location: { include: { city: true } } },
+      }),
+      user ? Promise.all([
+        prisma.savedJob.findMany({ where: { userId: user.id }, select: { jobId: true } }),
+        prisma.savedService.findMany({ where: { userId: user.id }, select: { serviceId: true } }),
+        prisma.savedItem.findMany({ where: { userId: user.id }, select: { itemId: true } }),
+        prisma.jobApplication.findMany({ where: { applicantId: user.id }, select: { jobId: true } }),
+      ]) : Promise.resolve(null)
+    ]);
 
-    services = await prisma.service.findMany({
-      where: { isActive: true, ...locationFilter },
-      include: {
-        provider: true,
-        category: true,
-        location: { include: { city: true } },
-      },
-      orderBy: { rating: 'desc' },
-      take: 6,
-    });
+    jobs = jobsRes;
+    services = servicesRes;
+    items = itemsRes;
+    businesses = businessesRes;
 
-    items = await prisma.marketplaceItem.findMany({
-      where: { status: 'AVAILABLE', ...locationFilter },
-      include: {
-        seller: true,
-        category: true,
-        location: { include: { city: true } },
-      },
-      orderBy: { createdAt: 'desc' },
-      take: 8,
-    });
-
-    businesses = await prisma.business.findMany({
-      take: 4,
-      include: { location: { include: { city: true } } },
-    });
-
-    if (user) {
-      const sj = await prisma.savedJob.findMany({ where: { userId: user.id }, select: { jobId: true } });
-      const ss = await prisma.savedService.findMany({ where: { userId: user.id }, select: { serviceId: true } });
-      const si = await prisma.savedItem.findMany({ where: { userId: user.id }, select: { itemId: true } });
-      const aj = await prisma.jobApplication.findMany({ where: { applicantId: user.id }, select: { jobId: true } });
+    if (userSavedData) {
+      const [sj, ss, si, aj] = userSavedData;
       savedJobIds = sj.map((item) => item.jobId);
       savedServiceIds = ss.map((item) => item.serviceId);
       savedItemIds = si.map((item) => item.itemId);
