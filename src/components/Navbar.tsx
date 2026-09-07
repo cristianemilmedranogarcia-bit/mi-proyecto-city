@@ -229,7 +229,7 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
         <div className="navbar-inner">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', flexShrink: 0, minWidth: '350px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Link href={getNavHref('/')} className="brand-logo" style={{ fontSize: '1.6rem', fontWeight: 800, letterSpacing: '-0.03em' }}>
+              <Link prefetch={true} href="/" className="brand-logo" style={{ fontSize: '1.6rem', fontWeight: 800, letterSpacing: '-0.03em' }}>
                 <span>Post<span style={{ color: '#16845d' }}>Place</span></span>
               </Link>
 
@@ -369,7 +369,7 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
               </li>
             ) : (
               <li>
-                <Link prefetch={true} href={getNavHref('/nearby')} className={`nav-link ${pathname.startsWith('/nearby') ? 'active' : ''}`}>
+                <Link prefetch={true} href="/nearby" className={`nav-link ${pathname.startsWith('/nearby') ? 'active' : ''}`}>
                   <Map size={17} strokeWidth={1.85} />
                   <span>Maps</span>
                 </Link>
@@ -384,7 +384,7 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
               </li>
             ) : (
               <li>
-                <Link prefetch={true} href={getNavHref('/saved')} className={`nav-link ${pathname.startsWith('/saved') ? 'active' : ''}`}>
+                <Link prefetch={true} href="/saved" className={`nav-link ${pathname.startsWith('/saved') ? 'active' : ''}`}>
                   <Bookmark size={17} strokeWidth={1.85} />
                   <span>Saved</span>
                 </Link>
