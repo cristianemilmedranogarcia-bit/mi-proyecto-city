@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Mark & Print | Estudio de Diseño en Línea</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&family=Outfit:wght@400;600;800&family=Cinzel:wght@600;700&family=Caveat:wght@600&family=Montserrat:wght@400;600;800&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --studio-bg: #eef0f3;
+      --sidebar-bg: #ffffff;
+      --header-bg: #ffffff;
+      --ink: #09090b;
+      --forest: #0e3b2e;
+      --forest-hover: #165644;
+      --border: #e4e4e7;
+      --accent: #2563eb;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--studio-bg);
+      color: var(--ink);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ══ HEADER BAR ══ */
+    .studio-header {
+      height: 62px;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      z-index: 50;
+      flex-shrink: 0;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    .studio-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.03em;
+    }
+
+    .studio-logo-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--forest);
+      color: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Serif', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+
+    .header-center-tools {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .tool-btn-group {
+      display: flex;
+      align-items: center;
+      background: #f1f1f4;
+      border-radius: 8px;
+      padding: 3px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      color: #52525b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .icon-btn:hover {
+      background: #ffffff;
+      color: var(--ink);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .icon-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .guide-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #52525b;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .guide-toggle-btn.active {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .header-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .price-display {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .btn-preview {
+      padding: 0.55rem 1.1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-preview:hover {
+      background: #f4f4f6;
+    }
+
+    .btn-primary-action {
+      padding: 0.6rem 1.3rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--forest);
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary-action:hover {
+      background: var(--forest-hover);
+    }
+
+    /* ══ MAIN STUDIO LAYOUT ══ */
+    .studio-main {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── LEFT NAV TABS ── */
+    .studio-left-nav {
+      width: 76px;
+      background: #ffffff;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 0.85rem;
+      gap: 0.5rem;
+      z-index: 20;
+    }
+
+    .nav-tab-item {
+      width: 62px;
+      height: 56px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      color: #71717a;
+      font-size: 0.65rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .nav-tab-item:hover {
+      background: #f4f4f6;
+      color: var(--ink);
+    }
+
+    .nav-tab-item.active {
+      background: #f0fdf4;
+      color: var(--forest);
+    }
+
+    .nav-tab-item .material-symbols-outlined {
+      font-size: 1.35rem;
+    }
+
+    /* ── TOOL PANEL DRAWER ── */
+    .studio-panel-drawer {
+      width: 320px;
+      background: #ffffff;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 15;
+      overflow-y: auto;
+    }
+
+    .panel-header {
+      padding: 1.25rem 1.25rem 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f4f4f6;
+    }
+
+    .panel-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .panel-content {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Form Controls */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #52525b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border 0.15s;
+      background: #fff;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--forest);
+      box-shadow: 0 0 0 3px rgba(14, 59, 46, 0.08);
+    }
+
+    .btn-block-action {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fafafa;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-block-action:hover {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      color: var(--forest);
+    }
+
+    /* Color Swatches Grid */
+    .color-swatches {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+
+    .swatch-btn {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.15s;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+    }
+
+    .swatch-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .swatch-btn.selected {
+      border-color: var(--forest);
+      transform: scale(1.08);
+    }
+
+    /* ── CANVAS WORKSPACE (CENTER) ── */
+    .canvas-workspace {
+      flex: 1;
+      background: #e4e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: auto;
+      padding: 3rem;
+    }
+
+    /* Card Canvas Frame */
+    .card-stage-container {
+      position: relative;
+      transition: transform 0.2s ease;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.16), 0 5px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      user-select: none;
+    }
+
+    .card-canvas {
+      width: 560px;
+      height: 320px;
+      background: #ffffff;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s ease;
+    }
+
+    /* Safety & Bleed Guide Lines */
+    .bleed-guide {
+      position: absolute;
+      inset: -14px;
+      border: 1.5px dashed rgba(239, 68, 68, 0.5);
+      pointer-events: none;
+      z-index: 40;
+      border-radius: 16px;
+    }
+
+    .safety-guide {
+      position: absolute;
+      inset: 18px;
+      border: 1.5px dashed rgba(34, 197, 94, 0.6);
+      pointer-events: none;
+      z-index: 40;
+      border-radius: 6px;
+    }
+
+    .guide-label {
+      position: absolute;
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .label-safety {
+      top: 6px;
+      right: 6px;
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+
+    .label-bleed {
+      top: -26px;
+      left: 0;
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fca5a5;
+    }
+
+    /* Canvas Elements */
+    .canvas-element {
+      position: absolute;
+      cursor: grab;
+      padding: 4px;
+      border: 1.5px dashed transparent;
+      transition: border-color 0.15s, outline 0.15s;
+      touch-action: none;
+      user-select: none;
+      transform-origin: center center;
+    }
+
+    .canvas-element:active {
+      cursor: grabbing;
+    }
+
+    .canvas-element:hover {
+      border-color: rgba(37, 99, 235, 0.4);
+    }
+
+    .canvas-element.active {
+      border: 1.5px solid var(--accent) !important;
+      border-radius: 4px;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+    }
+
+    /* Floating Toolbar Above Selected Element */
+    .element-controls {
+      position: absolute;
+      top: -42px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      gap: 3px;
+      background: #18181b;
+      padding: 4px 8px;
+      border-radius: 8px;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      white-space: nowrap;
+    }
+
+    .canvas-element.active .element-controls {
+      display: flex;
+    }
+
+    .el-btn {
+      color: #e4e4e7;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .el-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    /* Corner Resize Handles */
+    .resize-handle {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: none;
+      z-index: 101;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      touch-action: none;
+    }
+
+    .canvas-element.active .resize-handle {
+      display: block;
+    }
+
+    .rh-nw {
+      top: -7px;
+      left: -7px;
+      cursor: nwse-resize;
+    }
+
+    .rh-ne {
+      top: -7px;
+      right: -7px;
+      cursor: nesw-resize;
+    }
+
+    .rh-sw {
+      bottom: -7px;
+      left: -7px;
+      cursor: nesw-resize;
+    }
+
+    .rh-se {
+      bottom: -7px;
+      right: -7px;
+      cursor: nwse-resize;
+    }
+
+    /* ── RIGHT SIDE SWITCHER ── */
+    .studio-right-nav {
+      width: 130px;
+      background: #ffffff;
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 0.75rem;
+      gap: 1.25rem;
+      z-index: 20;
+    }
+
+    .side-thumb-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    .side-card-thumb {
+      width: 104px;
+      height: 60px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .side-thumb-wrap.active .side-card-thumb {
+      border-color: var(--forest);
+      box-shadow: 0 0 0 3px rgba(14, 59, 46, 0.15);
+    }
+
+    .thumb-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #52525b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .side-thumb-wrap.active .thumb-label {
+      color: var(--forest);
+    }
+
+    /* ══ PREVIEW MODAL ══ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .preview-modal-box {
+      background: #18181b;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 900px;
+      padding: 2.5rem;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      position: relative;
+    }
+
+    .preview-modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-mockup-stage {
+      perspective: 1000px;
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+
+    .mockup-card-3d {
+      width: 360px;
+      height: 206px;
+      border-radius: 12px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      transform: rotateY(-12deg) rotateX(8deg);
+      transition: transform 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mockup-card-3d:hover {
+      transform: rotateY(0deg) rotateX(0deg) scale(1.04);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER BAR -->
+  <header class="studio-header">
+    <a href="business-cards.html" class="studio-logo">
+      <div class="studio-logo-icon">S</div>
+      <span>Studio Mark &amp; Print</span>
+    </a>
+
+    <div class="header-center-tools">
+      <div class="tool-btn-group">
+        <button class="icon-btn" id="btn-undo" title="Deshacer" onclick="undoAction()"><span
+            class="material-symbols-outlined">undo</span></button>
+        <button class="icon-btn" id="btn-redo" title="Rehacer" onclick="redoAction()"><span
+            class="material-symbols-outlined">redo</span></button>
+      </div>
+
+      <div class="tool-btn-group">
+        <button class="icon-btn" title="Zoom Out" onclick="zoomCanvas(-0.1)"><span
+            class="material-symbols-outlined">zoom_out</span></button>
+        <span id="zoom-value" style="font-size: 0.78rem; font-weight: 700; padding: 0 6px; color: #52525b;">100%</span>
+        <button class="icon-btn" title="Zoom In" onclick="zoomCanvas(0.1)"><span
+            class="material-symbols-outlined">zoom_in</span></button>
+      </div>
+
+      <button class="guide-toggle-btn active" id="btn-toggle-guides" onclick="toggleGuides()">
+        <span class="material-symbols-outlined" style="font-size: 1.1rem;">grid_guides</span>
+        <span>Guías de Corte</span>
+      </button>
+    </div>
+
+    <div class="header-right-actions">
+      <div class="price-display" id="studio-price">$59.00</div>
+      <button class="btn-preview" onclick="openPreviewModal()">
+        <span class="material-symbols-outlined" style="font-size: 1.1rem;">visibility</span>
+        <span>Vista Previa</span>
+      </button>
+      <button class="btn-primary-action" onclick="finishDesignAndCart()">
+        <span>Añadir al Carrito</span>
+        <span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_forward</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN STUDIO WORKSPACE -->
+  <div class="studio-main">
+    <!-- LEFT NAV TAB BAR -->
+    <nav class="studio-left-nav">
+      <button class="nav-tab-item active" onclick="switchTab('text')">
+        <span class="material-symbols-outlined">title</span>
+        <span>Texto</span>
+      </button>
+      <button class="nav-tab-item" onclick="switchTab('uploads')">
+        <span class="material-symbols-outlined">upload_file</span>
+        <span>Subir</span>
+      </button>
+      <button class="nav-tab-item" onclick="switchTab('qrcode')">
+        <span class="material-symbols-outlined">qr_code_2</span>
+        <span>Código QR</span>
+      </button>
+      <button class="nav-tab-item" onclick="switchTab('background')">
+        <span class="material-symbols-outlined">palette</span>
+        <span>Fondo</span>
+      </button>
+      <button class="nav-tab-item" onclick="switchTab('shapes')">
+        <span class="material-symbols-outlined">shapes</span>
+        <span>Formas</span>
+      </button>
+      <button class="nav-tab-item" onclick="switchTab('templates')">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Diseños</span>
+      </button>
+    </nav>
+
+    <!-- DRAWER PANEL -->
+    <aside class="studio-panel-drawer" id="panel-drawer">
+
+      <!-- TEXT PANEL -->
+      <div class="panel-tab-content" id="tab-text">
+        <div class="panel-header">
+          <div class="panel-title">Opciones de Texto</div>
+        </div>
+        <div class="panel-content">
+          <button class="btn-block-action" onclick="addTextElement('Nuevo Título', 24, 'bold')">
+            <span class="material-symbols-outlined">add</span>
+            <span>Añadir Título</span>
+          </button>
+          <button class="btn-block-action" onclick="addTextElement('Subtítulo o Cargo', 14, 'normal')">
+            <span class="material-symbols-outlined">add</span>
+            <span>Añadir Subtítulo</span>
+          </button>
+          <button class="btn-block-action" onclick="addTextElement('contacto@tuempresa.com · +1 800 555 0199', 11, 'normal')">
+            <span class="material-symbols-outlined">add</span>
+            <span>Añadir Texto de Contacto</span>
+          </button>
+
+          <hr style="border: none; border-top: 1px solid var(--border); margin: 0.5rem 0;">
+
+          <div id="text-properties" style="display: none;" class="space-y-4">
+            <div class="form-group">
+              <label class="form-label">Contenido de Texto</label>
+              <textarea class="form-input h-20 resize-none" id="prop-text-content" oninput="updateActiveTextContent(this.value)"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Fuente</label>
+              <select class="form-select" id="prop-font-family" onchange="updateActiveTextStyle('fontFamily', this.value)">
+                <option value="Inter">Inter (Sans-Serif)</option>
+                <option value="Noto Serif">Noto Serif (Clásica)</option>
+                <option value="Playfair Display">Playfair Display (Elegante)</option>
+                <option value="Outfit">Outfit (Moderna)</option>
+                <option value="Cinzel">Cinzel (Lujo Serif)</option>
+                <option value="Montserrat">Montserrat (Limpia)</option>
+                <option value="Caveat">Caveat (Manuscrita)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+              <div class="form-group">
+                <label class="form-label">Tamaño</label>
+                <input type="number" class="form-input" id="prop-font-size" min="8" max="72" oninput="updateActiveTextStyle('fontSize', parseInt(this.value) || 14)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Color</label>
+                <input type="color" class="form-input h-10 p-1 cursor-pointer" id="prop-text-color" oninput="updateActiveTextStyle('color', this.value)">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="flex justify-between items-center">
+                <label class="form-label">Rotación 360°</label>
+                <span class="text-xs font-bold text-emerald-800" id="text-rotation-val">0°</span>
+              </div>
+              <input type="range" min="0" max="360" value="0" class="w-full accent-emerald-800 cursor-pointer" id="prop-text-rotation-slider" oninput="updateActiveElementRotation(parseInt(this.value))">
+            </div>
+
+            <div class="form-group">
+              <div class="flex justify-between items-center">
+                <label class="form-label">Opacidad (Transparencia)</label>
+                <span class="text-xs font-bold text-emerald-800" id="text-opacity-val">100%</span>
+              </div>
+              <input type="range" min="10" max="100" value="100" class="w-full accent-emerald-800 cursor-pointer" id="prop-text-opacity-slider" oninput="updateActiveElementOpacity(parseInt(this.value)/100)">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Alineación</label>
+              <div class="flex gap-2 bg-zinc-100 p-1 rounded-lg">
+                <button class="flex-1 py-1.5 rounded text-center hover:bg-white text-xs font-bold" onclick="updateActiveTextStyle('textAlign', 'left')">Izquierda</button>
+                <button class="flex-1 py-1.5 rounded text-center hover:bg-white text-xs font-bold" onclick="updateActiveTextStyle('textAlign', 'center')">Centro</button>
+                <button class="flex-1 py-1.5 rounded text-center hover:bg-white text-xs font-bold" onclick="updateActiveTextStyle('textAlign', 'right')">Derecha</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPLOADS PANEL -->
+      <div class="panel-tab-content" id="tab-uploads" style="display: none;">
+        <div class="panel-header">
+          <div class="panel-title">Subir Imagen o Logo</div>
+        </div>
+        <div class="panel-content space-y-3">
+          <div class="border-2 border-dashed border-zinc-200 rounded-xl p-6 text-center hover:border-emerald-700 transition-colors cursor-pointer relative bg-zinc-50">
+            <input type="file" id="upload-file-input" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" onchange="handleImageUpload(event)">
+            <span class="material-symbols-outlined text-4xl text-emerald-800 mb-2">cloud_upload</span>
+            <div class="font-bold text-sm text-zinc-900">Subir Logo o Imagen</div>
+            <div class="text-xs text-zinc-500 mt-1">PNG, JPG, SVG o WEBP</div>
+          </div>
+
+          <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900 leading-relaxed font-medium">
+            💡 <b>Tip Canva:</b> Arrastra tu imagen sobre cualquier círculo en la tarjeta y se encajará automáticamente adentro.
+          </div>
+
+          <!-- IMAGE RESIZE & ADJUST CONTROLS DRAWER -->
+          <div id="image-properties" style="display: none;" class="space-y-4 pt-3 border-t border-zinc-200">
+            <div class="form-label text-emerald-800 font-extrabold flex items-center gap-1">
+              <span class="material-symbols-outlined text-base">tune</span>
+              <span>Ajustar Imagen Seleccionada</span>
+            </div>
+
+            <!-- MASK CIRCLE TOGGLE BUTTON -->
+            <div class="form-group">
+              <label class="form-label">Forma del Marco</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button class="py-2 px-3 bg-zinc-100 hover:bg-emerald-50 hover:text-emerald-800 rounded-lg text-xs font-bold border flex items-center justify-center gap-1.5" onclick="toggleActiveImageShape(false)">
+                  <span class="material-symbols-outlined text-base">square</span>
+                  <span>Rectangular</span>
+                </button>
+                <button class="py-2 px-3 bg-emerald-700 text-white rounded-lg text-xs font-bold border flex items-center justify-center gap-1.5 shadow-sm" onclick="toggleActiveImageShape(true)">
+                  <span class="material-symbols-outlined text-base">circle</span>
+                  <span>Marco Circular</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Filtros de Imagen Estilo Canva</label>
+              <select class="form-select" id="prop-image-filter" onchange="updateActiveImageFilter(this.value)">
+                <option value="none">Original / Ninguno</option>
+                <option value="grayscale(100%)">Blanco y Negro</option>
+                <option value="sepia(100%)">Sepia Vintage</option>
+                <option value="contrast(150%)">Alto Contraste</option>
+                <option value="brightness(125%)">Brillante</option>
+                <option value="saturate(200%)">Colores Intensos</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <div class="flex justify-between items-center">
+                <label class="form-label">Rotación 360°</label>
+                <span class="text-xs font-bold text-emerald-800" id="image-rotation-val">0°</span>
+              </div>
+              <input type="range" min="0" max="360" value="0" class="w-full accent-emerald-800 cursor-pointer" id="prop-image-rotation-slider" oninput="updateActiveElementRotation(parseInt(this.value))">
+            </div>
+
+            <div class="form-group">
+              <div class="flex justify-between items-center">
+                <label class="form-label">Opacidad (Transparencia)</label>
+                <span class="text-xs font-bold text-emerald-800" id="image-opacity-val">100%</span>
+              </div>
+              <input type="range" min="10" max="100" value="100" class="w-full accent-emerald-800 cursor-pointer" id="prop-image-opacity-slider" oninput="updateActiveElementOpacity(parseInt(this.value)/100)">
+            </div>
+
+            <div class="form-group">
+              <div class="flex justify-between items-center">
+                <label class="form-label">Tamaño / Ancho</label>
+                <span class="text-xs font-bold text-emerald-800" id="image-size-val">180px</span>
+              </div>
+              <input type="range" min="40" max="480" value="180" class="w-full accent-emerald-800 cursor-pointer" id="prop-image-width-slider" oninput="updateActiveImageWidth(parseInt(this.value))">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Alineación Rápida</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button class="py-1.5 px-2 bg-zinc-100 hover:bg-zinc-200 rounded text-xs font-bold border flex items-center justify-center gap-1" onclick="alignActiveElement('center-x')">
+                  <span class="material-symbols-outlined text-sm">format_align_center</span>
+                  <span>Centrar Horiz.</span>
+                </button>
+                <button class="py-1.5 px-2 bg-zinc-100 hover:bg-zinc-200 rounded text-xs font-bold border flex items-center justify-center gap-1" onclick="alignActiveElement('center-y')">
+                  <span class="material-symbols-outlined text-sm">vertical_align_center</span>
+                  <span>Centrar Vert.</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-label mt-2">Imágenes Subidas</div>
+          <div class="grid grid-cols-2 gap-2" id="upload-gallery">
+            <div class="text-xs text-zinc-400 text-center col-span-2 py-4">No has subido imágenes aún</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QR CODE GENERATOR PANEL -->
+      <div class="panel-tab-content" id="tab-qrcode" style="display: none;">
+        <div class="panel-header">
+          <div class="panel-title">Código QR Interactivo</div>
+        </div>
+        <div class="panel-content space-y-4">
+          <div class="text-xs text-zinc-500">Genera un Código QR escaneable para tu sitio web, WhatsApp o redes sociales en tu tarjeta.</div>
+          
+          <div class="form-group">
+            <label class="form-label">Enlace o Teléfono (URL)</label>
+            <input type="text" id="qr-input-url" class="form-input" placeholder="https://tuempresa.com o +1 (800) 555-0199" value="https://studiomarkprint.com">
+          </div>
+
+          <button class="btn-primary-action w-full justify-center py-3" onclick="generateAndAddQRCode()">
+            <span class="material-symbols-outlined text-lg">qr_code_2</span>
+            <span>Insertar Código QR</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- BACKGROUND PANEL -->
+      <div class="panel-tab-content" id="tab-background" style="display: none;">
+        <div class="panel-header">
+          <div class="panel-title">Color de Fondo</div>
+        </div>
+        <div class="panel-content">
+          <div class="form-group">
+            <label class="form-label">Color Personalizado</label>
+            <input type="color" class="form-input h-12 p-1 cursor-pointer" id="bg-color-input" value="#ffffff" oninput="setCanvasBgColor(this.value)">
+          </div>
+
+          <div class="form-label mt-2">Paleta Recomendada</div>
+          <div class="color-swatches">
+            <button class="swatch-btn" style="background: #ffffff;" title="Blanco Puro" onclick="setCanvasBgColor('#ffffff')"></button>
+            <button class="swatch-btn" style="background: #09090b;" title="Negro Profundo" onclick="setCanvasBgColor('#09090b')"></button>
+            <button class="swatch-btn" style="background: #0e3b2e;" title="Verde Bosque" onclick="setCanvasBgColor('#0e3b2e')"></button>
+            <button class="swatch-btn" style="background: #faf7f2;" title="Crema Marfil" onclick="setCanvasBgColor('#faf7f2')"></button>
+            <button class="swatch-btn" style="background: #172554;" title="Azul Noche" onclick="setCanvasBgColor('#172554')"></button>
+            <button class="swatch-btn" style="background: #e2e8f0;" title="Gris Minimal" onclick="setCanvasBgColor('#e2e8f0')"></button>
+            <button class="swatch-btn" style="background: #78350f;" title="Terracota" onclick="setCanvasBgColor('#78350f')"></button>
+            <button class="swatch-btn" style="background: #fef08a;" title="Dorado Suave" onclick="setCanvasBgColor('#fef08a')"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHAPES & VECTOR ICONS PANEL -->
+      <div class="panel-tab-content" id="tab-shapes" style="display: none;">
+        <div class="panel-header">
+          <div class="panel-title">Formas &amp; Íconos Vectoriales</div>
+        </div>
+        <div class="panel-content space-y-4">
+          <div class="form-label">Formas Básicas</div>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="btn-block-action flex-col py-3" onclick="addShapeElement('line')">
+              <span class="material-symbols-outlined">horizontal_rule</span>
+              <span>Línea Divisora</span>
+            </button>
+            <button class="btn-block-action flex-col py-3" onclick="addShapeElement('rect')">
+              <span class="material-symbols-outlined">square</span>
+              <span>Rectángulo</span>
+            </button>
+            <button class="btn-block-action flex-col py-3" onclick="addShapeElement('circle')">
+              <span class="material-symbols-outlined">circle</span>
+              <span>Círculo Sólido</span>
+            </button>
+            <button class="btn-block-action flex-col py-3" onclick="addShapeElement('dot')">
+              <span class="material-symbols-outlined">fiber_manual_record</span>
+              <span>Punto Accent</span>
+            </button>
+          </div>
+
+          <div class="form-label pt-2">Íconos de Contacto</div>
+          <div class="grid grid-cols-4 gap-2">
+            <button class="p-2 border rounded-lg bg-zinc-50 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-500 transition-all flex flex-col items-center gap-1 text-xs" onclick="addVectorIcon('call', 'Teléfono')">
+              <span class="material-symbols-outlined text-xl">call</span>
+              <span>Teléfono</span>
+            </button>
+            <button class="p-2 border rounded-lg bg-zinc-50 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-500 transition-all flex flex-col items-center gap-1 text-xs" onclick="addVectorIcon('mail', 'Email')">
+              <span class="material-symbols-outlined text-xl">mail</span>
+              <span>Email</span>
+            </button>
+            <button class="p-2 border rounded-lg bg-zinc-50 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-500 transition-all flex flex-col items-center gap-1 text-xs" onclick="addVectorIcon('language', 'Web')">
+              <span class="material-symbols-outlined text-xl">language</span>
+              <span>Web</span>
+            </button>
+            <button class="p-2 border rounded-lg bg-zinc-50 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-500 transition-all flex flex-col items-center gap-1 text-xs" onclick="addVectorIcon('location_on', 'Mapa')">
+              <span class="material-symbols-outlined text-xl">location_on</span>
+              <span>Ubicación</span>
+            </button>
+            <button class="p-2 border rounded-lg bg-zinc-50 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-500 transition-all flex flex-col items-center gap-1 text-xs" onclick="addVectorIcon('chat', 'Chat')">
+              <span class="material-symbols-outlined text-xl">chat</span>
+              <span>WhatsApp</span>
+            </button>
+            <button class="p-2 border rounded-lg bg-zinc-50 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-500 transition-all flex flex-col items-center gap-1 text-xs" onclick="addVectorIcon('photo_camera', 'Cámara')">
+              <span class="material-symbols-outlined text-xl">photo_camera</span>
+              <span>Instagram</span>
+            </button>
+            <button class="p-2 border rounded-lg bg-zinc-50 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-500 transition-all flex flex-col items-center gap-1 text-xs" onclick="addVectorIcon('business', 'Empresa')">
+              <span class="material-symbols-outlined text-xl">business</span>
+              <span>Negocio</span>
+            </button>
+            <button class="p-2 border rounded-lg bg-zinc-50 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-500 transition-all flex flex-col items-center gap-1 text-xs" onclick="addVectorIcon('star', 'Estrella')">
+              <span class="material-symbols-outlined text-xl">star</span>
+              <span>Estrella</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEMPLATES PANEL -->
+      <div class="panel-tab-content" id="tab-templates" style="display: none;">
+        <div class="panel-header">
+          <div class="panel-title">Diseños Preestablecidos</div>
+        </div>
+        <div class="panel-content space-y-3">
+          <div class="border rounded-xl p-3 bg-zinc-50 cursor-pointer hover:border-emerald-700 transition-all" onclick="applyTemplate('minimal')">
+            <div class="font-bold text-sm">Minimalista Serif</div>
+            <div class="text-xs text-zinc-500">Diseño limpio y elegante para marcas ejecutivas</div>
+          </div>
+          <div class="border rounded-xl p-3 bg-zinc-50 cursor-pointer hover:border-emerald-700 transition-all" onclick="applyTemplate('modern')">
+            <div class="font-bold text-sm">Corporativo Moderno</div>
+            <div class="text-xs text-zinc-500">Formato oscuro con acentos verdes y contraste alto</div>
+          </div>
+          <div class="border rounded-xl p-3 bg-zinc-50 cursor-pointer hover:border-emerald-700 transition-all" onclick="applyTemplate('creative')">
+            <div class="font-bold text-sm">Estudio Creativo</div>
+            <div class="text-xs text-zinc-500">Tipografía destacada y diagramación asimétrica</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CANVAS CENTER WORKSPACE -->
+    <main class="canvas-workspace" id="canvas-workspace" onclick="deselectAllElements(event)">
+      <div class="card-stage-container" id="stage-container">
+
+        <!-- BLEED & SAFETY OVERLAYS -->
+        <div class="bleed-guide" id="guide-bleed">
+          <span class="guide-label label-bleed">Sangrado / Bleed (3.62" × 2.12")</span>
+        </div>
+        <div class="safety-guide" id="guide-safety">
+          <span class="guide-label label-safety">Zona Segura / Safety Area</span>
+        </div>
+
+        <!-- ACTUAL CARD CANVAS -->
+        <div class="card-canvas" id="card-canvas">
+          <!-- Canvas elements will be rendered dynamically here -->
+        </div>
+
+      </div>
+    </main>
+
+    <!-- RIGHT FRONT / BACK SWITCHER -->
+    <aside class="studio-right-nav">
+      <div class="side-thumb-wrap active" id="wrap-front" onclick="switchCardSide('front')">
+        <div class="side-card-thumb" id="thumb-front-box" style="background: #ffffff;">
+          <span style="font-size: 0.65rem; font-weight: 800; color: #0e3b2e;">FRENTE</span>
+        </div>
+        <span class="thumb-label">Frente</span>
+      </div>
+
+      <div class="side-thumb-wrap" id="wrap-back" onclick="switchCardSide('back')">
+        <div class="side-card-thumb" id="thumb-back-box" style="background: #0e3b2e;">
+          <span style="font-size: 0.65rem; font-weight: 800; color: #ffffff;">REVERSO</span>
+        </div>
+        <span class="thumb-label">Reverso</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- PREVIEW MODAL -->
+  <div class="modal-overlay" id="preview-modal">
+    <div class="preview-modal-box">
+      <button class="preview-modal-close" onclick="closePreviewModal()"><span class="material-symbols-outlined">close</span></button>
+
+      <div class="text-center">
+        <div class="text-2xl font-bold font-serif mb-1">Vista Previa Realista</div>
+        <div class="text-zinc-400 text-sm">Tarjetas de Presentación de Studio Mark &amp; Print</div>
+      </div>
+
+      <div class="preview-mockup-stage">
+        <div>
+          <div class="text-xs text-zinc-400 font-bold uppercase tracking-widest text-center mb-3">Lado Frontal</div>
+          <div class="mockup-card-3d" id="modal-card-front"></div>
+        </div>
+        <div>
+          <div class="text-xs text-zinc-400 font-bold uppercase tracking-widest text-center mb-3">Lado Reverso</div>
+          <div class="mockup-card-3d" id="modal-card-back"></div>
+        </div>
+      </div>
+
+      <button class="btn-primary-action px-8 py-3 text-base" onclick="closePreviewModal(); finishDesignAndCart();">
+        <span>Confirmar y Agregar al Carrito →</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script src="cart.js"></script>
+  <script>
+    // --- STATE ENGINE ---
+    let currentSide = 'front'; // 'front' | 'back'
+    let currentZoom = 1;
+    let guidesVisible = true;
+    let activeElementId = null;
+    let undoStack = [];
+    let redoStack = [];
+
+    // Helper: Is Color Dark?
+    function isDarkColor(hex) {
+      if (!hex || hex.length < 6) return false;
+      const c = hex.replace('#', '');
+      const r = parseInt(c.substr(0, 2), 16);
+      const g = parseInt(c.substr(2, 2), 16);
+      const b = parseInt(c.substr(4, 2), 16);
+      const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+      return brightness < 128;
+    }
+
+    // Card Side Data Structures
+    const cardData = {
+      front: {
+        bgColor: '#ffffff',
+        elements: []
+      },
+      back: {
+        bgColor: '#0e3b2e',
+        elements: []
+      }
+    };
+
+    // Initialize Default Elements (Blank Canvas)
+    function initDefaultElements() {
+      cardData.front.elements = [];
+      cardData.back.elements = [];
+      renderCanvas();
+    }
+
+    // Save State for Undo History
+    function saveHistoryState() {
+      undoStack.push(JSON.parse(JSON.stringify(cardData)));
+      if (undoStack.length > 30) undoStack.shift();
+      redoStack = [];
+      updateUndoRedoButtons();
+    }
+
+    function undoAction() {
+      if (undoStack.length === 0) return;
+      redoStack.push(JSON.parse(JSON.stringify(cardData)));
+      const prevState = undoStack.pop();
+      Object.assign(cardData, prevState);
+      renderCanvas();
+      updateUndoRedoButtons();
+    }
+
+    function redoAction() {
+      if (redoStack.length === 0) return;
+      undoStack.push(JSON.parse(JSON.stringify(cardData)));
+      const nextState = redoStack.pop();
+      Object.assign(cardData, nextState);
+      renderCanvas();
+      updateUndoRedoButtons();
+    }
+
+    function updateUndoRedoButtons() {
+      document.getElementById('btn-undo').disabled = undoStack.length === 0;
+      document.getElementById('btn-redo').disabled = redoStack.length === 0;
+    }
+
+    // --- RENDER CANVAS ENGINE ---
+    function renderCanvas() {
+      const canvas = document.getElementById('card-canvas');
+      const sideData = cardData[currentSide];
+
+      canvas.style.backgroundColor = sideData.bgColor;
+      canvas.innerHTML = '';
+
+      sideData.elements.forEach(el => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'canvas-element' + (el.id === activeElementId ? ' active' : '');
+        wrapper.id = 'node_' + el.id;
+        wrapper.style.left = el.x + 'px';
+        wrapper.style.top = el.y + 'px';
+
+        if (el.rotation) wrapper.style.transform = `rotate(${el.rotation}deg)`;
+        if (el.opacity !== undefined) wrapper.style.opacity = el.opacity;
+
+        if (el.type === 'text') {
+          wrapper.style.fontFamily = el.fontFamily || 'Inter';
+          wrapper.style.fontSize = (el.fontSize || 14) + 'px';
+          wrapper.style.color = el.color || '#000000';
+          wrapper.style.fontWeight = el.fontWeight || 'normal';
+          wrapper.style.textAlign = el.textAlign || 'left';
+          wrapper.style.whiteSpace = 'pre';
+          wrapper.innerText = el.text;
+        } else if (el.type === 'image') {
+          const img = document.createElement('img');
+          img.src = el.src;
+          const w = el.width || 180;
+          img.style.width = w + 'px';
+          img.style.height = el.isCircle ? w + 'px' : 'auto';
+          img.style.borderRadius = el.isCircle ? '50%' : '0';
+          img.style.objectFit = 'cover';
+          if (el.filter) img.style.filter = el.filter;
+          img.style.pointerEvents = 'none';
+          img.style.display = 'block';
+          wrapper.appendChild(img);
+        } else if (el.type === 'icon') {
+          const iconSpan = document.createElement('span');
+          iconSpan.className = 'material-symbols-outlined';
+          iconSpan.style.fontSize = (el.width || 24) + 'px';
+          iconSpan.style.color = el.color || (isDarkColor(sideData.bgColor) ? '#ffffff' : '#0e3b2e');
+          iconSpan.style.display = 'block';
+          iconSpan.style.userSelect = 'none';
+          iconSpan.innerText = el.iconName || 'call';
+          wrapper.appendChild(iconSpan);
+        } else if (el.type === 'line') {
+          const line = document.createElement('div');
+          line.style.width = (el.width || 80) + 'px';
+          line.style.height = (el.height || 2) + 'px';
+          line.style.backgroundColor = el.color || '#000000';
+          wrapper.appendChild(line);
+        } else if (el.type === 'rect') {
+          const rect = document.createElement('div');
+          rect.style.width = (el.width || 60) + 'px';
+          rect.style.height = (el.height || 60) + 'px';
+          rect.style.backgroundColor = el.color || '#000000';
+          rect.style.borderRadius = (el.borderRadius || 4) + 'px';
+          wrapper.appendChild(rect);
+        } else if (el.type === 'circle') {
+          const circle = document.createElement('div');
+          circle.style.width = (el.width || 60) + 'px';
+          circle.style.height = (el.height || 60) + 'px';
+          circle.style.backgroundColor = el.color || '#000000';
+          circle.style.borderRadius = '50%';
+          wrapper.appendChild(circle);
+        }
+
+        // Element Controls Bar (Floating Top Toolbar)
+        const controls = document.createElement('div');
+        controls.className = 'element-controls';
+        controls.innerHTML = `
+          <button class="el-btn" title="Mover Izquierda" onclick="nudgeActiveElement(-5, 0, event)"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span></button>
+          <button class="el-btn" title="Mover Derecha" onclick="nudgeActiveElement(5, 0, event)"><span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></button>
+          <button class="el-btn" title="Mover Arriba" onclick="nudgeActiveElement(0, -5, event)"><span class="material-symbols-outlined" style="font-size:16px;">arrow_upward</span></button>
+          <button class="el-btn" title="Mover Abajo" onclick="nudgeActiveElement(0, 5, event)"><span class="material-symbols-outlined" style="font-size:16px;">arrow_downward</span></button>
+          <button class="el-btn" title="Reducir" onclick="resizeActiveElement(-20, event)"><span class="material-symbols-outlined" style="font-size:16px;">remove</span></button>
+          <button class="el-btn" title="Agrandar" onclick="resizeActiveElement(20, event)"><span class="material-symbols-outlined" style="font-size:16px;">add</span></button>
+          <button class="el-btn" title="Girar -15°" onclick="rotateActiveElement(-15, event)"><span class="material-symbols-outlined" style="font-size:15px;">rotate_left</span></button>
+          <button class="el-btn" title="Girar +15°" onclick="rotateActiveElement(15, event)"><span class="material-symbols-outlined" style="font-size:15px;">rotate_right</span></button>
+          ${el.type === 'image' ? `<button class="el-btn" title="${el.isCircle ? 'Forma Rectangular' : 'Marco Circular'}" onclick="toggleActiveImageShape(!${el.isCircle}, event)"><span class="material-symbols-outlined" style="font-size:16px;">${el.isCircle ? 'square' : 'circle'}</span></button>` : ''}
+          <button class="el-btn" title="Traer al Frente" onclick="bringToFront('${el.id}', event)"><span class="material-symbols-outlined" style="font-size:15px;">flip_to_front</span></button>
+          <button class="el-btn" title="Enviar al Fondo" onclick="sendToBack('${el.id}', event)"><span class="material-symbols-outlined" style="font-size:15px;">flip_to_back</span></button>
+          <button class="el-btn" title="Duplicar" onclick="duplicateActiveElement('${el.id}', event)"><span class="material-symbols-outlined" style="font-size:15px;">content_copy</span></button>
+          <button class="el-btn" title="Eliminar" onclick="deleteActiveElement('${el.id}', event)"><span class="material-symbols-outlined" style="font-size:15px; color:#f87171;">delete</span></button>
+        `;
+        wrapper.appendChild(controls);
+
+        // Corner Resize Handles with Drag-to-Resize Engine
+        if (el.id === activeElementId) {
+          const handles = ['rh-nw', 'rh-ne', 'rh-sw', 'rh-se'];
+          handles.forEach(hClass => {
+            const rh = document.createElement('div');
+            rh.className = 'resize-handle ' + hClass;
+            makeElementResizable(rh, wrapper, el, hClass);
+            wrapper.appendChild(rh);
+          });
+        }
+
+        // Make Element Draggable (Ultra-smooth Pointer Engine)
+        makeElementDraggable(wrapper, el);
+
+        wrapper.onclick = function(e) {
+          e.stopPropagation();
+          selectElement(el.id);
+        };
+
+        canvas.appendChild(wrapper);
+      });
+
+      // Update Right Sidebar Thumbnails
+      document.getElementById('thumb-front-box').style.backgroundColor = cardData.front.bgColor;
+      document.getElementById('thumb-back-box').style.backgroundColor = cardData.back.bgColor;
+    }
+
+    // --- ULTRA-SMOOTH UNINTERRUPTED POINTER DRAG ENGINE WITH SHAPE SNAPPING ---
+    function makeElementDraggable(elmnt, elData) {
+      elmnt.onpointerdown = function(e) {
+        if (e.target.closest('.element-controls') || e.target.closest('.resize-handle')) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (activeElementId !== elData.id) {
+          activeElementId = elData.id;
+          renderCanvas();
+          const newlyRenderedNode = document.getElementById('node_' + elData.id);
+          if (newlyRenderedNode && newlyRenderedNode.onpointerdown) {
+            newlyRenderedNode.onpointerdown(e);
+            return;
+          }
+        }
+
+        try {
+          elmnt.setPointerCapture(e.pointerId);
+        } catch(err) {}
+
+        let startMouseX = e.clientX;
+        let startMouseY = e.clientY;
+        let startElX = elData.x;
+        let startElY = elData.y;
+        let targetSnapShape = null;
+
+        function onPointerMove(moveEvt) {
+          moveEvt.preventDefault();
+          let deltaX = (moveEvt.clientX - startMouseX) / currentZoom;
+          let deltaY = (moveEvt.clientY - startMouseY) / currentZoom;
+
+          let newX = Math.round(startElX + deltaX);
+          let newY = Math.round(startElY + deltaY);
+
+          elmnt.style.left = newX + 'px';
+          elmnt.style.top = newY + 'px';
+
+          elData.x = newX;
+          elData.y = newY;
+
+          // Drag-to-Shape Snap Detection for Images
+          if (elData.type === 'image') {
+            const sideData = cardData[currentSide];
+            const imgCenterX = newX + (elData.width || 180) / 2;
+            const imgCenterY = newY + ((elData.width || 180) / 2);
+
+            document.querySelectorAll('.canvas-element').forEach(n => {
+              if (n.id !== 'node_' + elData.id) n.style.outline = '';
+            });
+
+            targetSnapShape = null;
+
+            for (const otherEl of sideData.elements) {
+              if (otherEl.id === elData.id) continue;
+              if (otherEl.type === 'circle' || otherEl.type === 'rect') {
+                const w = otherEl.width || 60;
+                const h = otherEl.height || w;
+                if (imgCenterX >= otherEl.x - 20 && imgCenterX <= (otherEl.x + w + 20) &&
+                    imgCenterY >= otherEl.y - 20 && imgCenterY <= (otherEl.y + h + 20)) {
+                  targetSnapShape = otherEl;
+                  const targetNode = document.getElementById('node_' + otherEl.id);
+                  if (targetNode) {
+                    targetNode.style.outline = '3px dashed #22c55e';
+                  }
+                  break;
+                }
+              }
+            }
+          }
+        }
+
+        function onPointerUp(upEvt) {
+          try {
+            elmnt.releasePointerCapture(upEvt.pointerId);
+          } catch(err) {}
+          elmnt.onpointermove = null;
+          elmnt.onpointerup = null;
+
+          // Perform Snap & Mask onto Shape
+          if (elData.type === 'image' && targetSnapShape) {
+            elData.x = targetSnapShape.x;
+            elData.y = targetSnapShape.y;
+            elData.width = targetSnapShape.width || 180;
+
+            if (targetSnapShape.type === 'circle') {
+              elData.isCircle = true;
+            } else if (targetSnapShape.type === 'rect') {
+              elData.isCircle = false;
+            }
+
+            // Remove consumed shape and re-render
+            cardData[currentSide].elements = cardData[currentSide].elements.filter(item => item.id !== targetSnapShape.id);
+            renderCanvas();
+          }
+
+          saveHistoryState();
+        }
+
+        elmnt.onpointermove = onPointerMove;
+        elmnt.onpointerup = onPointerUp;
+      };
+    }
+
+    // --- FULL 2D 4-CORNER DIRECTIONAL HANDLE RESIZING ---
+    function makeElementResizable(handle, wrapper, elData, handleClass) {
+      handle.onpointerdown = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        try { handle.setPointerCapture(e.pointerId); } catch(err){}
+
+        let mouseStartX = e.clientX;
+        let mouseStartY = e.clientY;
+        let startWidth = elData.width || wrapper.offsetWidth || 180;
+        let startHeight = wrapper.offsetHeight || startWidth;
+        let startElX = elData.x;
+        let startElY = elData.y;
+        let startFontSize = elData.fontSize || 14;
+
+        const isLeftHandle = handleClass.includes('nw') || handleClass.includes('sw');
+        const isTopHandle = handleClass.includes('nw') || handleClass.includes('ne');
+
+        const aspectRatio = startHeight / (startWidth || 1);
+
+        function doResize(moveEvt) {
+          moveEvt.preventDefault();
+          let deltaX = (moveEvt.clientX - mouseStartX) / currentZoom;
+
+          let newW;
+          if (isLeftHandle) {
+            newW = Math.max(20, Math.min(540, Math.round(startWidth - deltaX)));
+            let newX = startElX + (startWidth - newW);
+            elData.x = newX;
+            wrapper.style.left = newX + 'px';
+          } else {
+            newW = Math.max(20, Math.min(540, Math.round(startWidth + deltaX)));
+          }
+
+          if (isTopHandle) {
+            let deltaW = newW - startWidth;
+            let deltaH = deltaW * aspectRatio;
+            let newY = Math.round(startElY - deltaH);
+            elData.y = newY;
+            wrapper.style.top = newY + 'px';
+          }
+
+          if (elData.type === 'image' || elData.type === 'line' || elData.type === 'rect' || elData.type === 'circle' || elData.type === 'icon') {
+            elData.width = newW;
+            if (elData.type === 'rect' || elData.type === 'circle') elData.height = newW;
+
+            const img = wrapper.querySelector('img');
+            if (img) {
+              img.style.width = newW + 'px';
+              if (elData.isCircle) img.style.height = newW + 'px';
+            }
+
+            const icon = wrapper.querySelector('.material-symbols-outlined');
+            if (icon) icon.style.fontSize = newW + 'px';
+
+            const line = wrapper.querySelector('div:not(.element-controls):not(.resize-handle)');
+            if (line) {
+              line.style.width = newW + 'px';
+              if (elData.type === 'rect' || elData.type === 'circle') line.style.height = newW + 'px';
+            }
+
+            const slider = document.getElementById('prop-image-width-slider');
+            if (slider) slider.value = newW;
+            const sliderVal = document.getElementById('image-size-val');
+            if (sliderVal) sliderVal.textContent = newW + 'px';
+
+          } else if (elData.type === 'text') {
+            let sizeChange = isLeftHandle ? Math.round(-deltaX / 5) : Math.round(deltaX / 5);
+            let newSize = Math.max(8, Math.min(72, startFontSize + sizeChange));
+            elData.fontSize = newSize;
+            wrapper.style.fontSize = newSize + 'px';
+            const sizeInput = document.getElementById('prop-font-size');
+            if (sizeInput) sizeInput.value = newSize;
+          }
+        }
+
+        function stopResize(upEvt) {
+          try { handle.releasePointerCapture(upEvt.pointerId); } catch(err){}
+          handle.onpointermove = null;
+          handle.onpointerup = null;
+          saveHistoryState();
+          renderCanvas();
+          syncPropertiesPanel();
+        }
+
+        handle.onpointermove = doResize;
+        handle.onpointerup = stopResize;
+      };
+    }
+
+    // Toggle Image Shape Mask (Circle / Rect)
+    function toggleActiveImageShape(isCircle, event) {
+      if (event) event.stopPropagation();
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (activeEl && activeEl.type === 'image') {
+        saveHistoryState();
+        activeEl.isCircle = isCircle;
+        renderCanvas();
+      }
+    }
+
+    // Element Rotation Engine
+    function rotateActiveElement(deltaDeg, event) {
+      if (event) event.stopPropagation();
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (!activeEl) return;
+
+      saveHistoryState();
+      activeEl.rotation = ((activeEl.rotation || 0) + deltaDeg + 360) % 360;
+      renderCanvas();
+      syncPropertiesPanel();
+    }
+
+    function updateActiveElementRotation(deg) {
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (activeEl) {
+        saveHistoryState();
+        activeEl.rotation = deg;
+        renderCanvas();
+        syncPropertiesPanel();
+      }
+    }
+
+    function updateActiveElementOpacity(opVal) {
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (activeEl) {
+        saveHistoryState();
+        activeEl.opacity = opVal;
+        renderCanvas();
+        syncPropertiesPanel();
+      }
+    }
+
+    function updateActiveImageFilter(filterVal) {
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (activeEl && activeEl.type === 'image') {
+        saveHistoryState();
+        activeEl.filter = filterVal;
+        renderCanvas();
+      }
+    }
+
+    function bringToFront(id, event) {
+      if (event) event.stopPropagation();
+      saveHistoryState();
+      const elements = cardData[currentSide].elements;
+      const idx = elements.findIndex(el => el.id === id);
+      if (idx >= 0) {
+        const item = elements.splice(idx, 1)[0];
+        elements.push(item);
+        renderCanvas();
+      }
+    }
+
+    function sendToBack(id, event) {
+      if (event) event.stopPropagation();
+      saveHistoryState();
+      const elements = cardData[currentSide].elements;
+      const idx = elements.findIndex(el => el.id === id);
+      if (idx >= 0) {
+        const item = elements.splice(idx, 1)[0];
+        elements.unshift(item);
+        renderCanvas();
+      }
+    }
+
+    // Directional Nudge (Arrows)
+    function nudgeActiveElement(dx, dy, event) {
+      if (event) event.stopPropagation();
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (!activeEl) return;
+
+      saveHistoryState();
+      activeEl.x += dx;
+      activeEl.y += dy;
+      renderCanvas();
+    }
+
+    // Quick Resize (+/- buttons)
+    function resizeActiveElement(delta, event) {
+      if (event) event.stopPropagation();
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (!activeEl) return;
+
+      saveHistoryState();
+      if (activeEl.type === 'image' || activeEl.type === 'line' || activeEl.type === 'rect' || activeEl.type === 'circle' || activeEl.type === 'icon') {
+        const curW = activeEl.width || 180;
+        activeEl.width = Math.max(20, Math.min(500, curW + delta));
+        if (activeEl.type === 'rect' || activeEl.type === 'circle') activeEl.height = activeEl.width;
+      } else if (activeEl.type === 'text') {
+        const curS = activeEl.fontSize || 14;
+        activeEl.fontSize = Math.max(8, Math.min(72, curS + (delta > 0 ? 2 : -2)));
+      }
+      renderCanvas();
+      syncPropertiesPanel();
+    }
+
+    function updateActiveImageWidth(newWidth) {
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (activeEl && (activeEl.type === 'image' || activeEl.type === 'rect' || activeEl.type === 'circle' || activeEl.type === 'icon')) {
+        saveHistoryState();
+        activeEl.width = newWidth;
+        if (activeEl.type === 'rect' || activeEl.type === 'circle') activeEl.height = newWidth;
+        renderCanvas();
+        syncPropertiesPanel();
+      }
+    }
+
+    function alignActiveElement(alignment) {
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (!activeEl) return;
+
+      saveHistoryState();
+      const wrapper = document.getElementById('node_' + activeEl.id);
+      const w = wrapper ? wrapper.offsetWidth : (activeEl.width || 180);
+      const h = wrapper ? wrapper.offsetHeight : 50;
+
+      if (alignment === 'center-x') {
+        activeEl.x = Math.round((560 - w) / 2);
+      } else if (alignment === 'center-y') {
+        activeEl.y = Math.round((320 - h) / 2);
+      }
+      renderCanvas();
+    }
+
+    // Keyboard Arrow Nudge
+    window.addEventListener('keydown', (e) => {
+      if (!activeElementId) return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowLeft') { nudgeActiveElement(-4, 0); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { nudgeActiveElement(4, 0); e.preventDefault(); }
+      else if (e.key === 'ArrowUp') { nudgeActiveElement(0, -4); e.preventDefault(); }
+      else if (e.key === 'ArrowDown') { nudgeActiveElement(0, 4); e.preventDefault(); }
+      else if (e.key === 'Delete' || e.key === 'Backspace') { deleteActiveElement(activeElementId); e.preventDefault(); }
+    });
+
+    // Select Active Element
+    function selectElement(id) {
+      if (activeElementId === id) {
+        syncPropertiesPanel();
+        return;
+      }
+      activeElementId = id;
+      renderCanvas();
+      syncPropertiesPanel();
+    }
+
+    function deselectAllElements(e) {
+      if (e && (e.target.closest('#card-canvas') || e.target.closest('#panel-drawer'))) return;
+      if (!activeElementId) return;
+      activeElementId = null;
+      renderCanvas();
+      syncPropertiesPanel();
+    }
+
+    function deleteActiveElement(id, event) {
+      if (event) event.stopPropagation();
+      saveHistoryState();
+      const sideData = cardData[currentSide];
+      sideData.elements = sideData.elements.filter(el => el.id !== id);
+      activeElementId = null;
+      renderCanvas();
+      syncPropertiesPanel();
+    }
+
+    function duplicateActiveElement(id, event) {
+      if (event) event.stopPropagation();
+      saveHistoryState();
+      const sideData = cardData[currentSide];
+      const target = sideData.elements.find(el => el.id === id);
+      if (target) {
+        const copy = JSON.parse(JSON.stringify(target));
+        copy.id = 'el_' + Date.now();
+        copy.x += 15;
+        copy.y += 15;
+        sideData.elements.push(copy);
+        selectElement(copy.id);
+      }
+    }
+
+    function moveElementLayer(id, direction, event) {
+      if (event) event.stopPropagation();
+      saveHistoryState();
+      const elements = cardData[currentSide].elements;
+      const idx = elements.findIndex(el => el.id === id);
+      if (idx < 0) return;
+
+      if (direction === 'up' && idx < elements.length - 1) {
+        const temp = elements[idx];
+        elements[idx] = elements[idx + 1];
+        elements[idx + 1] = temp;
+      } else if (direction === 'down' && idx > 0) {
+        const temp = elements[idx];
+        elements[idx] = elements[idx - 1];
+        elements[idx - 1] = temp;
+      }
+      renderCanvas();
+    }
+
+    // Sync Text & Image Property Drawers
+    function syncPropertiesPanel() {
+      const textPropBox = document.getElementById('text-properties');
+      const imgPropBox = document.getElementById('image-properties');
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+
+      if (activeEl && activeEl.type === 'text') {
+        switchTab('text');
+        if (textPropBox) textPropBox.style.display = 'block';
+        if (imgPropBox) imgPropBox.style.display = 'none';
+        document.getElementById('prop-text-content').value = activeEl.text;
+        document.getElementById('prop-font-family').value = activeEl.fontFamily || 'Inter';
+        document.getElementById('prop-font-size').value = activeEl.fontSize || 14;
+        document.getElementById('prop-text-color').value = activeEl.color || (isDarkColor(cardData[currentSide].bgColor) ? '#ffffff' : '#0e3b2e');
+        document.getElementById('prop-text-rotation-slider').value = activeEl.rotation || 0;
+        document.getElementById('text-rotation-val').textContent = (activeEl.rotation || 0) + '°';
+        document.getElementById('prop-text-opacity-slider').value = Math.round((activeEl.opacity !== undefined ? activeEl.opacity : 1) * 100);
+        document.getElementById('text-opacity-val').textContent = Math.round((activeEl.opacity !== undefined ? activeEl.opacity : 1) * 100) + '%';
+      } else if (activeEl && (activeEl.type === 'image' || activeEl.type === 'icon')) {
+        switchTab('uploads');
+        if (textPropBox) textPropBox.style.display = 'none';
+        if (imgPropBox) {
+          imgPropBox.style.display = 'block';
+          const w = activeEl.width || 180;
+          document.getElementById('prop-image-width-slider').value = w;
+          document.getElementById('image-size-val').textContent = w + 'px';
+          document.getElementById('prop-image-rotation-slider').value = activeEl.rotation || 0;
+          document.getElementById('image-rotation-val').textContent = (activeEl.rotation || 0) + '°';
+          document.getElementById('prop-image-opacity-slider').value = Math.round((activeEl.opacity !== undefined ? activeEl.opacity : 1) * 100);
+          document.getElementById('image-opacity-val').textContent = Math.round((activeEl.opacity !== undefined ? activeEl.opacity : 1) * 100) + '%';
+          if (document.getElementById('prop-image-filter')) document.getElementById('prop-image-filter').value = activeEl.filter || 'none';
+        }
+      } else {
+        if (textPropBox) textPropBox.style.display = 'none';
+        if (imgPropBox) imgPropBox.style.display = 'none';
+      }
+    }
+
+    function updateActiveTextContent(val) {
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (activeEl && activeEl.type === 'text') {
+        activeEl.text = val;
+        renderCanvas();
+      }
+    }
+
+    function updateActiveTextStyle(prop, val) {
+      const sideData = cardData[currentSide];
+      const activeEl = sideData.elements.find(el => el.id === activeElementId);
+      if (activeEl && activeEl.type === 'text') {
+        activeEl[prop] = val;
+        renderCanvas();
+      }
+    }
+
+    // Add New Elements
+    function addTextElement(defaultText, size, weight) {
+      saveHistoryState();
+      const newId = 'el_' + Date.now();
+      const darkBg = isDarkColor(cardData[currentSide].bgColor);
+      cardData[currentSide].elements.push({
+        id: newId,
+        type: 'text',
+        text: defaultText,
+        x: 120,
+        y: 120,
+        fontSize: size,
+        fontFamily: 'Inter',
+        color: darkBg ? '#ffffff' : '#0e3b2e',
+        fontWeight: weight,
+        textAlign: 'left'
+      });
+      selectElement(newId);
+    }
+
+    function addShapeElement(shapeType) {
+      saveHistoryState();
+      const newId = 'el_' + Date.now();
+      const darkBg = isDarkColor(cardData[currentSide].bgColor);
+      const color = darkBg ? '#ffffff' : '#0e3b2e';
+
+      if (shapeType === 'line') {
+        cardData[currentSide].elements.push({ id: newId, type: 'line', x: 180, y: 150, width: 120, height: 2, color: color });
+      } else if (shapeType === 'rect') {
+        cardData[currentSide].elements.push({ id: newId, type: 'rect', x: 180, y: 120, width: 80, height: 50, color: color, borderRadius: 4 });
+      } else if (shapeType === 'circle') {
+        cardData[currentSide].elements.push({ id: newId, type: 'circle', x: 200, y: 120, width: 100, height: 100, color: '#c8982a' });
+      } else if (shapeType === 'dot') {
+        cardData[currentSide].elements.push({ id: newId, type: 'circle', x: 220, y: 130, width: 16, height: 16, color: '#22c55e' });
+      }
+      selectElement(newId);
+    }
+
+    // Add Vector Contact Icon
+    function addVectorIcon(iconName, label) {
+      saveHistoryState();
+      const newId = 'icon_' + Date.now();
+      const darkBg = isDarkColor(cardData[currentSide].bgColor);
+      cardData[currentSide].elements.push({
+        id: newId,
+        type: 'icon',
+        iconName: iconName,
+        x: 220,
+        y: 130,
+        width: 32,
+        color: darkBg ? '#ffffff' : '#0e3b2e'
+      });
+      selectElement(newId);
+    }
+
+    // Generate & Add QR Code
+    function generateAndAddQRCode() {
+      const urlInput = document.getElementById('qr-input-url').value || 'https://studiomarkprint.com';
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(urlInput)}`;
+
+      saveHistoryState();
+      const newId = 'qr_' + Date.now();
+      cardData[currentSide].elements.push({
+        id: newId,
+        type: 'image',
+        src: qrApiUrl,
+        x: 390,
+        y: 180,
+        width: 110,
+        isCircle: false
+      });
+      selectElement(newId);
+    }
+
+    function handleImageUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        saveHistoryState();
+        const newId = 'img_' + Date.now();
+        cardData[currentSide].elements.push({
+          id: newId,
+          type: 'image',
+          src: e.target.result,
+          x: 180,
+          y: 80,
+          width: 180,
+          isCircle: false
+        });
+
+        // Add to uploaded gallery list
+        const gallery = document.getElementById('upload-gallery');
+        const item = document.createElement('img');
+        item.src = e.target.result;
+        item.className = 'w-full h-16 object-cover rounded-lg border border-zinc-200 cursor-pointer hover:border-emerald-700';
+        item.onclick = () => {
+          saveHistoryState();
+          const imgId = 'img_' + Date.now();
+          cardData[currentSide].elements.push({ id: imgId, type: 'image', src: e.target.result, x: 180, y: 80, width: 180, isCircle: false });
+          selectElement(imgId);
+        };
+        if (gallery.querySelector('.col-span-2')) gallery.innerHTML = '';
+        gallery.appendChild(item);
+
+        selectElement(newId);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setCanvasBgColor(color) {
+      saveHistoryState();
+      cardData[currentSide].bgColor = color;
+
+      // Smart Contrast Auto-Fix for Text & Icon Elements
+      const darkBg = isDarkColor(color);
+      cardData[currentSide].elements.forEach(el => {
+        if (el.type === 'text' || el.type === 'icon') {
+          if (darkBg && (el.color === '#0e3b2e' || el.color === '#09090b' || el.color === '#000000' || el.color === '#3f3f46')) {
+            el.color = '#ffffff';
+          } else if (!darkBg && (el.color === '#ffffff' || el.color === '#fafafa')) {
+            el.color = '#0e3b2e';
+          }
+        } else if (el.type === 'line' || el.type === 'rect') {
+          if (darkBg && (el.color === '#0e3b2e' || el.color === '#000000')) {
+            el.color = '#ffffff';
+          } else if (!darkBg && el.color === '#ffffff') {
+            el.color = '#0e3b2e';
+          }
+        }
+      });
+
+      renderCanvas();
+    }
+
+    // Switch Card Side (Front / Back)
+    function switchCardSide(side) {
+      currentSide = side;
+      activeElementId = null;
+      document.querySelectorAll('.side-thumb-wrap').forEach(t => t.classList.remove('active'));
+      document.getElementById('wrap-' + side).classList.add('active');
+      renderCanvas();
+    }
+
+    // Switch Left Navigation Tabs
+    function switchTab(tabName) {
+      document.querySelectorAll('.nav-tab-item').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel-tab-content').forEach(p => p.style.display = 'none');
+      
+      const activeBtn = Array.from(document.querySelectorAll('.nav-tab-item')).find(b => b.getAttribute('onclick').includes(tabName));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const panel = document.getElementById('tab-' + tabName);
+      if (panel) panel.style.display = 'block';
+    }
+
+    // Zoom Canvas
+    function zoomCanvas(delta) {
+      currentZoom = Math.max(0.6, Math.min(1.6, currentZoom + delta));
+      document.getElementById('stage-container').style.transform = `scale(${currentZoom})`;
+      document.getElementById('zoom-value').textContent = Math.round(currentZoom * 100) + '%';
+    }
+
+    // Toggle Bleed & Safety Guides
+    function toggleGuides() {
+      guidesVisible = !guidesVisible;
+      const btn = document.getElementById('btn-toggle-guides');
+      const bleed = document.getElementById('guide-bleed');
+      const safety = document.getElementById('guide-safety');
+
+      if (guidesVisible) {
+        btn.classList.add('active');
+        bleed.style.display = 'block';
+        safety.style.display = 'block';
+      } else {
+        btn.classList.remove('active');
+        bleed.style.display = 'none';
+        safety.style.display = 'none';
+      }
+    }
+
+    // Apply Templates
+    function applyTemplate(tplName) {
+      saveHistoryState();
+      if (tplName === 'minimal') {
+        cardData.front.bgColor = '#ffffff';
+        cardData.front.elements = [
+          { id: 't1', type: 'text', text: 'JULIA HALVORSEN', x: 50, y: 50, fontSize: 20, fontFamily: 'Cinzel', color: '#18181b', fontWeight: 'bold' },
+          { id: 't2', type: 'text', text: 'ESTUDIO DE ARQUITECTURA', x: 50, y: 82, fontSize: 10, fontFamily: 'Inter', color: '#71717a' },
+          { id: 't3', type: 'line', x: 50, y: 105, width: 60, height: 1, color: '#18181b' },
+          { id: 't4', type: 'text', text: 'julia@halvorsen.co · +1 323 888 1900', x: 50, y: 125, fontSize: 11, fontFamily: 'Inter', color: '#52525b' }
+        ];
+      } else if (tplName === 'modern') {
+        cardData.front.bgColor = '#09090b';
+        cardData.front.elements = [
+          { id: 'm1', type: 'text', text: 'NEXUS TECH', x: 40, y: 40, fontSize: 22, fontFamily: 'Outfit', color: '#22c55e', fontWeight: 'bold' },
+          { id: 'm2', type: 'text', text: 'Sistemas de Software & Cloud', x: 40, y: 75, fontSize: 12, fontFamily: 'Inter', color: '#a1a1aa' },
+          { id: 'm3', type: 'rect', x: 40, y: 100, width: 40, height: 4, color: '#22c55e', borderRadius: 2 },
+          { id: 'm4', type: 'text', text: 'www.nexustech.io\ncontacto@nexustech.io', x: 40, y: 125, fontSize: 12, fontFamily: 'Inter', color: '#e4e4e7' }
+        ];
+      }
+      renderCanvas();
+    }
+
+    // Modal Real-Time Preview
+    function openPreviewModal() {
+      const modal = document.getElementById('preview-modal');
+      const frontCard = document.getElementById('modal-card-front');
+      const backCard = document.getElementById('modal-card-back');
+
+      frontCard.style.backgroundColor = cardData.front.bgColor;
+      backCard.style.backgroundColor = cardData.back.bgColor;
+
+      modal.classList.add('open');
+    }
+
+    function closePreviewModal() {
+      document.getElementById('preview-modal').classList.remove('open');
+    }
+
+    // Generate Live Preview PNG Data URL of Canvas Design
+    function generateCanvasPreviewDataUrl(side = 'front') {
+      const canvas = document.createElement('canvas');
+      canvas.width = 560;
+      canvas.height = 320;
+      const ctx = canvas.getContext('2d');
+
+      const sideData = cardData[side] || cardData.front;
+
+      // Fill Background Color
+      ctx.fillStyle = sideData.bgColor || '#ffffff';
+      ctx.fillRect(0, 0, 560, 320);
+
+      // Draw Elements
+      sideData.elements.forEach(el => {
+        ctx.save();
+        if (el.opacity !== undefined) ctx.globalAlpha = el.opacity;
+
+        const w = el.width || 180;
+        const h = el.height || w;
+        const centerX = el.x + w / 2;
+        const centerY = el.y + h / 2;
+
+        if (el.rotation) {
+          ctx.translate(centerX, centerY);
+          ctx.rotate(el.rotation * Math.PI / 180);
+          ctx.translate(-centerX, -centerY);
+        }
+
+        if (el.type === 'text') {
+          const fontSize = el.fontSize || 14;
+          const fontWeight = el.fontWeight || 'normal';
+          const fontFamily = el.fontFamily || 'Inter';
+          ctx.font = `${fontWeight} ${fontSize}px "${fontFamily}", sans-serif`;
+          ctx.fillStyle = el.color || '#000000';
+          ctx.textAlign = el.textAlign || 'left';
+          ctx.textBaseline = 'top';
+
+          const lines = (el.text || '').split('\n');
+          lines.forEach((lineText, idx) => {
+            let alignX = el.x;
+            if (el.textAlign === 'center') alignX = el.x + 80;
+            else if (el.textAlign === 'right') alignX = el.x + 160;
+            ctx.fillText(lineText, alignX, el.y + idx * (fontSize * 1.25));
+          });
+        } else if (el.type === 'image' && el.src) {
+          const img = new Image();
+          img.src = el.src;
+          const imgH = el.isCircle ? w : (w * (img.naturalHeight / (img.naturalWidth || 1)));
+
+          if (el.filter) ctx.filter = el.filter;
+
+          if (el.isCircle) {
+            ctx.beginPath();
+            ctx.arc(el.x + w / 2, el.y + w / 2, w / 2, 0, Math.PI * 2);
+            ctx.clip();
+          }
+
+          if (img.complete && img.naturalWidth) {
+            ctx.drawImage(img, el.x, el.y, w, imgH);
+          } else {
+            ctx.fillStyle = '#e4e4e7';
+            ctx.fillRect(el.x, el.y, w, imgH);
+          }
+        } else if (el.type === 'icon') {
+          ctx.font = `bold ${el.width || 24}px sans-serif`;
+          ctx.fillStyle = el.color || '#000000';
+          ctx.fillText('•', el.x, el.y);
+        } else if (el.type === 'line') {
+          ctx.fillStyle = el.color || '#000000';
+          ctx.fillRect(el.x, el.y, el.width || 80, el.height || 2);
+        } else if (el.type === 'rect') {
+          ctx.fillStyle = el.color || '#000000';
+          ctx.fillRect(el.x, el.y, el.width || 60, el.height || 60);
+        } else if (el.type === 'circle') {
+          ctx.fillStyle = el.color || '#000000';
+          ctx.beginPath();
+          const r = (el.width || 50) / 2;
+          ctx.arc(el.x + r, el.y + r, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      });
+
+      return canvas.toDataURL('image/png');
+    }
+
+    // Cart Export Handoff
+    function finishDesignAndCart() {
+      const btn = document.querySelector('.btn-primary-action');
+      btn.textContent = '✓ Guardando Diseño…';
+      btn.style.background = '#166534';
+
+      const livePreviewImage = generateCanvasPreviewDataUrl('front');
+
+      if (typeof Cart !== 'undefined') {
+        Cart.addToCart({
+          id: 'custom_studio_' + Date.now(),
+          name: 'Tarjetas de Presentación Personalizadas (Estudio)',
+          price: 59.00,
+          qty: 1,
+          options: '250 tarjetas · Diseño personalizado en línea',
+          image: livePreviewImage || 'bussinescard.webp'
+        });
+      }
+
+      setTimeout(() => {
+        window.location.href = 'cart.html';
+      }, 600);
+    }
+
+    // Startup Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      initDefaultElements();
+    });
+  </script>
+</body>
+
+</html>

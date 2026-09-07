@@ -1,0 +1,2907 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Mark & Print | Tarjetas Estándar</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: {
+        preflight: false,
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="print-product-v2.css">
+  <style>
+    :root {
+      --ink: #141414;
+      --ink-soft: rgba(20, 20, 20, 0.5);
+      --ink-faint: rgba(20, 20, 20, 0.08);
+      --cream: #faf7f2;
+      --cream-mid: #f2ece3;
+      --cream-deep: #e4ddd4;
+      --forest: #0e3b2e;
+      --forest-mid: #1a5c45;
+      --forest-glow: rgba(14, 59, 46, 0.1);
+      --gold: #c8982a;
+      --border: #e4ddd4;
+      --white: #ffffff;
+      --r: 0.85rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ══ SPLIT ══ */
+    .split {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 2rem;
+      align-items: start;
+    }
+
+    .left-panel {
+      position: sticky;
+      top: 0;
+      border-radius: 1.5rem;
+      background: #3d4f5e;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      box-shadow: 0 24px 60px rgba(26, 22, 19, 0.08);
+    }
+
+    .card-stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 3rem;
+      position: relative;
+      background: radial-gradient(ellipse at 25% 20%, rgba(14, 59, 46, 0.5) 0%, transparent 55%), radial-gradient(ellipse at 78% 82%, rgba(200, 152, 42, 0.18) 0%, transparent 50%), #3d4f5e;
+    }
+
+    .cards-visual {
+      position: relative;
+      width: 22rem;
+      height: 28rem;
+    }
+
+    .demo-card {
+      position: absolute;
+      width: 19rem;
+      height: 11.2rem;
+      border-radius: 1.4rem;
+      box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.55), 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .demo-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--demo-card-bg, url('bussinescard.webp'));
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+      z-index: 1;
+      transition: transform 0.45s ease, background-image 0.3s ease;
+    }
+
+    .demo-card:hover::before {
+      transform: scale(1.06);
+    }
+
+    .demo-card.c1 {
+      top: 3.5rem;
+      left: 0;
+      transform: rotate(-8deg);
+      background: #ffffff;
+      animation: fA 7s ease-in-out infinite alternate;
+    }
+
+    .demo-card.c2 {
+      top: 7.5rem;
+      left: 2.8rem;
+      transform: rotate(3deg);
+      background: #ffffff;
+      animation: fB 6s ease-in-out infinite alternate;
+    }
+
+    .demo-card.c3 {
+      top: 12rem;
+      left: 1.2rem;
+      transform: rotate(-1.5deg);
+      background: #ffffff;
+      animation: fC 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes fA {
+      from {
+        transform: rotate(-8deg) translateY(0)
+      }
+
+      to {
+        transform: rotate(-8deg) translateY(-10px)
+      }
+    }
+
+    @keyframes fB {
+      from {
+        transform: rotate(3deg) translateY(0)
+      }
+
+      to {
+        transform: rotate(3deg) translateY(-8px)
+      }
+    }
+
+    @keyframes fC {
+      from {
+        transform: rotate(-1.5deg) translateY(0)
+      }
+
+      to {
+        transform: rotate(-1.5deg) translateY(-12px)
+      }
+    }
+
+    .dc-inner {
+      padding: 1.4rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    .dc-name {
+      font-family: Georgia, serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .dc-role {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+      opacity: 0.55;
+    }
+
+    .dc-line {
+      width: 1.8rem;
+      height: 2px;
+      border-radius: 1px;
+      margin: 0.6rem 0;
+    }
+
+    .dc-contact {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.65rem;
+      opacity: 0.4;
+      line-height: 1.6;
+    }
+
+    .dc-brand {
+      font-family: Georgia, serif;
+      font-size: 0.7rem;
+      opacity: 0.35;
+      text-align: right;
+    }
+
+    .c1 .dc-name,
+    .c1 .dc-role,
+    .c1 .dc-contact,
+    .c1 .dc-brand {
+      color: #1a1a1a;
+    }
+
+    .c1 .dc-line {
+      background: linear-gradient(90deg, #0e3b2e, #1f6a4d);
+    }
+
+    .c2 .dc-name,
+    .c2 .dc-role,
+    .c2 .dc-contact,
+    .c2 .dc-brand {
+      color: #edf5ef;
+    }
+
+    .c2 .dc-line {
+      background: rgba(237, 245, 239, 0.3);
+    }
+
+    .c3 .dc-name,
+    .c3 .dc-role,
+    .c3 .dc-contact,
+    .c3 .dc-brand {
+      color: #f4f0ea;
+    }
+
+    .c3 .dc-line {
+      background: linear-gradient(90deg, #d0ae63, #a98039);
+    }
+
+    .stage-footer {
+      padding: 1.2rem 2rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stage-tag {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.32);
+    }
+
+    .stage-guarantee {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.28);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .stage-guarantee span {
+      color: #4caf82;
+      font-weight: 700;
+    }
+
+    .bc-finish-note {
+      position: absolute;
+      bottom: -0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    .note-dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      margin: 0 1rem;
+      vertical-align: middle;
+      animation: noteDotPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes noteDotPulse {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.6); opacity: 0.8; }
+    }
+
+    .right-panel {
+      padding: 1rem 0 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .product-intro {
+      margin-bottom: 2.2rem;
+    }
+
+    .product-kicker {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin-bottom: 0.6rem;
+    }
+
+    .product-name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    .product-name em {
+      font-style: italic;
+      color: var(--forest);
+      font-weight: normal;
+    }
+
+    .product-subtitle {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+    }
+
+    .product-price-start {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.2rem;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.85rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .stars {
+      color: var(--forest);
+      letter-spacing: 0.1em;
+      font-size: 1rem;
+    }
+
+    .reviews-count {
+      color: var(--forest);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+
+    .product-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.8rem 0;
+    }
+
+    .desc-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 0.85rem;
+    }
+
+    .desc-text {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-bottom: 1.4rem;
+    }
+
+    .desc-list {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      padding-left: 1.2rem;
+      margin-bottom: 1.5rem;
+      list-style-type: disc;
+    }
+
+    .desc-list li {
+      margin-bottom: 0.35rem;
+      padding-left: 0.2rem;
+    }
+
+    .desc-list li::marker {
+      color: var(--forest);
+    }
+
+    .delivery-strip {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .delivery-hdr {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.45rem;
+    }
+
+    .delivery-row {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      padding: 0.22rem 0;
+    }
+
+    .delivery-row strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .free-tag {
+      color: var(--forest);
+      font-weight: 700;
+    }
+
+    .opt-section {
+      margin-bottom: 1.9rem;
+    }
+
+    .sec-title {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sec-sel {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--forest);
+    }
+
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+    }
+
+    .size-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: 1rem 0.85rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      user-select: none;
+      position: relative;
+    }
+
+    .size-card:hover {
+      border-color: rgba(20, 20, 20, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(20, 20, 20, 0.07);
+    }
+
+    .size-card.sel {
+      border-color: var(--forest);
+      box-shadow: 0 0 0 3px var(--forest-glow);
+    }
+
+    .size-card.sel::after {
+      content: "✓";
+      position: absolute;
+      top: 0.5rem;
+      right: 0.65rem;
+      font-size: 0.65rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-weight: 700;
+      color: var(--forest);
+    }
+
+    .size-preview {
+      height: 5rem;
+      background: var(--cream-mid);
+      border-radius: 0.45rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.7rem;
+      overflow: hidden;
+    }
+
+    .size-card.sel .size-preview {
+      background: rgba(14, 59, 46, 0.07);
+    }
+
+    .smc {
+      background: var(--white);
+      border-radius: 3px;
+      box-shadow: 0 2px 8px rgba(20, 20, 20, 0.12);
+      padding: 0.35rem 0.4rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      position: relative;
+    }
+
+    .smc-name {
+      font-size: 0.38rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.1;
+    }
+
+    .smc-role {
+      font-size: 0.3rem;
+      color: #888;
+      margin-top: 0.05rem;
+    }
+
+    .smc-co {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.28rem;
+      color: #555;
+      line-height: 1.3;
+      margin-top: 0.12rem;
+    }
+
+    .smc-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 99px;
+      position: absolute;
+      bottom: 0.4rem;
+      right: 0.4rem;
+    }
+
+    .size-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .size-dim {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.74rem;
+      color: var(--ink-soft);
+      margin-top: 0.1rem;
+    }
+
+    .dd {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: border-color 0.18s;
+      position: relative;
+    }
+
+    .dd:hover {
+      border-color: rgba(20, 20, 20, 0.4);
+    }
+
+    .dd-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 3.5rem;
+      padding: 0 1.1rem;
+      gap: 1rem;
+    }
+
+    .dd-val {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .dd-arrow {
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .dd.open .dd-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dd-list {
+      display: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .dd.open .dd-list {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: -1px;
+      right: -1px;
+      background: #fff;
+      z-index: 50;
+      border: 1.5px solid var(--ink-soft);
+      border-top: 0;
+      border-bottom-left-radius: var(--r);
+      border-bottom-right-radius: var(--r);
+    }
+
+    .dd-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--ink-faint);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: color 0.15s;
+      background: #fff;
+    }
+
+    .dd-item:last-child {
+      border-bottom: none;
+      border-bottom-left-radius: var(--r);
+      border-bottom-right-radius: var(--r);
+    }
+
+    .dd-item:hover {
+      color: var(--ink);
+      background: #faf9f7;
+    }
+
+    .dd-item.active {
+      color: var(--forest);
+      font-weight: 600;
+    }
+
+    .dd-item.active::after {
+      content: "✓";
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--forest);
+    }
+
+    .di-sw {
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 0.3rem;
+      flex-shrink: 0;
+      border: 1px solid rgba(20, 20, 20, 0.1);
+    }
+
+    .di-name {
+      font-weight: 600;
+      color: inherit;
+      line-height: 1.2;
+    }
+
+    .di-sub {
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      margin-top: 0.04rem;
+    }
+
+    .corners-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .corner-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.2rem 1.25rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.1, 0.7, 0.1, 1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      user-select: none;
+    }
+
+    .corner-card:hover {
+      border-color: rgba(20, 20, 20, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(20, 20, 20, 0.04);
+    }
+
+    .corner-card.sel {
+      border: 2px solid #00a676;
+      box-shadow: 0 4px 12px rgba(0, 166, 118, 0.12);
+    }
+
+    .corner-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .corner-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .corner-sub {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--ink);
+      opacity: 0.5;
+    }
+
+    .corner-svg {
+      width: 28px;
+      height: 28px;
+      color: var(--ink);
+      opacity: 0.85;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .corner-card.sel .corner-svg {
+      opacity: 1;
+      color: #00a676;
+    }
+
+    .custom-size-card {
+      position: relative;
+      overflow: visible !important;
+    }
+
+    .custom-size-card.open {
+      z-index: 100;
+    }
+
+    .size-popover {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      width: 100%;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: 0 10px 30px rgba(20, 20, 20, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.2s cubic-bezier(0.1, 0.7, 0.1, 1);
+      z-index: 50;
+      overflow: hidden;
+    }
+
+    .custom-size-card.open .size-popover {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .sp-item {
+      padding: 0.75rem 1rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--ink);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .sp-item:last-child {
+      border-bottom: none;
+    }
+
+    .sp-item:hover {
+      background: var(--cream);
+      color: var(--forest);
+    }
+
+    .sp-sub {
+      color: var(--ink-soft);
+      font-size: 0.75rem;
+      margin-left: 0.4rem;
+    }
+
+    .qty-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+    }
+
+    .qty-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.1rem;
+      cursor: pointer;
+      transition: all 0.18s;
+      position: relative;
+      text-align: center;
+    }
+
+    .qty-card:hover {
+      border-color: rgba(20, 20, 20, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(20, 20, 20, 0.05);
+    }
+
+    .qty-card.sel {
+      border-color: var(--forest);
+      box-shadow: 0 0 0 3px var(--forest-glow);
+    }
+
+    .qty-tag {
+      position: absolute;
+      top: -0.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--forest);
+      color: var(--white);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.25rem 0.5rem;
+      border-radius: 99px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .qty-num {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .qty-price {
+      color: var(--forest);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .qty-per {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.75rem;
+      color: var(--ink-soft);
+    }
+
+    .price-cta {
+      background: var(--cream);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .price-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .price-lbl {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-total {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .price-per {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      text-align: right;
+    }
+
+    .cta-btn {
+      width: 100%;
+      background: var(--forest);
+      color: var(--white);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 1.1rem;
+      border: none;
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-btn:hover {
+      background: var(--forest-mid);
+    }
+
+    .cta-sub {
+      width: 100%;
+      background: none;
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.95rem;
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cta-sub:hover {
+      background: var(--white);
+      border-color: rgba(20, 20, 20, 0.3);
+    }
+
+    .cta-guarantee {
+      text-align: center;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.75rem;
+      color: var(--ink-soft);
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 1000px) {
+      .split {
+        grid-template-columns: 1fr;
+        padding: 1.25rem;
+        gap: 1.5rem;
+      }
+
+      .left-panel {
+        position: relative;
+        min-height: 400px;
+        border-radius: 1rem;
+        height: auto;
+      }
+
+      .right-panel {
+        padding: 1rem 0;
+      }
+
+      .size-grid,
+      .qty-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .corners-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ══ GALLERY THUMBS ══ */
+    .gallery-strip {
+      max-width: 1440px;
+      margin: 0.85rem auto 0;
+      padding: 0 2rem;
+      display: flex;
+      gap: 0.55rem;
+    }
+
+    .gallery-thumb {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 0.65rem;
+      border: 2px solid var(--border);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.18s;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .gallery-thumb:hover {
+      border-color: rgba(20, 20, 20, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(20, 20, 20, 0.1);
+    }
+
+    .gallery-thumb.gsel {
+      border-color: var(--forest);
+      box-shadow: 0 0 0 3px var(--forest-glow);
+    }
+
+    .gallery-thumb.gsel::after {
+      content: "✓";
+      position: absolute;
+      top: 0.25rem;
+      right: 0.35rem;
+      font-size: 0.55rem;
+      font-weight: 800;
+      color: var(--forest);
+    }
+
+    /* ══ PRODUCT TABS ══ */
+    .prod-tabs-wrap {
+      max-width: 1440px;
+      margin: 2.5rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .prod-tabs-nav {
+      display: flex;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 2rem;
+      gap: 0;
+    }
+
+    .prod-tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      padding: 0.85rem 1.5rem 0.7rem;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .prod-tab-btn:hover {
+      color: var(--ink);
+    }
+
+    .prod-tab-btn.active {
+      color: var(--forest);
+      border-bottom-color: var(--forest);
+    }
+
+    .prod-tab-panel {
+      display: none;
+    }
+
+    .prod-tab-panel.active {
+      display: block;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .ov-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.4rem 1.3rem;
+    }
+
+    .ov-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      background: var(--forest);
+      border-radius: 0.45rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .ov-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .ov-card p {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .tmpl-box {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .tmpl-info h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+
+    .tmpl-info p {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      max-width: 36rem;
+    }
+
+    .tmpl-formats {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .fmt-tag {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.28rem 0.6rem;
+      border-radius: 0.3rem;
+      background: var(--forest);
+      color: var(--white);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tmpl-dl-btn {
+      background: var(--forest);
+      color: var(--white);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 0.9rem 1.6rem;
+      border: none;
+      border-radius: var(--r);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.18s;
+    }
+
+    .tmpl-dl-btn:hover {
+      background: var(--forest-mid);
+    }
+
+    .overview-text {
+      padding: 1.8rem 0 2rem;
+      max-width: 54rem;
+    }
+
+    .overview-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+
+    .overview-body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.97rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .ov-specs {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+
+    .ov-spec {
+      padding: 0.9rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex: 1;
+      min-width: 9rem;
+    }
+
+    .ov-spec-label {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .ov-spec-val {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .ov-spec-div {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+    }
+
+    @media (max-width: 700px) {
+      .ov-specs {
+        flex-direction: column;
+      }
+
+      .ov-spec-div {
+        width: 100%;
+        height: 1px;
+      }
+    }
+
+    /* ══ EDITORIAL ══ */
+    .editorial-wrap {
+      max-width: 1100px;
+      margin: 3rem auto 0;
+      padding: 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .ed-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 3.5rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ed-h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.1rem;
+      line-height: 1.35;
+    }
+
+    .ed-list {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.92rem;
+      color: var(--ink);
+      line-height: 1.8;
+      padding-left: 1.2rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .ed-list li {
+      margin-bottom: 0.1rem;
+    }
+
+    .ed-reviews {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.92rem;
+      color: var(--ink);
+      margin-bottom: 0.9rem;
+    }
+
+    .ed-body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.93rem;
+      color: var(--ink);
+      line-height: 1.75;
+      margin-bottom: 0.85rem;
+    }
+
+    .ed-body strong {
+      font-weight: 700;
+    }
+
+    .ed-split-img {
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .ed-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 1rem;
+    }
+
+    .ed-block {
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ed-block:last-child {
+      border-bottom: none;
+    }
+
+    .ed-h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 0.7rem;
+    }
+
+    .ed-link {
+      color: var(--forest);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .ed-link:hover {
+      color: var(--forest-mid);
+    }
+
+    @media (max-width: 800px) {
+      .ed-split {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .ed-split-img {
+        order: -1;
+        max-height: 280px;
+      }
+    }
+
+    /* ══ FAQ ══ */
+    .faq-wrap {
+      max-width: 860px;
+      margin: 4rem auto 5rem;
+      padding: 0 2rem;
+    }
+
+    .faq-wrap h2 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      text-align: center;
+      color: var(--ink);
+      margin-bottom: 2.5rem;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .faq-item.open {
+      border-color: rgba(14, 59, 46, 0.3);
+      box-shadow: 0 4px 20px rgba(14, 59, 46, 0.08);
+    }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.15rem 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .faq-q:hover {
+      background: var(--cream);
+    }
+
+    .faq-chevron {
+      color: var(--forest);
+      font-size: 0.8rem;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 1.3rem 1.2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    @media (max-width: 1000px) {
+      .overview-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-strip,
+      .prod-tabs-wrap {
+        padding: 0 1.25rem;
+      }
+
+      .faq-wrap {
+        padding: 0 1.25rem;
+      }
+
+      .tmpl-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ══ REVIEWS COMPONENT ══ */
+    /* ══ REVIEWS DASHBOARD COMPONENT CSS ══ */
+    .reviews-section { background: transparent; width: 100%; border-top: 1px solid rgba(0,0,0,0.12); }
+    .db-wrap { padding: 3rem 2rem 5rem; width: 100%; max-width: 1200px; margin: 0 auto; font-family: 'Inter', sans-serif; }
+    @media (max-width: 768px) { .db-wrap { padding: 2rem; } }
+    .db-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .db-title { font-size: 2.2rem; font-weight: 700; color: #111827; margin: 0; }
+    
+    .db-header-actions { display: flex; gap: 1rem; align-items: center; }
+    
+    .db-write-btn { 
+      position: relative; overflow: hidden; padding: 0.7rem 1.4rem; border-radius: 8px; font-weight: 600; cursor: pointer; 
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s;
+      border: 1px solid rgba(255,255,255,0.05); background-color: #09090b; color: #ffffff; 
+      display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; letter-spacing: 0.02em;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .db-write-btn::after {
+      content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+      transform: skewX(-25deg); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .db-write-btn:hover::after { left: 150%; }
+    .db-write-btn:hover { 
+      background-color: #18181b; transform: translateY(-2px); 
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.2); 
+    }
+    .db-write-btn:active { transform: translateY(0); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    
+    .db-dropdown { padding: 0.7rem 1.1rem; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.02); font-size: 0.9rem; font-weight: 600; color: #374151; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.2s, box-shadow 0.2s; }
+    .db-dropdown:hover { background: #f9fafb; box-shadow: 0 4px 10px rgba(0,0,0,0.04); }
+    .db-icon-btn { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; color: #374151; cursor: pointer; transition: background 0.2s; }
+    .db-icon-btn:hover { background: rgba(0,0,0,0.04); }
+    .db-icon-btn svg { width: 22px; height: 22px; }
+    
+    .db-stats-grid { display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 3rem; align-items: start; margin-bottom: 3rem; }
+    .db-col { display: flex; flex-direction: column; }
+    .db-col-mid { padding: 0 3rem; border-left: 1px solid rgba(0,0,0,0.12); border-right: 1px solid rgba(0,0,0,0.12); min-height: 120px; }
+    
+    .db-col-title { font-size: 1.05rem; font-weight: 600; color: #111827; margin-bottom: 1.5rem; }
+    .db-col-val { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.6rem; }
+    .db-col-val > span:first-child { font-size: 3.5rem; font-weight: 700; color: #111827; line-height: 1; letter-spacing: -0.03em; }
+    
+    .db-badge { display: flex; align-items: center; gap: 0.2rem; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; background: #dcfce7; color: #166534; }
+    .db-badge svg { width: 12px; height: 12px; stroke-width: 2.5; }
+    
+    .db-stars { display: flex; gap: 0; }
+    .db-stars svg { width: 18px; height: 18px; fill: #fbbf24; }
+    .db-stars svg.empty { fill: rgba(0,0,0,0.1); }
+    
+    .db-col-subtext { font-size: 0.9rem; color: #9ca3af; }
+    
+    .db-bars-wrap { display: flex; flex-direction: column; gap: 0.6rem; }
+    .db-bar-row { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: #4b5563; }
+    .db-bar-row svg { width: 10px; height: 10px; fill: rgba(0,0,0,0.2); }
+    .db-bar-track { flex: 1; height: 4px; background: rgba(0,0,0,0.05); border-radius: 2px; overflow: hidden; display: flex; align-items: center; margin: 0 0.5rem; }
+    .db-bar-fill { height: 100%; border-radius: 2px; }
+    .fill-5 { background: #14b8a6; } /* Teal */
+    .fill-4 { background: #d946ef; } /* Fuchsia/Purple */
+    .fill-3 { background: #f59e0b; } /* Amber */
+    .fill-2 { background: #0ea5e9; } /* Sky Blue */
+    .fill-1 { background: #f97316; } /* Orange */
+    
+    .db-bar-count { width: 35px; text-align: left; font-weight: 500; font-size: 0.85rem; color: #111827; }
+    
+    .db-divider { border: none; border-bottom: 2px solid rgba(0,0,0,0.12); margin: 0; }
+    
+    .db-list { display: flex; flex-direction: column; }
+    .db-item { display: grid; grid-template-columns: 280px 1fr; gap: 2rem; padding: 3rem 0; border-bottom: 2px solid rgba(0,0,0,0.12); }
+    .db-item:last-child { border-bottom: none; }
+    @media (max-width: 768px) {
+        .db-item { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 0; }
+        .db-stats-grid { grid-template-columns: 1fr; gap: 3rem; }
+        .db-col-mid { padding: 0; border: none; min-height: auto; }
+    }
+    
+    .db-item-left { display: flex; flex-direction: column; }
+    .db-avatar { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; margin-bottom: 1.2rem; }
+    .db-name { font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 0.6rem; }
+    .db-meta { font-size: 0.95rem; color: #6b7280; margin-bottom: 0.4rem; }
+    .db-meta strong { color: #111827; font-weight: 600; }
+    
+    .db-item-right { display: flex; flex-direction: column; margin-top: -0.3rem; }
+    .db-item-top { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .db-item-date { font-size: 0.9rem; color: #6b7280; font-weight: 500; letter-spacing: -0.01em; }
+    .db-item-body { font-size: 0.95rem; color: #4b5563; line-height: 1.6; margin-bottom: 2rem; max-width: 700px; }
+    
+    .db-item-actions { display: flex; gap: 1rem; align-items: center; }
+    .db-btn { padding: 0.6rem 1rem; border: 1px solid #e5e7eb; border-radius: 6px; background: transparent; font-size: 0.85rem; font-weight: 600; color: #111827; cursor: pointer; transition: all 0.2s; }
+    .db-btn:hover { background: #f9fafb; border-color: #d1d5db; }
+    .db-btn-heart { padding: 0.6rem 0.8rem; color: #3b82f6; display: flex; align-items: center; justify-content: center; }
+    .db-btn-heart svg { width: 18px; height: 18px; }
+
+    .db-zero-state { text-align: left; padding: 4rem 0; width: 100%; grid-column: 1 / -1; }
+    .db-zero-state h3 { font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 0.5rem; }
+    .db-zero-state p { font-size: 1rem; color: #6b7280; margin-bottom: 2rem; }
+    
+    .db-pagination { display: flex; align-items: center; justify-content: flex-end; gap: 0.4rem; margin-top: 2rem; padding-top: 2rem; }
+
+    /* Modal for Writing Review */
+    .re-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+    .re-modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .re-modal-content { background: var(--white); width: 90%; max-width: 500px; padding: 2.5rem; border-radius: 1rem; position: relative; max-height: 90vh; overflow-y: auto; transform: translateY(20px); transition: transform 0.3s; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+    .re-modal-overlay.open .re-modal-content { transform: translateY(0); }
+    .re-modal-close { position: absolute; top: 1rem; right: 1.5rem; cursor: pointer; font-size: 2.5rem; line-height: 1; color: var(--ink-soft); transition: 0.2s; }
+    .re-modal-close:hover { color: var(--ink); }
+    .re-modal-content h3 { font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 1.5rem; }
+    .re-form-group { margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+    .re-form-input, .re-form-textarea { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 0.5rem; outline: none; font-family: inherit; font-size: 0.95rem; }
+    .re-form-input:focus, .re-form-textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 2px rgba(0,0,0,0.05); }
+    .re-form-textarea { resize: vertical; min-height: 100px; }
+    .re-file-upload { position: relative; width: 100%; border: 1px dashed var(--border); border-radius: 0.5rem; background: #f9fafb; text-align: center; cursor: pointer; transition: all 0.2s; overflow: hidden; }
+    .re-file-upload:hover { border-color: #111827; background: #f3f4f6; }
+    .re-form-file { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+    .re-file-label { display: flex; align-items: center; justify-content: center; padding: 1.2rem; color: #4b5563; font-size: 0.95rem; font-weight: 500; }
+    #re-img-preview { margin-top: 0.8rem; display: none; }
+    #re-img-preview img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 1px solid #e5e7eb; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .db-item-img { max-width: 340px; border-radius: 8px; margin-top: 1.5rem; margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 12px rgba(0,0,0,0.04); cursor: pointer; transition: transform 0.2s ease; display: block; }
+    .db-item-img:hover { transform: scale(1.02); }
+    .re-star-select { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .re-star-select svg { width: 30px; height: 30px; fill: none; stroke: #f59e0b; stroke-width: 1.5; transition: fill 0.2s; cursor: pointer; }
+    .re-star-select svg.active { fill: #f59e0b; }
+    .re-submit-btn { width: 100%; background: var(--ink); color: var(--white); padding: 1rem; border: none; border-radius: 0.5rem; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 1rem; transition: background 0.2s; text-transform: uppercase; letter-spacing: 0.05em; }
+    .re-submit-btn:hover { background: #333; }
+  </style>
+</head>
+
+<body>
+  <div class="product-shell">
+    <div class="printing-topbar">Impresión premium, detalles elevados y primera impresión impactante para cada punto de
+      contacto de la marca.</div>
+    <header class="printing-header">
+      <div class="printing-header-top">
+        <a class="printing-logo" href="index.html">Studio Mark &amp; Print</a>
+        <div class="header-search-container">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="header-search-input" placeholder="Buscar productos, diseños o inspiración...">
+        </div>
+        <div class="header-utilities">
+          <a href="account.html" class="utility-btn">
+            <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Ingresar</span>
+          </a>
+          <a href="cart.html" class="utility-btn cart-btn">
+            <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span>Carrito</span>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+      </div>
+      <div class="printing-header-bottom">
+        <div class="printing-header-inner">
+          <nav class="printing-nav" aria-label="Navegación de impresión">
+            <a href="printing.html">Home</a>
+            <a href="business-cards.html" class="is-active">Tarjetas de Presentación</a>
+                        <a href="menus.html">Menus</a>
+            <a href="posters.html">Postales</a>
+            <a href="door-hangers.html">Door Hangers</a>
+            <a href="flyers.html">Flyers</a>
+            <a href="invitations.html">Invitaciones</a>
+          </nav>
+          <div class="printing-nav-meta">
+            <a href="index.html">Volver al Inicio</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a>
+      <span class="bc-sep">›</span>
+      <a href="printing.html">Impresión</a>
+      <span class="bc-sep">›</span>
+      <a href="business-cards.html">Tarjetas de Presentación</a>
+      <span class="bc-sep">›</span>
+      <span>Estándar</span>
+    </div>
+    <div class="split">
+
+      <!-- LEFT -->
+      <div class="left-panel">
+        <div class="card-stage">
+          <div class="cards-visual">
+            <div class="demo-card c1">
+
+            </div>
+            <div class="demo-card c2">
+
+            </div>
+            <div class="demo-card c3">
+
+            </div>
+            <div class="bc-finish-note">Diseño Tangible <span class="note-dot"></span> Presencia Inolvidable</div>
+          </div>
+        </div>
+        <div class="stage-footer">
+          <div class="stage-tag">Studio Mark &amp; Print · Tarjetas Original</div>
+          <div class="stage-guarantee"><span>✓</span> Revisión de archivo incluida</div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-panel">
+
+        <div class="product-intro">
+          <div class="product-name">Original Business Cards</div>
+          <div class="product-subtitle">3.5" x 2.0" – tu elección de 4 tipos de papel premium</div>
+          <div class="product-price-start">50 tarjetas desde $29.00</div>
+
+          <div class="product-rating">
+            <div class="stars" id="header-stars">★★★★★</div>
+            <span class="reviews-count" id="header-rcount">0.0 (0 reseñas)</span>
+          </div>
+
+          <hr class="product-divider">
+
+          <h3 class="desc-title">La tarjeta más vendida que todos aman</h3>
+          <p class="desc-text">Lo único estándar en estas Tarjetas de Presentación es su tamaño. Elige entre distintos
+            tipos de papel (hasta 32pt de grosor) y añade acabados de lujo para un impacto inolvidable. Nunca cierres
+            un
+            trato sin ellas.</p>
+
+          <ul class="desc-list">
+            <li>Impresión doble cara incluida en el formato estándar (3.5" x 2.0")</li>
+            <li>Disponibles en papel Original, Algodón, Kraft y Negro Profundo</li>
+            <li>Acabados Matte, Gloss, y Soft-Touch aterciopelado</li>
+            <li>Opciones exclusivas de Foil Dorado y Bordes Pintados</li>
+          </ul>
+        </div>
+
+        <!-- TAMAÑO -->
+        <div class="opt-section">
+          <div class="sec-title">Choose your size <span class="sec-sel" id="lbl-size">Estándar</span></div>
+          <div class="size-grid">
+            <div class="size-card sel" data-g="size" data-v="standard" data-lbl="Estándar">
+              <div class="size-preview">
+                <div class="smc" style="width:62px;position:relative;">
+                  <div class="smc-name">Julia Halvorsen</div>
+                  <div class="smc-role">Creative Director</div>
+                  <div class="smc-co">Halvorsen<br>Studio</div>
+                  <div class="smc-dot" style="background:#0e3b2e;"></div>
+                </div>
+              </div>
+              <div class="size-label">Estándar</div>
+              <div class="size-dim">2.0″ × 3.5″</div>
+            </div>
+
+            <div class="size-card" data-g="size" data-v="square" data-lbl="Cuadrada">
+              <div class="size-preview">
+                <div class="smc" style="width:50px;height:50px;position:relative;">
+                  <div class="smc-name">Julia Halvorsen</div>
+                  <div class="smc-role">Creative Director</div>
+                  <div class="smc-co">Halvorsen Studio</div>
+                  <div class="smc-dot" style="background:#e07b39;"></div>
+                </div>
+              </div>
+              <div class="size-label">Cuadrada</div>
+              <div class="size-dim">2.56″ × 2.56″</div>
+            </div>
+
+            <div class="size-card custom-size-card" id="sizes-trigger" data-g="size" data-v="custom"
+              data-lbl="Personalizado">
+              <div class="size-preview">
+                <div class="smc"
+                  style="width:48px;height:30px;position:relative;display:flex;align-items:center;justify-content:center;background:none;box-shadow:none;border:1.5px dashed var(--ink-soft);">
+                  <span style="font-size:1.4rem;color:var(--ink-soft);line-height:0.8;">+</span>
+                </div>
+              </div>
+              <div class="size-label">Personalizado</div>
+              <div class="size-dim" id="custom-dim-label"
+                style="display:flex;align-items:center;justify-content:center;gap:0.2rem;">Ver opciones <span
+                  style="font-size:0.55rem;">▼</span></div>
+
+              <div class="size-popover" id="size-popover">
+                <div class="sp-item" data-dim="1.75″ × 3″">1.75″ × 3″</div>
+                <div class="sp-item" data-dim="1.75″ × 3.5″">1.75″ × 3.5″</div>
+                <div class="sp-item" data-dim="2″ × 3″">2″ × 3″</div>
+                <div class="sp-item" data-dim="2.17″ × 3.35″">2.17″ × 3.35″ <span class="sp-sub">Europeo</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACABADO -->
+        <div class="opt-section">
+          <div class="sec-title">Elige tu acabado</div>
+          <div class="dd" id="dd-finish">
+            <div class="dd-trigger" onclick="toggleDD('dd-finish')">
+              <div class="dd-val" id="val-finish">Mate</div>
+              <div class="dd-arrow">▼</div>
+            </div>
+            <div class="dd-list">
+              <div class="dd-item active" data-dd="dd-finish" data-v="Matte">
+                <div class="di-sw" style="background:linear-gradient(135deg,#d8d3cd,#c4bfb9);"></div>
+                <div>
+                  <div class="di-name">Mate</div>
+                  <div class="di-sub">Sin brillo · Textura suave</div>
+                </div>
+              </div>
+              <div class="dd-item" data-dd="dd-finish" data-v="Gloss">
+                <div class="di-sw" style="background:linear-gradient(135deg,#e8e8f8,#cccce0);"></div>
+                <div>
+                  <div class="di-name">Brillante</div>
+                  <div class="di-sub">Brillo vibrante · Colores vivos</div>
+                </div>
+              </div>
+              <div class="dd-item" data-dd="dd-finish" data-v="Soft-Touch">
+                <div class="di-sw" style="background:linear-gradient(135deg,#b8b3ad,#a09b96);"></div>
+                <div>
+                  <div class="di-name">Soft-Touch</div>
+                  <div class="di-sub">Terciopelo al tacto · Premium</div>
+                </div>
+              </div>
+              <div class="dd-item" data-dd="dd-finish" data-v="Foil Dorado">
+                <div class="di-sw" style="background:linear-gradient(135deg,#f5d060,#c8920a);"></div>
+                <div>
+                  <div class="di-name">Foil Dorado</div>
+                  <div class="di-sub">Detalle metálico · Lujo</div>
+                </div>
+              </div>
+              <div class="dd-item" data-dd="dd-finish" data-v="Edge Painting">
+                <div class="di-sw" style="background:linear-gradient(135deg,#0e3b2e,#1a6b4e);"></div>
+                <div>
+                  <div class="di-name">Edge Painting</div>
+                  <div class="di-sub">Bordes pintados · Distintivo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAPER STOCK -->
+        <div class="opt-section">
+          <div class="sec-title">Tipo de Papel</div>
+          <div class="dd" id="dd-paper">
+            <div class="dd-trigger" onclick="toggleDD('dd-paper')">
+              <div class="dd-val" id="val-paper">Mate</div>
+              <div class="dd-arrow">▼</div>
+            </div>
+            <div class="dd-list">
+              <div class="dd-item active" data-dd="dd-paper" data-v="Matte" data-add="0">
+                <div class="di-sw" style="background:linear-gradient(135deg,#d8d3cd,#c4bfb9);"></div>
+                <div>
+                  <div class="di-name">Mate</div>
+                  <div class="di-sub">16PT · Estándar sin brillo</div>
+                </div>
+              </div>
+              <div class="dd-item" data-dd="dd-paper" data-v="Cotton  +$12" data-add="12">
+                <div class="di-sw" style="background:linear-gradient(135deg,#f5eee4,#e0d4c4);"></div>
+                <div>
+                  <div class="di-name">Algodón · +$12</div>
+                  <div class="di-sub">32PT · Textura natural premium</div>
+                </div>
+              </div>
+              <div class="dd-item" data-dd="dd-paper" data-v="Kraft  +$8" data-add="8">
+                <div class="di-sw" style="background:linear-gradient(135deg,#d4b890,#b89a72);"></div>
+                <div>
+                  <div class="di-name">Kraft Natural · +$8</div>
+                  <div class="di-sub">Orgánico · Artesanal</div>
+                </div>
+              </div>
+              <div class="dd-item" data-dd="dd-paper" data-v="Black Stock  +$10" data-add="10">
+                <div class="di-sw" style="background:linear-gradient(135deg,#2a2a2a,#111);"></div>
+                <div>
+                  <div class="di-name">Black Stock · +$10</div>
+                  <div class="di-sub">Negro profundo · Tinta blanca</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CORNERS -->
+        <div class="opt-section">
+          <div class="sec-title">Esquinas <span class="sec-sel" id="lbl-corners">Cuadradas</span></div>
+          <div class="corners-grid">
+            <div class="corner-card sel" data-g="corners" data-v="Square" data-lbl="Cuadradas">
+              <div class="corner-info">
+                <div class="corner-title">Cuadradas</div>
+                <div class="corner-sub">Clásicas y elegantes</div>
+              </div>
+              <svg class="corner-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4,4 20,4 20,20" />
+                <polyline points="20,20 4,20 4,4" stroke-dasharray="3 4" />
+              </svg>
+            </div>
+            <div class="corner-card" data-g="corners" data-v="Round" data-lbl="Redondeadas">
+              <div class="corner-info">
+                <div class="corner-title">Redondeadas</div>
+                <div class="corner-sub">Suaves y modernas</div>
+              </div>
+              <svg class="corner-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4 H14 A6 6 0 0 1 20 10 V20" />
+                <polyline points="20,20 4,20 4,4" stroke-dasharray="3 4" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBIR IMAGEN / LOGO -->
+        <div class="opt-section">
+          <div class="sec-title">Tu Imagen o Logo <span class="sec-sel" id="lbl-design">Opcional</span></div>
+          <div class="design-upload-box" id="design-upload-box" style="
+            background: var(--white);
+            border: 2px dashed var(--border);
+            border-radius: var(--r);
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+          ">
+            <input type="file" id="card-design-input" accept="image/*" style="
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+              cursor: pointer;
+              z-index: 5;
+            " onchange="handleDesignUpload(event)">
+            <div id="upload-idle-state" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+              <div style="
+                width: 2.8rem;
+                height: 2.8rem;
+                border-radius: 50%;
+                background: var(--cream);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--forest);
+              ">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 0.95rem; color: var(--ink);">Subir tu propio diseño o logo</div>
+                <div style="font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.2rem;">Haz clic o arrastra un archivo (PNG, JPG, SVG, WEBP)</div>
+              </div>
+            </div>
+            
+            <div id="upload-preview-state" style="display: none; align-items: center; justify-content: space-between; gap: 1rem;">
+              <div style="display: flex; align-items: center; gap: 0.8rem; text-align: left;">
+                <img id="uploaded-design-thumb" src="" alt="Vista previa del diseño" style="width: 54px; height: 34px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                <div>
+                  <div id="uploaded-file-name" style="font-weight: 700; font-size: 0.88rem; color: var(--ink); max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">imagen.png</div>
+                  <div style="font-size: 0.75rem; color: var(--forest); font-weight: 600;">✓ Vista previa actualizada</div>
+                </div>
+              </div>
+              <button type="button" onclick="removeUploadedDesign(event)" style="
+                background: rgba(220, 38, 38, 0.1);
+                color: #dc2626;
+                border: none;
+                border-radius: 0.4rem;
+                padding: 0.4rem 0.75rem;
+                font-size: 0.78rem;
+                font-weight: 600;
+                cursor: pointer;
+                z-index: 10;
+                position: relative;
+              ">Cambiar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUANTITY -->
+        <div class="opt-section">
+          <div class="sec-title">Cantidad <span class="sec-sel" id="lbl-qty">250</span></div>
+          <div class="qty-grid">
+            <div class="qty-card" data-g="qty" data-v="50" data-price="29" data-per="0.58" data-lbl="50">
+              <div class="qty-num">50</div>
+              <div class="qty-price">$29</div>
+              <div class="qty-per">($0.58 / unit)</div>
+            </div>
+            <div class="qty-card" data-g="qty" data-v="100" data-price="39" data-per="0.39" data-lbl="100">
+              <div class="qty-num">100</div>
+              <div class="qty-price">$39</div>
+              <div class="qty-per">($0.39 / unit)</div>
+            </div>
+            <div class="qty-card sel" data-g="qty" data-v="250" data-price="59" data-per="0.24" data-lbl="250">
+              <div class="qty-tag">Mejor Valor</div>
+              <div class="qty-num">250</div>
+              <div class="qty-price">$59</div>
+              <div class="qty-per">($0.24 / unit)</div>
+            </div>
+            <div class="qty-card" data-g="qty" data-v="500" data-price="89" data-per="0.18" data-lbl="500">
+              <div class="qty-num">500</div>
+              <div class="qty-price">$89</div>
+              <div class="qty-per">($0.18 / unit)</div>
+            </div>
+            <div class="qty-card" data-g="qty" data-v="1000" data-price="139" data-per="0.14" data-lbl="1,000">
+              <div class="qty-num">1,000</div>
+              <div class="qty-price">$139</div>
+              <div class="qty-per">($0.14 / unit)</div>
+            </div>
+            <div class="qty-card" data-g="qty" data-v="2500" data-price="0" data-per="0" data-lbl="2,500+">
+              <div class="qty-num">2,500+</div>
+              <div class="qty-price">Cotizar</div>
+              <div class="qty-per">Tarifa volumen</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="price-cta">
+          <div class="price-row">
+            <div>
+              <div class="price-lbl">Total estimado</div>
+              <div class="price-total" id="price-total">$59</div>
+            </div>
+            <div>
+              <div class="price-per" id="price-per">$0.24 por tarjeta</div>
+              <div class="price-per">250 tarjetas · Matte</div>
+            </div>
+          </div>
+          <a href="editor.html" class="cta-btn" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">🎨 Diseñar en Línea (Estudio Interactivo)</a>
+          <button class="cta-sub" onclick="handleContinue(this)">Subir diseño propio → Añadir al Carrito</button>
+          <div class="cta-guarantee">✓ &nbsp;Revisión de archivo · Sin cargos ocultos · Cambios gratis</div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <!-- ══ EDITORIAL SECTION ══ -->
+    <div class="editorial-wrap">
+
+      <!-- Block 1: Split — text left, photo right -->
+      <div class="ed-split">
+        <div class="ed-split-text">
+          <h2 class="ed-h2">Obtén tarjetas de presentación con altos estándares, no con altos precios.</h2>
+          <ul class="ed-list">
+            <li>Papel glossy, mate o sin recubrimiento estándar</li>
+            <li>Forma estándar con esquinas rectas incluida</li>
+            <li>Impresión en ambas caras disponible</li>
+            <li>Upgrades a papel premium disponibles</li>
+            <li>Esquinas redondeadas y formas especiales disponibles</li>
+            <li>Acabados embossed gloss y foil disponibles</li>
+            <li>Cantidades desde 50 hasta 10,000+</li>
+          </ul>
+          <p class="ed-reviews" id="ed-reviews">⭐ <strong>0 reseñas de 5 estrellas</strong></p>
+          <p class="ed-body">Cuando se trata de imprimir tarjetas de presentación, Studio Mark &amp; Print es tu mejor
+            aliado. Llevamos años siendo la opción preferida de negocios y emprendedores, y nuestra misión es ayudarte a
+            crear tarjetas de alta calidad de manera rápida y sencilla, sin precios exagerados. Ya sea que estés
+            causando una primera impresión, fidelizando clientes o dando tu contacto, tenemos opciones que se adaptan a
+            tu negocio, presupuesto y estilo.</p>
+        </div>
+        <div class="ed-split-img">
+          <img src="img/thumb-stack.png" alt="Tarjetas de presentación premium apiladas" class="ed-img">
+        </div>
+      </div>
+
+      <!-- Block 2: Lots of options -->
+      <div class="ed-block">
+        <h3 class="ed-h3">Muchas opciones y acabados</h3>
+        <p class="ed-body">Desde papeles tradicionales hasta gramajes más gruesos y acabados especiales que llaman la
+          atención, tienes muchas opciones para tus tarjetas. Comenzando con nuestros papeles estándar — glossy, mate o
+          sin recubrimiento — también ofrecemos upgrades premium como kraft, algodón y black stock. Y no solo eso:
+          puedes optar por esquinas redondeadas, forma cuadrada o acabados como Soft-Touch aterciopelado, Foil Dorado o
+          Bordes Pintados. Para más detalles, consulta la sección de Opciones superior.</p>
+      </div>
+
+      <!-- Block 3: Easy to design -->
+      <div class="ed-block">
+        <h3 class="ed-h3">Fácil de diseñar y entrega rápida</h3>
+        <p class="ed-body">Nuestro proceso de diseño es simple: sube tu archivo listo para imprimir, o comparte tu idea
+          y te ayudamos a materializarla. Cada pedido incluye revisión gratuita de archivo antes de entrar a producción.
+          La producción estándar toma 2–3 días hábiles, con opciones de envío express disponibles. En poco tiempo
+          estarás entregando tarjetas de calidad que representan bien tu marca.</p>
+        <p class="ed-body">¿Necesitas más de 10,000 tarjetas? <a href="mailto:studiomarkprint@gmail.com"
+            class="ed-link">Escríbenos para un presupuesto personalizado</a>.</p>
+      </div>
+
+      <!-- Block 4: Why Studio Mark & Print -->
+      <div class="ed-block">
+        <h3 class="ed-h3">¿Por qué Studio Mark &amp; Print?</h3>
+        <p class="ed-body"><strong>Calidad sin compromiso:</strong> Utilizamos papel de alto gramaje y tintas de última
+          generación para garantizar colores nítidos y consistentes en cada tiraje, sin importar la cantidad.</p>
+        <p class="ed-body"><strong>Atención personalizada:</strong> No eres un número de pedido. Nuestro equipo revisa
+          cada archivo antes de imprimir y te contactamos si detectamos algo que pueda afectar el resultado final.</p>
+        <p class="ed-body"><strong>Precio justo:</strong> Precios transparentes, sin cargos ocultos ni sorpresas. Lo que
+          ves es lo que pagas — calidad premium a un precio que tiene sentido para tu negocio.</p>
+      </div>
+
+    </div>
+
+    <!-- ══ REVIEWS COMPONENT ══ -->
+    <div id="re-modal" class="re-modal-overlay" onclick="if(event.target===this) closeReModal()">
+      <div class="re-modal-content">
+        <span class="re-modal-close" onclick="closeReModal()">&times;</span>
+        <h3>Escribir una reseña</h3>
+        <form id="re-form" onsubmit="submitReForm(event)">
+          <div class="re-form-group">
+            <label>Tu calificación general</label>
+            <div class="re-star-select" id="re-star-selector">
+              <svg viewBox="0 0 24 24" data-v="1" onclick="selectReStar(1)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" data-v="2" onclick="selectReStar(2)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" data-v="3" onclick="selectReStar(3)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" data-v="4" onclick="selectReStar(4)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" data-v="5" onclick="selectReStar(5)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+          <div class="re-form-group">
+            <label>Título de tu reseña</label>
+            <input type="text" id="re-f-title" class="re-form-input" placeholder="Ej. ¡Me encantan!" required>
+          </div>
+          <div class="re-form-group">
+            <label>Cuéntanos más</label>
+            <textarea id="re-f-text" class="re-form-textarea" placeholder="¿Qué te gustó más sobre tu orden?" required></textarea>
+          </div>
+          <div class="re-form-group">
+            <label>Añadir foto <span style="color:#9ca3af;font-weight:500;">(opcional)</span></label>
+            <div class="re-file-upload">
+              <input type="file" id="re-f-image" accept="image/*" class="re-form-file" onchange="handleReviewImageUpload(event)">
+              <div class="re-file-label">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; opacity:0.7;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg> 
+                Seleccionar foto
+              </div>
+            </div>
+            <div id="re-img-preview"></div>
+          </div>
+          <div class="re-form-group">
+            <label>Tu nombre</label>
+            <input type="text" id="re-f-name" class="re-form-input" placeholder="¿Cómo te gustaría aparecer?" required>
+          </div>
+          <button type="submit" class="re-submit-btn">Enviar Reseña</button>
+        </form>
+      </div>
+    </div>
+    
+    <section class="reviews-section">
+      <div class="db-wrap">
+        <!-- Top Header -->
+      <div class="db-header">
+        <h2 class="db-title">Reviews</h2>
+        <div class="db-header-actions">
+          <button class="db-write-btn" onclick="openReModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; opacity: 0.8;"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            Write a review
+          </button>
+          <div class="db-dropdown">All Time <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg></div>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="db-stats-grid">
+        <!-- Col 1 -->
+        <div class="db-col">
+          <div class="db-col-title">Total Reviews</div>
+          <div class="db-col-val">
+            <span id="db-total-val">0</span>
+            <span class="db-badge">21% <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg></span>
+          </div>
+          <div class="db-col-subtext">Growth in reviews on this year</div>
+        </div>
+        
+        <!-- Col 2 -->
+        <div class="db-col db-col-mid">
+          <div class="db-col-title">Average Rating</div>
+          <div class="db-col-val">
+            <span id="db-avg-val">0.0</span>
+            <div class="db-stars" id="db-avg-stars">
+            </div>
+          </div>
+          <div class="db-col-subtext">Average rating on this year</div>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="db-col">
+          <div class="db-bars-wrap" id="db-bars-wrap">
+          </div>
+        </div>
+      </div>
+
+      <hr class="db-divider">
+
+      <div class="db-list" id="db-list">
+      </div>
+      
+        <div class="db-pagination" id="db-pagination">
+        </div>
+      </div>
+    </section>
+    <!-- ══ FAQ ══ -->
+    <div class="faq-wrap">
+      <h2>Preguntas Frecuentes</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Qué acabados están disponibles para las Tarjetas de Presentación Estándar?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-a">Ofrecemos cinco acabados: <strong>Mate</strong> (suave y elegante, sin brillo),
+            <strong>Brillante</strong> (colores intensos y vibrantes), <strong>Soft-Touch</strong> (aterciopelado al
+            tacto, sensación premium), <strong>Foil Dorado</strong> (detalles metálicos de lujo) y <strong>Bordes
+              Pintados</strong> (color en el canto de la tarjeta). Cada acabado transforma completamente la percepción
+            de tu marca.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Cuánto tiempo tarda la producción y el envío?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-a">La producción estándar toma <strong>2–3 días hábiles</strong> una vez aprobado tu archivo.
+            El envío estándar agrega 3–5 días adicionales. También ofrecemos envío express con entrega en 1–2 días.
+            Recibirás un correo con número de rastreo tan pronto tu pedido salga de producción.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Son adecuadas para todas las industrias?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-a">Absolutamente. Las Tarjetas de Presentación Estándar son el formato más universal y
+            reconocido en el mundo de los negocios. Son ideales para <strong>diseñadores, abogados, médicos,
+              restaurantes, agencias inmobiliarias, freelancers, startups</strong> y prácticamente cualquier industria.
+            Puedes personalizarlas completamente con nuestras opciones de papel y acabado.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Cuál es el grosor disponible?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-a">El grosor depende del papel que elijas: el papel <strong>Original</strong> es de
+            <strong>16PT</strong> (estándar de la industria), el papel <strong>Algodón</strong> llega a
+            <strong>32PT</strong> de grosor —casi el doble— con una textura natural premium que se siente notablemente
+            diferente al tacto. Tanto el Kraft Natural como el Black Stock son de 16PT.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Se puede escribir sobre las tarjetas?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-a">Sí, con acabado <strong>Mate</strong> o en papel <strong>Algodón</strong> sin acabado
+            adicional, es muy fácil escribir con bolígrafo o pluma. Los acabados <strong>Brillante</strong> y
+            <strong>Soft-Touch</strong> admiten escritura con tinta de secado rápido o bolígrafo de punta fina, aunque
+            puede requerir un poco más de tiempo de secado.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            ¿Puedo pedir una muestra antes de hacer mi pedido completo?
+            <span class="faq-chevron">▼</span>
+          </button>
+          <div class="faq-a">Sí. Ofrecemos pedidos de muestra desde <strong>50 tarjetas</strong> para que puedas evaluar
+            la calidad del papel, el acabado y la fidelidad de colores antes de hacer un pedido mayor. También enviamos
+            <strong>kits de muestras físicos</strong> con los diferentes tipos de papel y acabados sin costo adicional —
+            escríbenos a studiomarkprint@gmail.com para solicitarlo.</div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <footer class="bg-[#09090b] text-zinc-400 py-16 px-6 md:px-12 border-t border-zinc-900">
+      <div class="max-w-screen-2xl mx-auto">
+        <div
+          class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 pb-16 border-b border-zinc-900">
+          <div class="max-w-md">
+            <h3 class="text-white text-2xl md:text-3xl font-bold mb-4 italic" style="font-family: 'Noto Serif', serif;">
+              The newsletter you'll actually want to read.
+            </h3>
+            <p class="text-zinc-500 mb-6 font-light">Get exclusive offers, design inspiration, and print tips delivered
+              to your inbox.</p>
+            <form class="flex w-full max-w-sm gap-2">
+              <input type="email" placeholder="Email address"
+                class="flex-grow bg-transparent border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:border-white transition-colors outline-none text-white">
+              <button
+                class="bg-white text-black px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all">Sign
+                Up</button>
+            </form>
+          </div>
+          <div class="flex flex-col items-start lg:items-end gap-6">
+            <p class="text-white font-bold uppercase text-[10px] tracking-[0.3em]">Follow Us</p>
+            <div class="flex gap-4">
+              <a href="#"
+                class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/studiomarkprint/" target="_blank" rel="noopener noreferrer"
+                class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="https://www.tiktok.com/@studiomarkprint" target="_blank" rel="noopener noreferrer"
+                class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.81-.6-4.03-1.37-.01 2.39-.01 4.79-.01 7.18-.01 1.5-.63 3.12-1.74 4.12-1.29 1.21-3.11 1.9-4.91 1.91-2.95.14-5.89-1.92-6.59-4.75-.72-2.61.14-5.51 2.24-7.24 1.25-1.01 2.87-1.57 4.47-1.58v4.03c-.28-.01-.57-.01-.85.02-1.27.13-2.45.96-2.9 2.16-.41.97-.24 2.15.42 2.94.75.9 2.03 1.18 3.1.75 1.05-.4 1.69-1.51 1.71-2.62.01-4.03.01-8.06.01-12.09z">
+                  </path>
+                </svg>
+              </a>
+              <a href="mailto:studiomarkprint@gmail.com"
+                class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 py-16">
+          <div>
+            <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Products</h4>
+            <ul class="space-y-4 text-sm font-light">
+              <li><a href="printing.html" class="hover:text-white transition-colors">Business Cards</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Postcards</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Stickers</a></li>
+              <li><a href="flyers.html" class="hover:text-white transition-colors">Flyers</a></li>
+              <li><a href="invitations.html" class="hover:text-white transition-colors">Invitations</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Services</h4>
+            <ul class="space-y-4 text-sm font-light">
+              <li><a href="#" class="hover:text-white transition-colors">Graphic Design</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Website Design</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Brand Identity</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Curation</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Packaging</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Company</h4>
+            <ul class="space-y-4 text-sm font-light">
+              <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Our Standard</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Support</h4>
+            <ul class="space-y-4 text-sm font-light">
+              <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Shipping Info</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Return Policy</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+              <li><a href="mailto:studiomarkprint@gmail.com"
+                  class="text-white font-medium">studiomarkprint@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="flex flex-col md:flex-row items-center gap-6 text-[10px] uppercase tracking-widest text-zinc-600">
+            <p>&copy; 2026 Studio Mark &amp; Print</p>
+            <div class="flex gap-6">
+              <a href="#" class="hover:text-zinc-400 transition-colors">Privacy</a>
+              <a href="#" class="hover:text-zinc-400 transition-colors">Terms</a>
+              <a href="#" class="hover:text-zinc-400 transition-colors">Security</a>
+            </div>
+          </div>
+          <span class="text-[10px] uppercase tracking-widest text-zinc-400">United States / EN</span>
+        </div>
+      </div>
+
+
+  </div>
+  <script>
+    let basePrice = 59, paperAdd = 0;
+
+    document.querySelectorAll('[data-g]').forEach(el => {
+      el.addEventListener('click', () => {
+        const g = el.dataset.g;
+        document.querySelectorAll(`[data-g="${g}"]`).forEach(s => s.classList.remove('sel'));
+        el.classList.add('sel');
+        const lbl = document.getElementById(`lbl-${g}`);
+        if (lbl) lbl.textContent = el.dataset.lbl || el.dataset.v;
+        if (g === 'qty') { basePrice = parseInt(el.dataset.price) || 0; updatePrice(); }
+      });
+    });
+
+    function toggleDD(id) {
+      const el = document.getElementById(id);
+      const was = el.classList.contains('open');
+      document.querySelectorAll('.dd').forEach(d => d.classList.remove('open'));
+      if (!was) el.classList.add('open');
+    }
+
+    document.querySelectorAll('.dd-item').forEach(item => {
+      item.addEventListener('click', e => {
+        e.stopPropagation();
+        const ddId = item.dataset.dd;
+        document.querySelectorAll(`#${ddId} .dd-item`).forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        const key = ddId.replace('dd-', '');
+        document.getElementById(`val-${key}`).textContent = item.dataset.v.split('·')[0].trim();
+        if (item.dataset.add !== undefined) { paperAdd = parseInt(item.dataset.add) || 0; updatePrice(); }
+        document.getElementById(ddId).classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dd')) {
+        document.querySelectorAll('.dd').forEach(d => d.classList.remove('open'));
+      }
+      if (!e.target.closest('.custom-size-card')) {
+        const trigger = document.getElementById('sizes-trigger');
+        if (trigger) trigger.classList.remove('open');
+      }
+    });
+
+    const customCard = document.getElementById('sizes-trigger');
+    if (customCard) {
+      customCard.addEventListener('click', (e) => {
+        if (!e.target.closest('.sp-item')) {
+          customCard.classList.toggle('open');
+        }
+      });
+    }
+
+    document.querySelectorAll('.sp-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        const dim = item.dataset.dim;
+        document.getElementById('custom-dim-label').innerHTML = `${dim} <span style="font-size:0.55rem;margin-left:0.2rem;">▼</span>`;
+
+        const lblFull = `Personalizado (${dim})`;
+        customCard.dataset.lbl = lblFull;
+
+        const lbl = document.getElementById('lbl-size');
+        if (lbl) lbl.textContent = lblFull;
+
+        document.querySelectorAll(`[data-g="size"]`).forEach(s => s.classList.remove('sel'));
+        customCard.classList.add('sel');
+
+        customCard.classList.remove('open');
+      });
+    });
+
+    function updatePrice() {
+      const total = basePrice + paperAdd;
+      const qtyEl = document.querySelector('[data-g="qty"].sel');
+      const qty = qtyEl ? parseInt(qtyEl.dataset.v) : 250;
+      const per = qty > 0 && total > 0 ? (total / qty).toFixed(2) : '—';
+      document.getElementById('price-total').textContent = total > 0 ? `$${total}` : 'Cotizar';
+      document.getElementById('price-per').textContent = total > 0 ? `$${per} por tarjeta` : 'Tarifa de volumen';
+    }
+
+    let currentUploadedImage = null;
+
+    function handleDesignUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        currentUploadedImage = e.target.result;
+        
+        const idleState = document.getElementById('upload-idle-state');
+        const previewState = document.getElementById('upload-preview-state');
+        const thumb = document.getElementById('uploaded-design-thumb');
+        const fileName = document.getElementById('uploaded-file-name');
+        const lbl = document.getElementById('lbl-design');
+
+        if (idleState) idleState.style.display = 'none';
+        if (previewState) previewState.style.display = 'flex';
+        if (thumb) thumb.src = currentUploadedImage;
+        if (fileName) fileName.textContent = file.name;
+        if (lbl) lbl.textContent = '✓ Subido';
+
+        document.querySelectorAll('.demo-card').forEach(card => {
+          card.style.setProperty('--demo-card-bg', `url("${currentUploadedImage}")`);
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeUploadedDesign(event) {
+      if (event) event.stopPropagation();
+      currentUploadedImage = null;
+      
+      const input = document.getElementById('card-design-input');
+      const idleState = document.getElementById('upload-idle-state');
+      const previewState = document.getElementById('upload-preview-state');
+      const lbl = document.getElementById('lbl-design');
+
+      if (input) input.value = '';
+      if (idleState) idleState.style.display = 'flex';
+      if (previewState) previewState.style.display = 'none';
+      if (lbl) lbl.textContent = 'Opcional';
+
+      document.querySelectorAll('.demo-card').forEach(card => {
+        card.style.removeProperty('--demo-card-bg');
+      });
+    }
+
+    function handleContinue(btn) {
+      btn.textContent = '✓ Procesando…';
+      btn.style.background = '#1a5c45';
+      
+      const qtyEl = document.querySelector('[data-g="qty"].sel');
+      const qtyVal = qtyEl ? parseInt(qtyEl.dataset.v) : 250;
+      
+      const priceEl = document.getElementById('price-total');
+      let priceVal = 59;
+      if (priceEl && priceEl.textContent) {
+        const parsed = parseFloat(priceEl.textContent.replace('$', '').trim());
+        if (!isNaN(parsed) && parsed > 0) priceVal = parsed;
+      }
+
+      const paperEl = document.querySelector('[data-g="paper"].sel .size-label');
+      const paperName = paperEl ? paperEl.textContent.trim() : 'Estándar Matte';
+
+      if (typeof Cart !== 'undefined') {
+        Cart.addToCart({
+          id: 'std_' + Date.now(),
+          name: 'Tarjetas de Presentación Estándar',
+          price: priceVal,
+          qty: 1,
+          options: `${qtyVal} tarjetas · ${paperName}${currentUploadedImage ? ' · Con diseño propio' : ''}`,
+          image: currentUploadedImage || 'bussinescard.webp'
+        });
+      }
+
+      setTimeout(() => {
+        window.location.href = 'checkout.html';
+      }, 500);
+    }
+
+    /* Thumbnail gallery */
+    function selectThumb(el) {
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('gsel'));
+      el.classList.add('gsel');
+    }
+
+    /* Product tabs */
+    function switchProdTab(tabId, btn) {
+      document.querySelectorAll('.prod-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.prod-tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel = document.getElementById('ptab-' + tabId);
+      if (panel) panel.classList.add('active');
+    }
+
+    /* FAQ accordion */
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* ══ REVIEWS COMPONENT LOGIC ══ */
+    let mockReviews = [];
+    try {
+      const stored = localStorage.getItem('studio_mark_reviews');
+      if (stored) mockReviews = JSON.parse(stored);
+    } catch(e) {}
+
+    let distribution = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+    let totalReviewsNum = 0;
+    let avgScore = 0;
+
+    function computeReviewStats() {
+      totalReviewsNum = mockReviews.length;
+      distribution = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+      if (totalReviewsNum === 0) {
+        avgScore = 0;
+        return;
+      }
+      let sum = 0;
+      mockReviews.forEach(r => {
+        distribution[r.rating] = (distribution[r.rating] || 0) + 1;
+        sum += r.rating;
+      });
+      avgScore = (sum / totalReviewsNum).toFixed(1);
+      
+      const distRaw = { ...distribution };
+      for(let i=1; i<=5; i++) {
+        distribution[i] = Math.round((distribution[i] / totalReviewsNum) * 100);
+      }
+      return distRaw;
+    }
+
+    function updateReviewDOM() {
+      const distRaw = computeReviewStats() || {5:0,4:0,3:0,2:0,1:0};
+      
+      const headerTotal = document.getElementById('db-total-val');
+      if (headerTotal) {
+          headerTotal.textContent = totalReviewsNum >= 1000 ? (totalReviewsNum/1000).toFixed(1) + 'k' : totalReviewsNum;
+      }
+      
+      const headerAvg = document.getElementById('db-avg-val');
+      if (headerAvg) {
+          headerAvg.textContent = avgScore > 0 ? avgScore : '0.0';
+      }
+      
+      const dbStars = document.getElementById('db-avg-stars');
+      if (dbStars) {
+          dbStars.innerHTML = getStarsHtml(Math.round(avgScore));
+      }
+    }
+
+    let reState = {
+      filterRating: null, 
+      search: "",
+      sort: "recent",
+      page: 1,
+      perPage: 5
+    };
+
+    function renderStarBars() {
+      const el = document.getElementById('db-bars-wrap');
+      if(el) {
+        let html = '';
+        [5, 4, 3, 2, 1].forEach(star => {
+          let cnt = mockReviews.filter(r => Math.round(r.rating) === star).length;
+          let label = cnt >= 1000 ? (cnt/1000).toFixed(1) + 'k' : cnt;
+          let pct = totalReviewsNum === 0 ? 0 : (cnt / totalReviewsNum) * 100;
+          html += `
+            <div class="db-bar-row">
+              <span style="width: 25px; display:flex; align-items:center; justify-content:space-between;">${star} <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+              <div class="db-bar-track"><div class="db-bar-fill fill-${star}" style="width: ${pct}%"></div></div>
+              <div class="db-bar-count">${label}</div>
+            </div>
+          `;
+        });
+        el.innerHTML = html;
+      }
+    }
+
+    function setReFilter(star) {
+      if(reState.filterRating === star) {
+        reState.filterRating = null; 
+      } else {
+        reState.filterRating = star;
+      }
+      reState.page = 1;
+      updateReviews();
+    }
+
+    function getStarsHtml(rating) {
+      let h = '';
+      for(let i=1; i<=5; i++) {
+        if(i <= rating) h += `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+        else h += `<svg class="empty" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+      }
+      return h;
+    }
+
+    function updateReviews() {
+      let filtered = mockReviews.filter(r => {
+        let matchR = reState.filterRating ? (r.rating === reState.filterRating) : true;
+        let matchS = reState.search ? (r.title.toLowerCase().includes(reState.search.toLowerCase()) || r.text.toLowerCase().includes(reState.search.toLowerCase())) : true;
+        return matchR && matchS;
+      });
+
+      if(reState.sort === 'high') filtered.sort((a,b) => b.rating - a.rating);
+      if(reState.sort === 'low') filtered.sort((a,b) => a.rating - b.rating);
+      if(reState.sort === 'recent') filtered.sort((a,b) => b.id - a.id); 
+
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / reState.perPage) || 1;
+      if (reState.page > totalPages) reState.page = totalPages;
+
+      const start = (reState.page - 1) * reState.perPage;
+      const paginated = filtered.slice(start, start + reState.perPage);
+
+      const listEl = document.getElementById('db-list');
+      const pagEl = document.getElementById('db-pagination');
+
+      renderStarBars();
+
+      if(!listEl) return;
+
+      if(totalItems === 0) {
+        if(mockReviews.length === 0) {
+          listEl.innerHTML = `
+            <div class="db-zero-state">
+              <h3>Sé el primero en opinar</h3>
+              <p>Aún no tenemos reseñas de este producto. Tu opinión es muy valiosa para nosotros y para futuros clientes.</p>
+              <button class="db-write-btn" onclick="openReModal()" style="margin-top: 1.5rem;">Escribir una reseña</button>
+            </div>
+          `;
+        } else {
+          listEl.innerHTML = `
+            <div class="db-zero-state">
+              <h3>No hay resultados</h3>
+              <p>No encontramos reseñas que coincidan con tu búsqueda o filtros actuales.</p>
+            </div>
+          `;
+        }
+        if(pagEl) pagEl.innerHTML = '';
+        return;
+      }
+
+      let html = '';
+      paginated.forEach(r => {
+        let av = r.avatar || `https://i.pravatar.cc/150?u=${r.name.replace(/\\s/g,'')}`;
+          
+        html += `
+          <div class="db-item">
+            <div class="db-item-left">
+              <img src="${av}" class="db-avatar" alt="${r.name}">
+              <div class="db-name">${r.name}</div>
+            </div>
+            <div class="db-item-right">
+              <div class="db-item-top">
+                <div class="db-stars">${getStarsHtml(r.rating)}</div>
+                <div class="db-item-date">${r.date}</div>
+              </div>
+              <div class="db-item-body">
+                ${r.text}
+                ${r.image ? `<img src="${r.image}" class="db-item-img" alt="Foto adjuntada">` : ''}
+              </div>
+              <div class="db-item-actions">
+                <button class="db-btn">Public Comment</button>
+                <button class="db-btn">Direct Message</button>
+                <button class="db-btn db-btn-heart"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      listEl.innerHTML = html;
+
+      let startIdx = start + 1;
+      let endIdx = Math.min(start + reState.perPage, totalItems);
+      let phtml = `<div class="re-page-info">Mostrando ${startIdx}-${endIdx} de ${totalItems} reseñas</div>`;
+      
+      const prevClass = reState.page === 1 ? 'disabled' : '';
+      phtml += `<button class="re-page-btn ${prevClass}" onclick="changeRePage(-1)">‹</button>`;
+      
+      for(let i=1; i<=totalPages; i++) {
+        if(i === 1 || i === totalPages || (i >= reState.page - 1 && i <= reState.page + 1)) {
+           phtml += `<button class="re-page-btn ${i === reState.page ? 'active' : ''}" onclick="gotoRePage(${i})">${i}</button>`;
+        } else if(i === reState.page - 2 || i === reState.page + 2) {
+           phtml += `<div style="color:#9ca3af; padding: 0 0.5rem;">...</div>`;
+        }
+      }
+
+      const nextClass = reState.page === totalPages ? 'disabled' : '';
+      phtml += `<button class="re-page-btn ${nextClass}" onclick="changeRePage(1)">›</button>`;
+      
+      if(pagEl) pagEl.innerHTML = phtml;
+    }
+
+    function changeRePage(dir) {
+      const max = Math.ceil(mockReviews.filter(r => {
+        let matchR = reState.filterRating ? (r.rating === reState.filterRating) : true;
+        let matchS = reState.search ? (r.title.toLowerCase().includes(reState.search.toLowerCase()) || r.text.toLowerCase().includes(reState.search.toLowerCase())) : true;
+        return matchR && matchS;
+      }).length / reState.perPage);
+      let newP = reState.page + dir;
+      if(newP >= 1 && newP <= max) { gotoRePage(newP); }
+    }
+    
+    function gotoRePage(p) {
+      reState.page = p;
+      updateReviews();
+      const el = document.getElementById('db-list');
+      if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+
+    function clearReFilters() {
+      reState.filterRating = null;
+      reState.search = "";
+      updateReviews();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const reSearchEl = document.getElementById('re-search');
+      if (reSearchEl) {
+        reSearchEl.addEventListener('input', (e) => {
+          reState.search = e.target.value;
+          reState.page = 1;
+          updateReviews();
+        });
+      }
+      const reFilterEl = document.getElementById('re-filter-select');
+      if (reFilterEl) {
+        reFilterEl.addEventListener('change', (e) => {
+          reState.filterRating = e.target.value === 'all' ? null : parseInt(e.target.value);
+          reState.page = 1;
+          updateReviews();
+        });
+      }
+      const reSortEl = document.getElementById('re-sort');
+      if (reSortEl) {
+        reSortEl.addEventListener('change', (e) => {
+          reState.sort = e.target.value;
+          reState.page = 1;
+          updateReviews();
+        });
+      }
+      updateReviewDOM();
+      updateReviews();
+    });
+
+    let reModalRating = 0;
+    let pendingReviewImage = null;
+    
+    function handleReviewImageUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        pendingReviewImage = event.target.result;
+        const preview = document.getElementById('re-img-preview');
+        if (preview) {
+          preview.innerHTML = `<img src="${pendingReviewImage}" alt="Preview">`;
+          preview.style.display = 'block';
+        }
+        const label = document.querySelector('.re-file-label');
+        if (label) {
+          label.innerHTML = '<span style="color:#111827; font-weight:600;">✓ Foto adjuntada</span> <span style="font-size:0.85rem; font-weight:400; margin-left:8px;">(clic para cambiar)</span>';
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+    
+    function openReModal() {
+      document.getElementById('re-modal').classList.add('open');
+      selectReStar(5);
+    }
+    
+    function closeReModal() {
+      document.getElementById('re-modal').classList.remove('open');
+      document.getElementById('re-form').reset();
+      pendingReviewImage = null;
+      const prev = document.getElementById('re-img-preview');
+      if (prev) {
+        prev.style.display = 'none';
+        prev.innerHTML = '';
+      }
+      const label = document.querySelector('.re-file-label');
+      if (label) {
+        label.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; opacity:0.7;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg> Seleccionar foto`;
+      }
+    }
+    
+    function selectReStar(val) {
+      reModalRating = val;
+      document.querySelectorAll('#re-star-selector svg').forEach((svg, i) => {
+        if(i < val) svg.classList.add('active');
+        else svg.classList.remove('active');
+      });
+    }
+    
+    function submitReForm(e) {
+      e.preventDefault();
+      const title = document.getElementById('re-f-title').value;
+      const text = document.getElementById('re-f-text').value;
+      const name = document.getElementById('re-f-name').value;
+      
+      const newReview = {
+        id: mockReviews.length > 0 ? Math.max(...mockReviews.map(r => r.id)) + 1 : 1,
+        rating: reModalRating,
+        title: title,
+        date: new Date().toLocaleDateString('en-US', {month:'short', day:'2-digit', year:'numeric'}),
+        name: name,
+        text: text,
+        verified: true,
+        image: pendingReviewImage
+      };
+      
+      mockReviews.unshift(newReview);
+      try {
+        localStorage.setItem('studio_mark_reviews', JSON.stringify(mockReviews));
+      } catch(e) {}
+      updateReviewDOM();
+      
+      const btn = document.querySelector('.re-submit-btn');
+      btn.textContent = 'Enviando...';
+      
+      setTimeout(() => {
+        clearReFilters(); 
+        closeReModal();
+        btn.textContent = 'Enviar Reseña';
+        const el = document.getElementById('re-count-title');
+        if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }, 700);
+    }
+  </script>
+    <script src="cart.js"></script>
+    <script src="account.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var user = Auth.getCurrentUser();
+            if (user) {
+                var labels = document.querySelectorAll('.utility-btn span:last-of-type');
+                document.querySelectorAll('.utility-btn').forEach(function(btn) {
+                    if (btn.href && btn.href.includes('account.html')) {
+                        btn.querySelector('span') && (btn.querySelector('span').textContent = user.name.split(' ')[0]);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

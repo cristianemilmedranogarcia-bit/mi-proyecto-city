@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Checkout — Studio Mark & Print</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- PayPal SDK — REPLACE YOUR_PAYPAL_CLIENT_ID with your real Client ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD" data-namespace="paypalSdk" onerror="handlePayPalLoadError()"></script>
+    <style>
+        body { font-family:'Inter',sans-serif; background:#f8f9fa; color:#111; }
+        .printing-topbar { background:#f4f1eb; border-bottom:1px solid #ece7df; color:#3f3a34; font-size:0.82rem; padding:0.6rem 2rem; letter-spacing:0.01em; text-align:center; position:relative; }
+        .printing-header { background:#fff; border-bottom:1px solid #ece9e5; }
+        .printing-header-top { max-width:96rem; margin:0 auto; padding:1.25rem 2rem; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:3rem; }
+        .printing-logo { text-decoration:none; font-size:1.55rem; font-weight:800; letter-spacing:-0.05em; color:#0e3b2e; }
+        .header-utilities { display:flex; align-items:center; gap:1.75rem; }
+        .utility-btn { display:flex; align-items:center; gap:0.65rem; text-decoration:none; color:#211f1b; font-size:0.92rem; font-weight:600; transition:opacity 0.2s; }
+        .utility-btn:hover { opacity:0.7; }
+        .utility-icon { width:1.35rem; height:1.35rem; stroke-width:1.8; }
+        .cart-btn { position:relative; }
+        .cart-count { position:absolute; top:-0.45rem; right:-1.1rem; background:#0e3b2e; color:#fff; font-size:0.65rem; font-weight:800; min-width:1.15rem; height:1.15rem; border-radius:999px; display:flex; align-items:center; justify-content:center; border:2px solid #fff; }
+
+        .card { background:#fff; border-radius:1.25rem; border:1px solid #ece9e5; padding:1.75rem; }
+        .form-label { font-size:0.82rem; font-weight:600; color:#444; display:block; margin-bottom:0.35rem; }
+        .form-input { border:1.5px solid #e5e0d8; border-radius:0.6rem; padding:0.75rem 1rem; font-size:0.92rem; outline:none; transition:border-color 0.2s; background:#fafaf8; width:100%; box-sizing:border-box; }
+        .form-input:focus { border-color:#0e3b2e; background:#fff; box-shadow:0 0 0 3px rgba(14,59,46,0.08); }
+        .section-title { font-size:1.05rem; font-weight:800; color:#0e3b2e; letter-spacing:-0.03em; margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid #f0ede8; }
+
+        /* Stripe card element */
+        #stripe-card-element {
+            border:1.5px solid #e5e0d8; border-radius:0.6rem; padding:0.82rem 1rem;
+            background:#fafaf8; transition:border-color 0.2s;
+        }
+        #stripe-card-element.StripeElement--focus { border-color:#0e3b2e; background:#fff; box-shadow:0 0 0 3px rgba(14,59,46,0.08); }
+        #stripe-card-element.StripeElement--invalid { border-color:#dc2626; }
+
+        .pay-btn { background:#0e3b2e; color:#fff; border:none; border-radius:0.65rem; padding:1rem 1.5rem; font-size:1rem; font-weight:700; cursor:pointer; width:100%; transition:transform 0.2s, background 0.2s; display:flex; align-items:center; justify-content:center; gap:0.5rem; }
+        .pay-btn:hover:not(:disabled) { background:#143422; transform:translateY(-1px); }
+        .pay-btn:disabled { opacity:0.6; cursor:not-allowed; }
+
+        .method-tab { flex:1; padding:0.85rem; border-radius:0.65rem; border:2px solid #e5e0d8; background:#fafaf8; cursor:pointer; text-align:center; font-weight:600; font-size:0.88rem; transition:all 0.2s; color:#555; }
+        .method-tab.active { border-color:#0e3b2e; background:#f0fdf4; color:#0e3b2e; }
+
+        .divider { border:none; border-top:1px solid #f0ede8; margin:1rem 0; }
+        .topbar-social-icons { position:absolute; left:1.5rem; top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:10px; }
+        .topbar-social-icons a { display:inline-flex; align-items:center; color:#5d5851; text-decoration:none; }
+        .error-msg { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; border-radius:0.5rem; padding:0.75rem 1rem; font-size:0.85rem; margin-bottom:1rem; }
+        .success-overlay { position:fixed; inset:0; background:rgba(14,59,46,0.97); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; color:#fff; text-align:center; padding:2rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Topbar -->
+    <div class="printing-topbar">
+        <div class="topbar-social-icons">
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter/X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg></a>
+        </div>
+        Premium printing, elevated details, and impactful first impressions for every brand touchpoint.
+    </div>
+
+    <!-- Header -->
+    <header class="printing-header">
+        <div class="printing-header-top">
+            <a class="printing-logo" href="index.html">Studio Mark &amp; Print</a>
+            <div></div>
+            <div class="header-utilities">
+                <a href="account.html" class="utility-btn">
+                    <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span id="header-account-label">Log In</span>
+                </a>
+                <a href="cart.html" class="utility-btn cart-btn">
+                    <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span>Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Success overlay -->
+    <div id="success-overlay" class="success-overlay" style="display:none;">
+        <div style="font-size:4rem; margin-bottom:1.5rem;">✅</div>
+        <h2 style="font-size:2rem; font-weight:800; margin-bottom:0.5rem;">Order Confirmed!</h2>
+        <p style="font-size:1rem; opacity:0.85; margin-bottom:2rem;" id="success-msg">Thank you for your order. We'll start printing right away!</p>
+        <a href="index.html" style="background:#fff; color:#0e3b2e; padding:0.9rem 2rem; border-radius:0.65rem; font-weight:700; text-decoration:none; font-size:0.95rem;">Back to Home</a>
+    </div>
+
+    <!-- Main -->
+    <main style="max-width:1100px; margin:0 auto; padding:2.5rem 1.5rem;">
+        <!-- Steps -->
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:2.5rem; font-size:0.82rem; font-weight:600; color:#999;">
+            <a href="cart.html" style="color:#0e3b2e; text-decoration:none;">Cart</a>
+            <span>›</span>
+            <span style="color:#111;">Checkout</span>
+            <span>›</span>
+            <span>Confirmation</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 380px; gap:2rem; align-items:start;">
+
+            <!-- Left: Forms -->
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+
+                <!-- Contact -->
+                <div class="card">
+                    <div class="section-title">Contact Information</div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+                        <div><label class="form-label">First Name</label><input id="first-name" type="text" class="form-input" placeholder="Jane" required/></div>
+                        <div><label class="form-label">Last Name</label><input id="last-name" type="text" class="form-input" placeholder="Doe" required/></div>
+                    </div>
+                    <div style="margin-bottom:1rem;"><label class="form-label">Email</label><input id="email" type="email" class="form-input" placeholder="you@example.com" required/></div>
+                    <div><label class="form-label">Phone</label><input id="phone" type="tel" class="form-input" placeholder="+1 (555) 000-0000"/></div>
+                </div>
+
+                <!-- Shipping -->
+                <div class="card">
+                    <div class="section-title">Shipping Address</div>
+                    <div style="margin-bottom:1rem;"><label class="form-label">Address</label><input id="address" type="text" class="form-input" placeholder="123 Main St" required/></div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+                        <div><label class="form-label">City</label><input id="city" type="text" class="form-input" placeholder="New York" required/></div>
+                        <div><label class="form-label">State</label><input id="state" type="text" class="form-input" placeholder="NY" required/></div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                        <div><label class="form-label">ZIP Code</label><input id="zip" type="text" class="form-input" placeholder="10001" required/></div>
+                        <div><label class="form-label">Country</label><input id="country" type="text" class="form-input" value="United States"/></div>
+                    </div>
+                </div>
+
+                <!-- Payment -->
+                <div class="card">
+                    <div class="section-title">Payment Method</div>
+
+                    <!-- Method tabs -->
+                    <div style="display:flex; gap:0.75rem; margin-bottom:1.5rem;">
+                        <button class="method-tab active" id="tab-stripe" onclick="selectMethod('stripe')">
+                            💳 Credit / Debit Card
+                        </button>
+                        <button class="method-tab" id="tab-paypal" onclick="selectMethod('paypal')">
+                            <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal" style="height:20px; vertical-align:middle;"/>
+                        </button>
+                    </div>
+
+                    <!-- Stripe panel -->
+                    <div id="stripe-panel">
+                        <div id="stripe-error" class="error-msg" style="display:none;"></div>
+                        <div style="margin-bottom:1.25rem;">
+                            <label class="form-label">Card Holder Name</label>
+                            <input id="card-name" type="text" class="form-input" placeholder="Jane Doe"/>
+                        </div>
+                        <div>
+                            <label class="form-label">Card Details</label>
+                            <div id="stripe-card-element"></div>
+                            <div style="font-size:0.75rem; color:#999; margin-top:0.5rem;">Test card: 4242 4242 4242 4242 · Any future date · Any CVC</div>
+                        </div>
+                        <div style="margin-top:1.5rem;">
+                            <button class="pay-btn" id="stripe-pay-btn" onclick="handleStripePayment()">
+                                🔒 Pay with Card
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PayPal panel -->
+                    <div id="paypal-panel" style="display:none;">
+                        <div id="paypal-button-container"></div>
+                        <p style="text-align:center; font-size:0.8rem; color:#999; margin-top:0.75rem;">You'll be redirected to PayPal to complete payment securely.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Order summary -->
+            <div>
+                <div class="card" style="position:sticky; top:1.5rem;">
+                    <div style="font-size:1.05rem; font-weight:800; color:#111; margin-bottom:1.25rem; letter-spacing:-0.02em;">Order Summary</div>
+                    <div id="checkout-items" style="margin-bottom:1rem; display:flex; flex-direction:column; gap:0.75rem;"></div>
+                    <hr class="divider"/>
+                    <div style="display:flex; flex-direction:column; gap:0.5rem; font-size:0.88rem;">
+                        <div style="display:flex; justify-content:space-between; color:#555;"><span>Subtotal</span><span id="co-subtotal">$0.00</span></div>
+                        <div style="display:flex; justify-content:space-between; color:#555;"><span>Shipping</span><span id="co-shipping">$0.00</span></div>
+                        <div style="display:flex; justify-content:space-between; color:#555;"><span>Tax (8%)</span><span id="co-tax">$0.00</span></div>
+                        <hr class="divider"/>
+                        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1rem; color:#0e3b2e;"><span>Total</span><span id="co-total">$0.00</span></div>
+                    </div>
+                    <div style="margin-top:1.25rem; padding:0.75rem; background:#f8f9fa; border-radius:0.6rem; display:flex; align-items:center; gap:0.5rem; font-size:0.75rem; color:#888;">
+                        <span>🔒</span> <span>All transactions are encrypted and secure.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="cart.js"></script>
+    <script src="account.js"></script>
+    <script>
+        // ─── CONFIG — replace with your real keys ───────────────────────────
+        // Stripe publishable key (test):  pk_test_...
+        // Stripe publishable key (live):  pk_live_...
+        const STRIPE_PUBLISHABLE_KEY = 'pk_test_YOUR_STRIPE_KEY_HERE';
+        // ────────────────────────────────────────────────────────────────────
+
+        const TAX_RATE = 0.08;
+        const FREE_SHIPPING_THRESHOLD = 50;
+        const SHIPPING_COST = 5.99;
+
+        let stripe, cardElement, currentMethod = 'stripe';
+
+        function fmt(n) { return '$' + n.toFixed(2); }
+
+        function getOrderTotals() {
+            const subtotal = Cart.getTotal();
+            const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+            const tax = subtotal * TAX_RATE;
+            const total = subtotal + shipping + tax;
+            return { subtotal, shipping, tax, total };
+        }
+
+        function renderSummary() {
+            const items = Cart.getCart();
+            const { subtotal, shipping, tax, total } = getOrderTotals();
+            document.getElementById('co-subtotal').textContent = fmt(subtotal);
+            document.getElementById('co-shipping').textContent = shipping === 0 ? 'FREE' : fmt(shipping);
+            document.getElementById('co-tax').textContent = fmt(tax);
+            document.getElementById('co-total').textContent = fmt(total);
+            document.getElementById('checkout-items').innerHTML = items.map(i => `
+                <div style="display:flex; gap:0.75rem; align-items:center;">
+                    <div style="width:60px; height:36px; border-radius:0.4rem; background:#ffffff; border:1px solid #e4e4e7; overflow:hidden; flex-shrink:0; box-shadow:0 1px 4px rgba(0,0,0,0.06); display:flex; align-items:center; justify-content:center;">
+                        ${i.image ? `<img src="${i.image}" style="width:100%;height:100%;object-fit:contain;" alt="${i.name}"/>` : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.25rem;">🖨️</div>'}
+                    </div>
+                    <div style="flex:1; min-width:0;">
+                        <div style="font-size:0.82rem; font-weight:600; color:#111; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${i.name}</div>
+                        <div style="font-size:0.75rem; color:#999;">Qty: ${i.qty}</div>
+                    </div>
+                    <div style="font-weight:700; font-size:0.88rem; color:#333;">${fmt(i.price * i.qty)}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectMethod(method) {
+            currentMethod = method;
+            document.getElementById('stripe-panel').style.display = method === 'stripe' ? 'block' : 'none';
+            document.getElementById('paypal-panel').style.display = method === 'paypal' ? 'block' : 'none';
+            document.getElementById('tab-stripe').className = 'method-tab' + (method === 'stripe' ? ' active' : '');
+            document.getElementById('tab-paypal').className = 'method-tab' + (method === 'paypal' ? ' active' : '');
+        }
+
+        function validateShippingForm() {
+            const required = ['first-name','last-name','email','address','city','state','zip'];
+            for (const id of required) {
+                if (!document.getElementById(id).value.trim()) {
+                    document.getElementById(id).focus();
+                    alert('Please fill in all required fields.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // ─── Stripe ─────────────────────────────────────────────────────────
+        function initStripe() {
+            if (!STRIPE_PUBLISHABLE_KEY || STRIPE_PUBLISHABLE_KEY.includes('YOUR_STRIPE')) {
+                document.getElementById('stripe-error').textContent = '⚠️ Stripe key not configured. Add your Publishable Key to checkout.html.';
+                document.getElementById('stripe-error').style.display = 'block';
+                return;
+            }
+            stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+            const elements = stripe.elements();
+            cardElement = elements.create('card', {
+                style: {
+                    base: { fontFamily: 'Inter, sans-serif', fontSize: '15px', color: '#111', '::placeholder': { color: '#aaa' } },
+                    invalid: { color: '#dc2626' }
+                }
+            });
+            cardElement.mount('#stripe-card-element');
+            cardElement.on('change', e => {
+                const err = document.getElementById('stripe-error');
+                if (e.error) { err.textContent = e.error.message; err.style.display = 'block'; }
+                else { err.style.display = 'none'; }
+            });
+        }
+
+        async function handleStripePayment() {
+            if (!validateShippingForm()) return;
+            if (!stripe || !cardElement) {
+                alert('Stripe is not configured. Please add your Stripe Publishable Key.');
+                return;
+            }
+            const btn = document.getElementById('stripe-pay-btn');
+            btn.disabled = true;
+            btn.textContent = 'Processing…';
+
+            // In production you would call your backend to create a PaymentIntent
+            // and get the client_secret. For demo purposes we simulate the flow.
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
+                type: 'card',
+                card: cardElement,
+                billing_details: {
+                    name: document.getElementById('card-name').value || document.getElementById('first-name').value,
+                    email: document.getElementById('email').value,
+                }
+            });
+
+            if (error) {
+                const el = document.getElementById('stripe-error');
+                el.textContent = error.message;
+                el.style.display = 'block';
+                btn.disabled = false;
+                btn.innerHTML = '🔒 Pay with Card';
+                return;
+            }
+
+            // Simulate successful payment (replace with real PaymentIntent confirmation)
+            completeOrder('stripe', paymentMethod.id);
+        }
+
+        // ─── PayPal ──────────────────────────────────────────────────────────
+        function handlePayPalLoadError() {
+            document.getElementById('paypal-button-container').innerHTML =
+                '<p style="color:#dc2626; font-size:0.85rem; text-align:center;">⚠️ PayPal could not load. Please add your PayPal Client ID to checkout.html.</p>';
+        }
+
+        function initPayPal() {
+            if (typeof paypalSdk === 'undefined') return;
+            paypalSdk.Buttons({
+                style: { layout: 'vertical', color: 'blue', shape: 'rect', label: 'paypal' },
+                createOrder(data, actions) {
+                    if (!validateShippingForm()) return Promise.reject();
+                    const { total } = getOrderTotals();
+                    return actions.order.create({
+                        purchase_units: [{ amount: { value: total.toFixed(2), currency_code: 'USD' }, description: 'Studio Mark & Print Order' }]
+                    });
+                },
+                onApprove(data, actions) {
+                    return actions.order.capture().then(details => {
+                        completeOrder('paypal', details.id);
+                    });
+                },
+                onError(err) { console.error('PayPal error', err); }
+            }).render('#paypal-button-container');
+        }
+
+        // ─── Order completion ────────────────────────────────────────────────
+        function completeOrder(method, paymentId) {
+            const items = Cart.getCart();
+            const { total } = getOrderTotals();
+            const order = {
+                paymentMethod: method,
+                paymentId,
+                items,
+                total,
+                status: 'processing',
+                shipping: {
+                    name: `${document.getElementById('first-name').value} ${document.getElementById('last-name').value}`,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                }
+            };
+            Auth.addOrder(order);
+            Cart.clearCart();
+            const overlay = document.getElementById('success-overlay');
+            overlay.style.display = 'flex';
+            document.getElementById('success-msg').textContent =
+                `Payment confirmed via ${method === 'paypal' ? 'PayPal' : 'credit card'}. We'll start printing right away! Order ID: ${paymentId.slice(0,12).toUpperCase()}`;
+        }
+
+        // ─── Init ────────────────────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSummary();
+            initStripe();
+            initPayPal();
+            const user = Auth.getCurrentUser();
+            if (user) {
+                document.getElementById('header-account-label').textContent = user.name.split(' ')[0];
+                document.getElementById('first-name').value = user.name.split(' ')[0] || '';
+                document.getElementById('last-name').value = user.name.split(' ').slice(1).join(' ') || '';
+                document.getElementById('email').value = user.email || '';
+            }
+            if (!Cart.getCount()) {
+                window.location.href = 'cart.html';
+            }
+        });
+    </script>
+</body>
+</html>

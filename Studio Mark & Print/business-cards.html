@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Studio Mark & Print | Business Cards</title>
+    <link rel="stylesheet" href="print-product-v2.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false,
+            },
+            theme: {
+                extend: {
+                    fontFamily: {
+                        headline: ["Noto Serif", "serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Exact Preflight Simulation for Footer *ONLY* */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        footer {
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+
+        footer *,
+        footer ::before,
+        footer ::after {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        :where(footer h1, footer h2, footer h3, footer h4, footer h5, footer h6, footer p) {
+            margin: 0;
+            font-size: inherit;
+            font-weight: inherit;
+        }
+
+        footer a {
+            text-decoration: none !important;
+            color: inherit;
+        }
+
+        footer input,
+        footer button {
+            font-family: inherit;
+            font-size: 100%;
+            font-weight: inherit;
+            line-height: inherit;
+            color: inherit;
+            margin: 0;
+            padding: 0;
+        }
+
+        footer button {
+            background-color: transparent;
+            background-image: none;
+            cursor: pointer;
+        }
+
+        footer input {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+
+        footer input::placeholder {
+            color: #9ca3af;
+            opacity: 1;
+        }
+
+
+        .product-main {
+            padding-top: 1.18rem !important;
+        }
+
+        :root {
+            --hero-bg: #4a3e39;
+            --hero-fg: #fff8f2;
+            --visual-bg: #ebd0bb;
+            --shape-a: #d99b73;
+            --shape-b: #c48b57;
+            --shape-c: #38261e;
+            --card-one: #fbfaf6;
+            --card-two: #c48b57;
+            --note-color: #e5d8b8;
+            --circle-color: #4a3e39;
+            --ticket-color: #38261e;
+        }
+
+        .product-hero {
+            position: relative;
+            height: 461px !important;
+            min-height: 461px !important;
+            max-height: 461px !important;
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            border-radius: 2rem;
+            overflow: hidden;
+        }
+
+        .product-hero-copy {
+            position: relative;
+            padding: 3.5rem 3.5rem 3.5rem 3.5rem !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.25rem !important;
+            height: 100% !important;
+        }
+
+        .product-title {
+            font-size: clamp(2.5rem, 4.2vw, 4.2rem) !important;
+            line-height: 0.94 !important;
+            margin: 0;
+        }
+
+        .product-copy {
+            font-size: 0.95rem !important;
+            line-height: 1.45 !important;
+            max-width: 28.5rem !important;
+            margin: 0;
+        }
+
+        .product-hero-visual {
+            position: relative;
+            height: 461px !important;
+            min-height: 461px !important;
+            max-height: 461px !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .business-cards-visual {
+            position: relative;
+            width: min(100%, 25rem);
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bc-stack {
+            position: relative;
+            width: 100%;
+            height: 21.5rem;
+        }
+
+        .bc-card {
+            position: absolute;
+            width: 19.5rem;
+            height: 11.5rem;
+            border-radius: 1.4rem;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 1.5rem 3.2rem rgba(30, 24, 21, 0.18), 0 0.4rem 1.1rem rgba(30, 24, 21, 0.08);
+            cursor: pointer;
+            transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, z-index 0.2s ease;
+        }
+
+        .bc-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bc-card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            /* Slight bleed to prevent edge clipping on zoom */
+            background-image: url('bussinescard.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 1;
+            pointer-events: none;
+            z-index: 0;
+            transition: transform 0.45s ease;
+        }
+
+        .bc-card:hover::before {
+            transform: scale(1.06);
+        }
+
+        .bc-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: none;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .bc-card.dark {
+            top: 0.5rem;
+            left: 1.5rem;
+            transform: rotate(-7deg);
+            background: transparent;
+            color: #f4efe7;
+            padding: 1.3rem 1.3rem 1rem;
+            z-index: 3;
+            animation: bcFloatA 6s ease-in-out infinite alternate;
+        }
+
+        .bc-card.light {
+            top: 4.2rem;
+            left: 3.8rem;
+            transform: rotate(3.5deg);
+            background: transparent;
+            color: #202020;
+            border: 1px solid rgba(29, 24, 20, 0.08);
+            padding: 1.3rem 1.3rem 1rem;
+            z-index: 4;
+            animation: bcFloatB 7s ease-in-out infinite alternate;
+        }
+
+        .bc-card.green {
+            top: 7.8rem;
+            left: 2.4rem;
+            transform: rotate(-1.2deg);
+            background: transparent;
+            color: #edf5ef;
+            padding: 1.2rem 1.3rem 0.95rem;
+            z-index: 5;
+            animation: bcFloatC 5.5s ease-in-out infinite alternate;
+        }
+
+        .bc-card.dark:hover {
+            z-index: 10;
+            transform: rotate(-4deg) translateY(-1rem) scale(1.03);
+        }
+
+        .bc-card.light:hover {
+            z-index: 10;
+            transform: rotate(1deg) translateY(-1rem) scale(1.03);
+        }
+
+        .bc-card.green:hover {
+            z-index: 10;
+            transform: rotate(0deg) translateY(-1rem) scale(1.03);
+        }
+
+        @keyframes bcFloatA {
+            from {
+                transform: rotate(-7deg) translateY(0);
+            }
+
+            to {
+                transform: rotate(-7deg) translateY(-0.7rem);
+            }
+        }
+
+        @keyframes bcFloatB {
+            from {
+                transform: rotate(3.5deg) translateY(0);
+            }
+
+            to {
+                transform: rotate(3.5deg) translateY(-0.55rem);
+            }
+        }
+
+        @keyframes bcFloatC {
+            from {
+                transform: rotate(-1.2deg) translateY(0);
+            }
+
+            to {
+                transform: rotate(-1.2deg) translateY(-0.85rem);
+            }
+        }
+
+        .bc-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1rem;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            font-weight: 700;
+        }
+
+        .bc-role {
+            margin-top: 0.55rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            opacity: 0.42;
+        }
+
+        .bc-dark-line {
+            width: 2.2rem;
+            height: 0.15rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #d0ae63, #a98039);
+            margin: 1rem 0 1.2rem;
+        }
+
+        .bc-small {
+            font-size: 0.78rem;
+            line-height: 1.65;
+            opacity: 0.34;
+        }
+
+        .bc-mark {
+            position: absolute;
+            right: 1.25rem;
+            top: 1.25rem;
+            width: 2.1rem;
+            height: 2.1rem;
+            border-radius: 0.65rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .bc-edge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0.28rem;
+            background: linear-gradient(90deg, #0e3b2e, #1f6a4d, #0e3b2e);
+        }
+
+        .bc-right-note {
+            position: absolute;
+            top: 1.55rem;
+            right: 1.7rem;
+            text-align: right;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(20, 20, 20, 0.32);
+            line-height: 1.35;
+        }
+
+        .bc-right-note strong {
+            display: block;
+            margin-top: 0.15rem;
+            font-family: Georgia, "Times New Roman", serif;
+            letter-spacing: -0.04em;
+            text-transform: none;
+            font-size: 0.95rem;
+            color: #212121;
+        }
+
+        .bc-divider {
+            position: absolute;
+            left: 1.8rem;
+            right: 1.8rem;
+            bottom: 3.1rem;
+            height: 1px;
+            background: rgba(20, 20, 20, 0.1);
+        }
+
+        .bc-bottom-left,
+        .bc-bottom-right {
+            position: absolute;
+            bottom: 1.2rem;
+            font-size: 0.76rem;
+            color: rgba(20, 20, 20, 0.34);
+            letter-spacing: 0.1em;
+        }
+
+        .bc-bottom-left {
+            left: 1.8rem;
+        }
+
+        .bc-bottom-right {
+            right: 1.8rem;
+        }
+
+        .bc-orb {
+            position: absolute;
+            right: 1.55rem;
+            top: 1.55rem;
+            width: 2.3rem;
+            height: 2.3rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .bc-orb::after {
+            content: "";
+            position: absolute;
+            inset: 0.52rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .bc-green-footer {
+            position: absolute;
+            left: 1.75rem;
+            right: 1.75rem;
+            bottom: 1.35rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: rgba(237, 245, 239, 0.26);
+        }
+
+        .bc-green-list {
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .bc-green-list span::before {
+            content: "";
+            display: inline-block;
+            width: 0.46rem;
+            height: 0.46rem;
+            border-radius: 999px;
+            background: rgba(237, 245, 239, 0.24);
+            margin-right: 0.45rem;
+            vertical-align: middle;
+        }
+
+
+
+        .bc-finish-note {
+            margin: 1.5rem auto 0;
+            width: max-content;
+            text-align: center;
+            font-size: 0.88rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.62);
+            white-space: nowrap;
+        }
+
+        .note-dot {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin: 0 1.2rem;
+            vertical-align: middle;
+            animation: noteDotPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes noteDotPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: scale(1.8);
+                opacity: 0.9;
+            }
+        }
+
+
+
+        .sizes-section .section-kicker {
+            margin-bottom: 0.9rem;
+        }
+
+        .sizes-section .section-title {
+            margin-bottom: 2.2rem;
+            max-width: 28rem;
+            text-wrap: balance;
+        }
+
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .size-card {
+            background: #fff;
+            border: 1px solid #e8e5e1;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .size-card:hover {
+            border-color: #141414;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .size-card.popular {
+            border-color: #0e3b2e;
+            padding-top: 2rem;
+        }
+
+        .size-popular-tag {
+            position: absolute;
+            top: 0.85rem;
+            left: 1rem;
+            background: #0e3b2e;
+            color: #fff;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .size-visual {
+            background: #f0ece8;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .size-rect {
+            background: #d6d0ca;
+            border-radius: 3px;
+        }
+
+        .size-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #141414;
+        }
+
+        .size-dim {
+            font-size: 0.78rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        .pricing-section-head {
+            text-align: center;
+            max-width: 42rem;
+            margin: 0 auto 2.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pricing-section-head .section-title {
+            margin-bottom: 1.1rem;
+        }
+
+        .pricing-container {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+
+        .pricing-copy p {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: rgba(20, 20, 20, 0.62);
+            text-wrap: balance;
+        }
+
+        .pricing-panel {
+            background: #fff;
+            border: 1px solid #ebe6df;
+            border-radius: 1.4rem;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(21, 21, 21, 0.05);
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pricing-table th {
+            text-align: left;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #8a8278;
+            padding: 1.1rem 1.25rem;
+            background: #faf7f2;
+            border-bottom: 1px solid #ebe6df;
+        }
+
+        .pricing-table td {
+            padding: 1.15rem 1.25rem;
+            border-bottom: 1px solid #f0ebe4;
+            vertical-align: middle;
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table tr:hover td {
+            background: rgba(20, 20, 20, 0.018);
+        }
+
+        .pricing-qty {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #151515;
+        }
+
+        .pricing-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #151515;
+        }
+
+        .pricing-per {
+            font-size: 0.95rem;
+            color: rgba(20, 20, 20, 0.64);
+        }
+
+        .pricing-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 1.9rem;
+            padding: 0 0.75rem;
+            border-radius: 999px;
+            background: #0e3b2e;
+            color: #fff;
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .preview-layout {
+            display: grid;
+            grid-template-columns: 0.82fr 1.18fr;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .preview-controls {
+            background: #ffffff;
+            border: 1px solid #ebe6df;
+            border-radius: 1.4rem;
+            padding: 1.6rem;
+            box-shadow: 0 16px 40px rgba(21, 21, 21, 0.05);
+            display: grid;
+            gap: 0.9rem;
+            align-content: start;
+        }
+
+        .preview-controls label {
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #7b7369;
+            font-weight: 700;
+        }
+
+        .preview-controls input,
+        .preview-controls select {
+            width: 100%;
+            min-height: 3rem;
+            border: 1px solid #ddd6cd;
+            border-radius: 0.9rem;
+            background: #fbf8f3;
+            padding: 0 1rem;
+            font-size: 0.98rem;
+            color: #171717;
+        }
+
+        .preview-controls input[type="color"] {
+            padding: 0.35rem;
+            min-height: 3.2rem;
+        }
+
+        .preview-controls input[type="file"] {
+            padding: 0.8rem 1rem;
+            background: #fbf8f3;
+        }
+
+        .preview-stage {
+            background:
+                radial-gradient(circle at top left, rgba(155, 112, 131, 0.22), transparent 26%),
+                linear-gradient(180deg, #f5efe6 0%, #efe7db 100%);
+            border: 1px solid #ebe6df;
+            border-radius: 1.7rem;
+            min-height: 36rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-card {
+            width: min(100%, 31rem);
+            aspect-ratio: 1.72 / 1;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2rem 4rem rgba(21, 21, 21, 0.16), 0 0.6rem 1.5rem rgba(21, 21, 21, 0.08);
+            background: #171717;
+            color: #ffffff;
+        }
+
+        .preview-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--preview-image, none);
+            background-size: cover;
+            background-position: center;
+            opacity: var(--preview-image-opacity, 0);
+            mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+
+        .preview-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 32%, rgba(0, 0, 0, 0.04));
+            pointer-events: none;
+        }
+
+        .preview-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .preview-card-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+        }
+
+        .preview-card-role {
+            margin-top: 0.55rem;
+            font-size: 0.92rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            opacity: 0.64;
+        }
+
+        .preview-card-brand {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.35rem;
+            letter-spacing: -0.04em;
+            text-align: right;
+        }
+
+        .preview-card-meta {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.72;
+        }
+
+        .preview-card-footer {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .preview-card-style {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2rem;
+            padding: 0 0.75rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 760px) {
+            .product-hero-copy {
+                padding-left: 2rem;
+            }
+
+            .business-cards-visual {
+                width: 100%;
+                padding-top: 1.1rem;
+            }
+
+            .bc-stack {
+                height: 26rem;
+            }
+
+            .bc-card {
+                width: 18.2rem;
+                height: 10.7rem;
+            }
+
+            .bc-card.dark {
+                left: 1.6rem;
+                top: 2.8rem;
+            }
+
+            .bc-card.light {
+                left: 2.8rem;
+                top: 4.9rem;
+            }
+
+            .bc-card.green {
+                left: 2rem;
+                top: 8.6rem;
+            }
+
+
+            .bc-finish-note {
+                margin-top: 2rem;
+                font-size: 0.72rem;
+                letter-spacing: 0.2em;
+            }
+
+            .pricing-section-head {
+                margin-bottom: 2rem;
+            }
+
+            .preview-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-with-rail {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
+
+            .bc-finish-note {
+                font-size: 0.72rem;
+                letter-spacing: 0.2em;
+            }
+
+            .filters-rail {
+                position: static;
+            }
+
+            .filters-toggle span {
+                font-size: 1.55rem;
+            }
+
+            .preview-stage {
+                min-height: 28rem;
+            }
+        }
+
+        /* PRODUCT GRID */
+        .scard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .scard {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: all 0.25s cubic-bezier(0.1, 0.7, 0.1, 1);
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(20, 20, 20, 0.02);
+        }
+
+        .scard:hover {
+            border-color: rgba(20, 20, 20, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(20, 20, 20, 0.08);
+        }
+
+        .scard-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--cream-mid);
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+            display: block;
+        }
+
+        .scard-info {
+            padding: 1.4rem 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .scard-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.25rem;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .scard-price {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+        }
+
+        @media (max-width: 900px) {
+            .scard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .scard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Premium Footer Overrides ───────────────────────────────── */
+        footer.bg-\[#09090b\] {
+            background-color: #09090b !important;
+            color: #a1a1aa !important;
+            font-family: "Inter", sans-serif !important;
+        }
+
+        footer.bg-\[#09090b\] p,
+        footer.bg-\[#09090b\] a,
+        footer.bg-\[#09090b\] li,
+        footer.bg-\[#09090b\] span {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        footer.bg-\[#09090b\] ul {
+            list-style: none !important;
+            padding-left: 0 !important;
+            margin: 0 !important;
+        }
+
+        footer.bg-\[#09090b\] a:hover {
+            color: #ffffff !important;
+        }
+
+        footer.bg-\[#09090b\] h3 {
+            color: #ffffff !important;
+            font-family: "Noto Serif", serif !important;
+        }
+
+        footer.bg-\[#09090b\] h4 {
+            color: #ffffff !important;
+            font-size: 0.625rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.3em !important;
+            text-transform: uppercase !important;
+            margin-bottom: 2rem !important;
+        }
+
+        footer.bg-\[#09090b\] .rounded-full {
+            border-radius: 9999px !important;
+        }
+
+        footer.bg-\[#09090b\] .border {
+            border-width: 1px !important;
+            border-style: solid !important;
+        }
+
+        footer.bg-\[#09090b\] .border-zinc-800 {
+            border-color: #27272a !important;
+        }
+
+        footer.bg-\[#09090b\] input {
+            background: transparent !important;
+            border: 1px solid #3f3f46 !important;
+            color: #ffffff !important;
+            box-shadow: none !important;
+            border-radius: 0.5rem !important;
+            padding: 0.75rem 1rem !important;
+            font-size: 0.875rem !important;
+        }
+
+        footer.bg-\[#09090b\] button {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border-radius: 0.5rem !important;
+            font-weight: 700 !important;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+
+<body>
+    <div class="product-shell">
+        <div class="printing-topbar" style="position:relative;">
+            <!-- Social icons: far left -->
+            <div
+                style="position:absolute;left:1.5rem;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:10px;">
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"
+                    style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter/X"
+                    style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"
+                    style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                    </svg>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"
+                    style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                </a>
+                <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"
+                    style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z" />
+                    </svg>
+                </a>
+            </div>
+            Premium printing, elevated details, and standout first impressions for every brand
+            touchpoint.
+        </div>
+        <header class="printing-header">
+            <div class="printing-header-top">
+                <a class="printing-logo" href="index.html">Studio Mark &amp; Print</a>
+
+                <div class="header-search-container">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" class="header-search-input"
+                        placeholder="Search for products, designs or inspiration...">
+                </div>
+
+                <div class="header-utilities">
+                    <a href="account.html" class="utility-btn">
+                        <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Log In</span>
+                    </a>
+                    <a href="cart.html" class="utility-btn cart-btn">
+                        <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span>Cart</span>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="printing-header-bottom">
+                <div class="printing-header-inner">
+                    <nav class="printing-nav" aria-label="Printing navigation">
+                        <a href="printing.html">Home</a>
+                        <a href="business-cards.html" class="active">Business Cards</a>
+                        <a href="menus.html">Menus</a>
+                        <a href="posters.html">Posters</a>
+                        <a href="door-hangers.html">Door Hangers</a>
+                        <a href="flyers.html">Flyers</a>
+                        <a href="invitations.html">Invitations</a>
+                        <a href="stickers.html">Stickers</a>
+                        <a href="photos.html">Photos</a>
+                    </nav>
+                    <div class="printing-nav-meta">
+                        <a href="contact.html" class="hover:text-zinc-800 transition-colors">Contact Us</a>
+                        <span class="text-zinc-200">|</span>
+                        <a href="index.html" class="hover:text-zinc-800 transition-colors">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="product-main">
+            <section class="product-hero">
+                <div class="product-hero-copy">
+                    <div><span class="product-kicker">Signature Cards</span>
+                        <h1 class="product-title">Business cards that <em>make an impression</em></h1>
+                    </div>
+                    <p class="product-copy">Impeccable finishes, premium materials, and exceptional quality in every
+                        detail. Discover our business card systems for your brand.</p>
+                    <div class="product-actions">
+                        <a class="product-btn primary" href="printing.html">Back to Printing</a>
+                        <a class="product-btn secondary" href="standard.html">Comprar Tarjetas</a>
+                    </div>
+                </div>
+                <div class="product-hero-visual">
+                    <div class="business-cards-visual" aria-hidden="true">
+                        <div class="bc-stack">
+                            <div class="bc-card dark" id="bc-card-dark"></div>
+                            <div class="bc-card light" id="bc-card-light"></div>
+                            <div class="bc-card green" id="bc-card-green"></div>
+                        </div>
+                        <div class="bc-finish-note" id="bc-finish-note">Diseño Tangible <span class="note-dot"></span>
+                            Presencia Inolvidable</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-block sizes-section">
+                <div class="section-head">
+                    <div><span class="section-kicker">Enfoque de Diseño</span>
+                        <h2 class="section-title">¿Por qué elegir a Studio Mark & Print?</h2>
+                    </div>
+                    <p class="section-copy">Diseñamos tarjetas de presentación como objetos de marca, no como simples
+                        plantillas. Esto significa que los bordes, el grosor del papel, el espaciado, el laminado
+                        metálico, el relieve y el ritmo del reverso reciben la misma atención que tu logotipo principal.
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <article class="feature-card"><strong>01</strong>
+                        <h3
+                            style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
+                            <span>Damos a conocer tu negocio con calidad</span>
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                style="flex-shrink: 0; opacity: 0.65; margin-top: 0.15rem;">
+                                <path
+                                    d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                                <path d="M5 3v4" />
+                                <path d="M19 17v4" />
+                                <path d="M3 5h4" />
+                                <path d="M17 19h4" />
+                            </svg>
+                        </h3>
+                        <p>Destaca entre la multitud con geometrías y cortes a la medida. Diseñamos proporciones
+                            perfectas
+                            para que tu marca se vea y se sienta verdaderamente de primer nivel.</p>
+                    </article>
+                    <article class="feature-card"><strong>02</strong>
+                        <h3
+                            style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
+                            <span>Materiales que transmiten confianza</span>
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                style="flex-shrink: 0; opacity: 0.65; margin-top: 0.15rem;">
+                                <path
+                                    d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+                                <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+                                <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+                            </svg>
+                        </h3>
+                        <p>Utilizamos exclusivamente papeles de importación con gramaje extra. Una textura y rigidez al
+                            tacto que proyectan seguridad y prestigio empresarial.</p>
+                    </article>
+                    <article class="feature-card"><strong>03</strong>
+                        <h3
+                            style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
+                            <span>Envíos rápidos a todo Estados Unidos</span>
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                style="flex-shrink: 0; opacity: 0.65; margin-top: 0.15rem;">
+                                <path d="M10 17h4V5H2v12h3" />
+                                <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5" />
+                                <path d="M14 17h1" />
+                                <circle cx="7.5" cy="17.5" r="2.5" />
+                                <circle cx="17.5" cy="17.5" r="2.5" />
+                            </svg>
+                        </h3>
+                        <p>No importa en qué ciudad te encuentres. Producimos con prioridad y garantizamos entregas
+                            puntuales y seguras a donde quiera que vaya tu negocio.</p>
+                    </article>
+                </div>
+
+            </section>
+
+            <section class="section-block sizes-section" style="padding-top: 1.5rem;">
+                <p class="section-kicker">Tamaños de Tarjeta</p>
+                <h2 class="section-title">Cada formato cumple una intención distinta.</h2>
+                <div class="scard-grid">
+                    <a href="standard.html" class="scard">
+                        <img src="Custom Business Cards - Design & Print Online_files/0702WF-TR-752x376-Original-Business-Cards.jpg"
+                            alt="Estándar" class="scard-img">
+                        <div class="scard-info">
+                            <h4 class="scard-title">Estándar</h4>
+                            <p class="scard-price">Desde $9.59</p>
+                        </div>
+                    </a>
+
+                    <a href="square.html" class="scard">
+                        <img src="Custom Business Cards - Design & Print Online_files/0513WF-May-Campaign-Site-Size-Module-SQ-BC-368x5880.png"
+                            alt="Cuadrada" class="scard-img">
+                        <div class="scard-info">
+                            <h4 class="scard-title">Cuadrada</h4>
+                            <p class="scard-price">Desde $12.00</p>
+                        </div>
+                    </a>
+
+                    <a href="glossy.html" class="scard">
+                        <img src="Custom Business Cards - Design & Print Online_files/0702WF-TR-752x376-Gold-Foil-Business-Cards.jpg"
+                            alt="Brillante" class="scard-img">
+                        <div class="scard-info">
+                            <h4 class="scard-title">Brillante</h4>
+                            <p class="scard-price">Desde $9.59</p>
+                        </div>
+                    </a>
+
+                    <a href="premium-paper.html" class="scard">
+                        <img src="Custom Business Cards - Design & Print Online_files/0836WF-TR-752x376-Business-Cards-Sample-Pack0.jpg"
+                            alt="Papel Clarito" class="scard-img">
+                        <div class="scard-info">
+                            <h4 class="scard-title">Papel Clarito</h4>
+                            <p class="scard-price">Desde $59.50</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="editorial-band">
+                <div class="editorial-head" style="max-width: 48rem; margin-bottom: 3rem;">
+                    <h3
+                        style="font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 1rem; letter-spacing: -0.05em;">
+                        Cómo hacer tu pedido. Sin fricción.</h3>
+                    <p style="font-size: 1.125rem; color: rgba(247, 242, 233, 0.66); line-height: 1.6; margin: 0;">Las
+                        tarjetas de presentación pueden volverse ruidosas muy rápido. Agiliza tu solicitud en cuatro
+                        pasos simples. Nuestro equipo se encarga de lo demás para que la pieza final se sienta premium e
+                        intencional.</p>
+                </div>
+                <div>
+                    <div class="process-gallery">
+                        <article class="process-card">
+                            <img src="Custom Business Cards - Design & Print Online_files/0836WF-TR-752x376-Business-Cards-Sample-Pack0.jpg"
+                                alt="Paso 1" class="step-image">
+                            <div>
+                                <h4>Elige tu Formato</h4>
+                                <p>Selecciona el tamaño, tipo de borde y la familia de acabados.</p>
+                            </div>
+                        </article>
+                        <article class="process-card">
+                            <img src="Custom Business Cards - Design & Print Online_files/0702WF-TR-752x376-Original-Business-Cards.jpg"
+                                alt="Paso 2" class="step-image">
+                            <div>
+                                <h4>Configura y Cotiza</h4>
+                                <p>Ajusta el volumen que necesitas para ver el precio dinámico garantizado.</p>
+                            </div>
+                        </article>
+                        <article class="process-card">
+                            <img src="Custom Business Cards - Design & Print Online_files/0198WF-TR-752x376-managed-services-platform.jpg"
+                                alt="Paso 3" class="step-image">
+                            <div>
+                                <h4>Proporciona tu Diseño</h4>
+                                <p>Sube tu archivo original completo, o escríbenos si ocupas asistencia estructural.</p>
+                            </div>
+                        </article>
+                        <article class="process-card">
+                            <img src="Custom Business Cards - Design & Print Online_files/CP-0113-TR-752x564-Letterpress.jpg"
+                                alt="Paso 4" class="step-image">
+                            <div>
+                                <h4>Producción y Envío</h4>
+                                <p>Revisamos la integridad y calidad del archivo, imprimimos y enviamos a la puerta.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <div class="cta-strip">
+                <p>Si hay una pieza impresa que vale la pena hacer exactamente bien, sigue siendo la tarjeta de
+                    presentación. Debería sentirse como la marca condensada en un objeto.</p><a
+                    class="product-btn primary" href="standard.html">Preguntar sobre Tarjetas de Presentación</a>
+            </div>
+    </div>
+    </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#09090b] text-zinc-400 py-16 px-6 md:px-12 border-t border-zinc-900">
+        <div class="max-w-screen-2xl mx-auto">
+            <!-- Top Section: Newsletter & Social -->
+            <div
+                class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 pb-16 border-b border-zinc-900">
+                <div class="max-w-md">
+                    <h3 class="text-white text-2xl md:text-3xl font-headline font-bold mb-4 italic">
+                        The newsletter you'll actually want to read.
+                    </h3>
+                    <p class="text-zinc-500 mb-6 font-light">
+                        Get exclusive offers, design inspiration, and print tips delivered to your inbox.
+                    </p>
+                    <form class="flex w-full max-w-sm gap-2">
+                        <input type="email" placeholder="Email address"
+                            class="flex-grow bg-transparent border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:border-white transition-colors outline-none text-white">
+                        <button
+                            class="bg-white text-black px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all">
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex flex-col items-start lg:items-end gap-6">
+                    <p class="text-white font-bold uppercase text-[10px] tracking-[0.3em]">Follow Us</p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/studiomarkprint/" target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@studiomarkprint" target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.81-.6-4.03-1.37-.01 2.39-.01 4.79-.01 7.18-.01 1.5-.63 3.12-1.74 4.12-1.29 1.21-3.11 1.9-4.91 1.91-2.95.14-5.89-1.92-6.59-4.75-.72-2.61.14-5.51 2.24-7.24 1.25-1.01 2.87-1.57 4.47-1.58v4.03c-.28-.01-.57-.01-.85.02-1.27.13-2.45.96-2.9 2.16-.41.97-.24 2.15.42 2.94.75.9 2.03 1.18 3.1.75 1.05-.4 1.69-1.51 1.71-2.62.01-4.03.01-8.06.01-12.09z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="mailto:studiomarkprint@gmail.com"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-lg">mail</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Section: Links Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 py-16">
+                <!-- Column 1 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Products</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="printing.html" class="hover:text-white transition-colors">Business Cards</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Postcards</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Stickers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Flyers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Invitations</a></li>
+                    </ul>
+                </div>
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Services</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">Graphic Design</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Website Design</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Brand Identity</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Curation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Packaging</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Company</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Our Standard</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Carreers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Support</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Shipping Info</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Return Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="mailto:hello@markandprint.co"
+                                class="text-white font-medium">hello@markandprint.co</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Legal & Region -->
+            <div class="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div
+                    class="flex flex-col md:flex-row items-center gap-6 text-[10px] uppercase tracking-widest text-zinc-600">
+                    <p>© 2026 Studio Mark & Print</p>
+                    <div class="flex gap-6">
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Privacy</a>
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Terms</a>
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Security</a>
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 cursor-pointer hover:border-zinc-700 transition-colors">
+                    <div class="w-4 h-3 bg-blue-900 relative overflow-hidden">
+                        <!-- Tiny USA Flag representation -->
+                        <div class="absolute inset-0 bg-red-600 flex flex-col">
+                            <div class="h-1 bg-white"></div>
+                            <div class="h-1 bg-red-600"></div>
+                            <div class="h-1 bg-white"></div>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-zinc-400">United States / EN</span>
+                    <span class="material-symbols-outlined text-xs">expand_more</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+
+
+        const previewNameInput = document.getElementById('preview-name');
+        const previewRoleInput = document.getElementById('preview-role');
+        const previewCompanyInput = document.getElementById('preview-company');
+        const previewContactInput = document.getElementById('preview-contact');
+        const previewBgInput = document.getElementById('preview-bg');
+        const previewTextInput = document.getElementById('preview-text');
+        const previewStyleSelect = document.getElementById('preview-style');
+        const previewImageInput = document.getElementById('preview-image');
+        const previewCard = document.getElementById('preview-card');
+        const previewCardName = document.getElementById('preview-card-name');
+        const previewCardRole = document.getElementById('preview-card-role');
+        const previewCardContact = document.getElementById('preview-card-contact');
+        const previewCardBrand = document.getElementById('preview-card-brand');
+        const previewCardStyle = document.getElementById('preview-card-style');
+        const previewOrderBtn = document.getElementById('preview-order-btn');
+
+        function applyPreviewStyle(style) {
+            if (style === 'Bold Serif') {
+                previewCardName.style.fontFamily = 'Georgia, "Times New Roman", serif';
+                previewCardName.style.letterSpacing = '-0.05em';
+                previewCardRole.style.letterSpacing = '0.22em';
+            } else if (style === 'Editorial') {
+                previewCardName.style.fontFamily = 'Georgia, "Times New Roman", serif';
+                previewCardName.style.fontStyle = 'italic';
+                previewCardRole.style.letterSpacing = '0.3em';
+            } else {
+                previewCardName.style.fontFamily = 'Georgia, "Times New Roman", serif';
+                previewCardName.style.fontStyle = 'normal';
+                previewCardRole.style.letterSpacing = '0.28em';
+            }
+        }
+
+        function updatePreviewCard() {
+            previewCardName.textContent = previewNameInput.value || 'Alexandra Reed';
+            previewCardRole.textContent = previewRoleInput.value || 'Directora Creativa';
+            previewCardBrand.textContent = previewCompanyInput.value || 'Studio Mark & Print';
+            previewCardContact.textContent = previewContactInput.value || 'hola@markandprint.com';
+            previewCardStyle.textContent = previewStyleSelect.value;
+            previewCard.style.backgroundColor = previewBgInput.value;
+            previewCard.style.color = previewTextInput.value;
+            previewCardName.style.color = previewTextInput.value;
+            previewCardRole.style.color = previewTextInput.value;
+            previewCardBrand.style.color = previewTextInput.value;
+            previewCardContact.style.color = previewTextInput.value;
+            previewCardStyle.style.color = previewTextInput.value;
+            previewCardStyle.style.border = `1px solid ${previewTextInput.value}33`;
+            applyPreviewStyle(previewStyleSelect.value);
+        }
+
+        [previewNameInput, previewRoleInput, previewCompanyInput, previewContactInput, previewBgInput, previewTextInput, previewStyleSelect].forEach((el) => {
+            el.addEventListener('input', updatePreviewCard);
+            el.addEventListener('change', updatePreviewCard);
+        });
+
+        previewImageInput.addEventListener('change', (event) => {
+            const file = event.target.files && event.target.files[0];
+            if (!file) {
+                previewCard.style.setProperty('--preview-image', 'none');
+                previewCard.style.setProperty('--preview-image-opacity', '0');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                previewCard.style.setProperty('--preview-image', `url("${reader.result}")`);
+                previewCard.style.setProperty('--preview-image-opacity', '0.42');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        if (previewOrderBtn) {
+            previewOrderBtn.addEventListener('click', () => {
+                window.location.href = 'standard.html';
+            });
+        }
+
+        updatePreviewCard();
+    </script>
+    <script src="cart.js"></script>
+    <script src="account.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var user = Auth.getCurrentUser();
+            if (user) {
+                var labels = document.querySelectorAll('.utility-btn span:last-of-type');
+                document.querySelectorAll('.utility-btn').forEach(function (btn) {
+                    if (btn.href && btn.href.includes('account.html')) {
+                        btn.querySelector('span') && (btn.querySelector('span').textContent = user.name.split(' ')[0]);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Studio Mark & Print | About StudioStudio Mark & Print</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ["Noto Serif", "serif"],
+                        sans: ["Inter", "sans-serif"],
+                        headline: ["Noto Serif", "serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            background: #1d1d1b;
+        }
+
+        .tt-interphases {
+            font-family: "TT Interphases", "TT Interphases Pro", "Inter", sans-serif;
+        }
+
+        .about-mark {
+            position: relative;
+            width: 4.5rem;
+            height: 3rem;
+            overflow: visible;
+            cursor: ew-resize;
+            z-index: 4;
+        }
+
+        .about-mark-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform: translate(var(--about-mark-shift-x, 0px), var(--about-mark-shift-y, 0px));
+            transition: transform 110ms linear;
+            will-change: transform;
+        }
+
+        .about-mark-band {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1.45rem;
+            border-radius: 999px;
+            transform-origin: center;
+            will-change: transform, opacity;
+        }
+
+        .about-mark-band--solid {
+            top: 0;
+            background: #ffffff;
+            box-shadow: 0 14px 28px rgba(255, 255, 255, 0.08);
+            z-index: 5;
+            animation: aboutMarkPressSolid 3.2s cubic-bezier(0.72, 0.02, 0.28, 1) infinite alternate;
+        }
+
+        .about-mark-band--middle {
+            top: 0.62rem;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            z-index: 3;
+            animation: aboutMarkPressMiddle 3.2s cubic-bezier(0.72, 0.02, 0.28, 1) infinite alternate;
+        }
+
+        .about-mark-band--bottom {
+            top: 1.24rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            z-index: 2;
+            animation: aboutMarkPressBottom 3.2s cubic-bezier(0.72, 0.02, 0.28, 1) infinite alternate;
+        }
+
+        .about-mark-band--base {
+            top: 1.86rem;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            z-index: 1;
+            animation: aboutMarkPressBase 3.2s cubic-bezier(0.72, 0.02, 0.28, 1) infinite alternate;
+        }
+
+        @keyframes aboutMarkPressSolid {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(0.82rem);
+            }
+        }
+
+        @keyframes aboutMarkPressMiddle {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(0.08rem);
+                opacity: 0.72;
+            }
+        }
+
+        @keyframes aboutMarkPressBottom {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-0.22rem);
+                opacity: 0.48;
+            }
+        }
+
+        @keyframes aboutMarkPressBase {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-0.46rem);
+                opacity: 0.28;
+            }
+        }
+
+        #services {
+            position: relative;
+            overflow: hidden;
+            min-height: 100svh;
+            transition: background-color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #services .about-mark-track {
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-guide {
+            position: absolute;
+            left: 5.25rem;
+            right: 42%;
+            top: 15.85rem;
+            height: 4.75rem;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+            transition: opacity 0.35s ease;
+        }
+
+        .services-guide svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .services-guide path {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.88);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 10 16;
+        }
+
+        .services-guide-tag {
+            position: absolute;
+            right: -1.25rem;
+            top: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.8rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: opacity 0.35s ease, color 0.35s ease;
+        }
+
+        .services-guide-tag::before {
+            content: "";
+            width: 4.5rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.9;
+        }
+
+        #services.services-impact .services-guide path,
+        #services.services-impact .services-guide-tag {
+            opacity: 0;
+        }
+
+        .services-impact-ball {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 999px;
+            background: #ffffff;
+            opacity: 0;
+            transform: translate3d(var(--impact-x, 0px), -16rem, 0);
+            pointer-events: none;
+            z-index: 3;
+            box-shadow: 0 18px 40px rgba(255, 255, 255, 0.08);
+        }
+
+        .services-impact-line {
+            position: absolute;
+            left: 50%;
+            top: calc(100% - 0.1rem);
+            width: 1px;
+            height: 0;
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+
+        .services-impact-ready .services-impact-ball {
+            animation: servicesImpactDrop 0.62s cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+        }
+
+        .services-impact-ready .services-impact-line {
+            animation: servicesImpactLine 0.62s cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
+        }
+
+        @keyframes servicesImpactDrop {
+            0% {
+                opacity: 0;
+                transform: translate3d(var(--impact-x, 0px), -20rem, 0);
+            }
+
+            12% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate3d(var(--impact-x, 0px), 17.5rem, 0);
+            }
+        }
+
+        @keyframes servicesImpactLine {
+            0% {
+                opacity: 0;
+                height: 0;
+            }
+
+            14% {
+                opacity: 0.9;
+            }
+
+            100% {
+                opacity: 0;
+                height: 15rem;
+            }
+        }
+
+        #services.services-impact {
+            background: #ffffff;
+        }
+
+        #services.services-impact h1,
+        #services.services-impact p,
+        #services.services-impact .services-copy {
+            color: #141414;
+        }
+
+        #services.services-impact .services-image-frame {
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.08);
+        }
+
+        #services.services-impact .about-mark-band--solid {
+            background: #111111;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+        }
+
+        #services.services-impact .about-mark-band--middle {
+            border-color: rgba(17, 17, 17, 0.35);
+        }
+
+        #services.services-impact .about-mark-band--bottom {
+            border-color: rgba(17, 17, 17, 0.22);
+        }
+
+        #services.services-impact .about-mark-band--base {
+            border-color: rgba(17, 17, 17, 0.15);
+        }
+
+        @media (max-width: 1023px) {
+            .services-guide {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-body text-white">
+    <header class="bg-white text-zinc-900 px-8 py-6">
+        <div class="max-w-screen-2xl mx-auto flex items-center justify-between gap-8">
+            <a class="text-xl font-semibold tracking-tight" href="index.html">Studio Mark &amp; Print</a>
+            <a class="uppercase text-xs tracking-[0.35em] text-zinc-500 hover:text-zinc-900 transition-colors"
+                href="index.html">Back to Home</a>
+        </div>
+    </header>
+
+    <section class="bg-[#1d1d1b] px-8 py-20 md:py-28" id="services">
+        <div class="max-w-screen-2xl mx-auto">
+            <div
+                class="about-mark-track grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] gap-x-20 gap-y-14 items-start">
+                <div class="services-impact-ball" aria-hidden="true">
+                    <span class="services-impact-line"></span>
+                </div>
+                <div class="services-guide" aria-hidden="true">
+                    <svg viewBox="0 0 780 140" preserveAspectRatio="none">
+                        <path d="M10 98 C120 102, 182 86, 248 66 S396 34, 470 48 S528 64, 560 62" />
+                    </svg>
+                    <span class="services-guide-tag">Bring It Here</span>
+                </div>
+                <div class="max-w-[28rem] about-mark-zone">
+                    <h1
+                        class="font-headline text-white text-5xl md:text-[5.5rem] font-normal tracking-[-0.05em] leading-[0.9]">
+                        About<br>
+                        StudioMark <span class="font-black">&amp; Print</span>
+                    </h1>
+
+                    <div class="mt-10 about-mark" aria-hidden="true">
+                        <div class="about-mark-inner">
+                            <span class="about-mark-band about-mark-band--solid"></span>
+                            <span class="about-mark-band about-mark-band--middle"></span>
+                            <span class="about-mark-band about-mark-band--bottom"></span>
+                            <span class="about-mark-band about-mark-band--base"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-[25rem] md:max-w-[30rem] lg:justify-self-end">
+                    <div class="services-image-frame aspect-[1.32/1] overflow-hidden bg-[#d8d3cb]">
+                        <img class="w-full h-full object-cover"
+                            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80"
+                            alt="Creative studio team portrait in an editorial setting">
+                    </div>
+                </div>
+
+                <div class="max-w-[31rem] services-copy">
+                    <p class="tt-interphases text-[1.05rem] md:text-[1.15rem] leading-[1.55] text-white">
+                        Since its founding, Studio Mark &amp; Print has been the go-to company for design-led print,
+                        digital presence, and brand presentation. Its offering ranges from graphic design and branded
+                        collateral to websites, campaigns, and visual production.
+                    </p>
+                </div>
+
+                <div class="max-w-[31rem] lg:justify-self-end services-copy">
+                    <p class="tt-interphases text-[1.05rem] md:text-[1.15rem] leading-[1.55] text-white">
+                        Studio Mark &amp; Print supports a growing client base with premium execution across print and digital.
+                        Every project is built to feel refined, strategic, and clear from the first impression to the
+                        final delivery.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const aboutMarkZones = document.querySelectorAll('.about-mark-zone');
+        const servicesSection = document.getElementById('services');
+
+        aboutMarkZones.forEach((zone) => {
+            const mark = zone.querySelector('.about-mark');
+            const track = zone.closest('.about-mark-track');
+            const activeArea = track || zone;
+
+            if (!mark || !activeArea) {
+                return;
+            }
+
+            const impactBall = activeArea.querySelector('.services-impact-ball');
+            const guideTag = activeArea.querySelector('.services-guide-tag');
+            const guidePath = activeArea.querySelector('.services-guide path');
+            const guideSvg = activeArea.querySelector('.services-guide svg');
+            let markEngaged = false;
+            let impactTriggered = false;
+            let impactTimer = null;
+
+            mark.addEventListener('pointerenter', () => {
+                markEngaged = true;
+            });
+
+            activeArea.addEventListener('pointermove', (event) => {
+                if (!markEngaged) {
+                    return;
+                }
+
+                const rect = activeArea.getBoundingClientRect();
+                const guideRectForTravel = guideSvg?.getBoundingClientRect();
+                const travelRect = guideRectForTravel || rect;
+                const relativeX = event.clientX - travelRect.left;
+                const maxTravel = Math.max(0, travelRect.width);
+                const normalizedX = Math.max(0, Math.min(maxTravel, relativeX));
+                let progress = maxTravel > 0 ? normalizedX / maxTravel : 0;
+
+                if (guidePath && guideSvg) {
+                    const pathLength = guidePath.getTotalLength();
+                    const svgRect = guideSvg.getBoundingClientRect();
+                    const viewBox = guideSvg.viewBox.baseVal;
+                    const scaleX = viewBox && viewBox.width ? svgRect.width / viewBox.width : 1;
+                    const scaleY = viewBox && viewBox.height ? svgRect.height / viewBox.height : 1;
+                    let nearestLength = 0;
+                    let nearestDistance = Number.POSITIVE_INFINITY;
+
+                    for (let i = 0; i <= 160; i += 1) {
+                        const testLength = pathLength * (i / 160);
+                        const testPoint = guidePath.getPointAtLength(testLength);
+                        const renderedX = testPoint.x * scaleX;
+                        const distance = Math.abs(renderedX - normalizedX);
+
+                        if (distance < nearestDistance) {
+                            nearestDistance = distance;
+                            nearestLength = testLength;
+                        }
+                    }
+
+                    progress = pathLength > 0 ? nearestLength / pathLength : progress;
+                    const point = guidePath.getPointAtLength(nearestLength);
+                    const markRect = mark.getBoundingClientRect();
+                    const targetLeft = (svgRect.left - rect.left) + (point.x * scaleX) - markRect.width * 0.34;
+                    const targetTop = (svgRect.top - rect.top) + (point.y * scaleY) - markRect.height * 0.26;
+                    const originLeft = mark.offsetLeft;
+                    const originTop = mark.offsetTop;
+
+                    mark.style.setProperty('--about-mark-shift-x', `${targetLeft - originLeft}px`);
+                    mark.style.setProperty('--about-mark-shift-y', `${targetTop - originTop}px`);
+                } else {
+                    mark.style.setProperty('--about-mark-shift-x', `${normalizedX}px`);
+                    mark.style.setProperty('--about-mark-shift-y', '0px');
+                }
+
+                if (!impactTriggered && progress >= 0.995) {
+                    impactTriggered = true;
+
+                    if (impactBall) {
+                        const guideRect = guideTag?.getBoundingClientRect();
+                        const ballX = guideRect
+                            ? (guideRect.left - rect.left) - 14
+                            : (mark.getBoundingClientRect().left - rect.left) + (mark.getBoundingClientRect().width / 2) - 14;
+                        impactBall.style.setProperty('--impact-x', `${ballX}px`);
+                    }
+
+                    servicesSection?.classList.remove('services-impact');
+                    activeArea.classList.remove('services-impact-ready');
+                    void activeArea.offsetWidth;
+                    activeArea.classList.add('services-impact-ready');
+
+                    window.clearTimeout(impactTimer);
+                    impactTimer = window.setTimeout(() => {
+                        servicesSection?.classList.add('services-impact');
+                    }, 620);
+                }
+            });
+
+            const resetMarkShift = () => {
+                markEngaged = false;
+                mark.style.setProperty('--about-mark-shift-x', '0px');
+                mark.style.setProperty('--about-mark-shift-y', '0px');
+                impactTriggered = false;
+                window.clearTimeout(impactTimer);
+                activeArea.classList.remove('services-impact-ready');
+                servicesSection?.classList.remove('services-impact');
+            };
+
+            activeArea.addEventListener('pointerleave', resetMarkShift);
+            activeArea.addEventListener('pointercancel', resetMarkShift);
+        });
+    </script>
+</body>
+
+</html>

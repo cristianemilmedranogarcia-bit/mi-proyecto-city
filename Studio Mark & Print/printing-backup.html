@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Studio Mark & Print | Premium Printing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: {
+        preflight: false,
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="print-product-v2.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            background: #f8f9fa;
+            color: #111111;
+            font-family: "Inter", sans-serif;
+        }
+
+        .printing-topbar {
+            background: #f4f1eb;
+            border-bottom: 1px solid #ece7df;
+            color: #3f3a34;
+            font-size: 0.82rem;
+            line-height: 1.2;
+            text-align: center;
+            padding: 0.7rem 1.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        .printing-header {
+            background: #ffffff;
+            border-bottom: 1px solid #ece9e5;
+        }
+
+        .printing-header-top {
+            max-width: 96rem;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .printing-header-bottom {
+            background: #ffffff;
+            border-top: 1px solid #f2f0ed;
+        }
+
+        .printing-header-inner {
+            max-width: 96rem;
+            margin: 0 auto;
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .printing-logo {
+            text-decoration: none;
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            color: #0e3b2e;
+            line-height: 1;
+        }
+
+        .printing-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            font-size: 0.95rem;
+            color: #211f1b;
+        }
+
+        .printing-nav a {
+            position: relative;
+        }
+
+        .printing-nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.3rem;
+            width: 100%;
+            height: 1px;
+            background: currentColor;
+            opacity: 0;
+            transform: scaleX(0.4);
+            transform-origin: center;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .printing-nav a:hover::after {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        .header-search-container {
+            position: relative;
+            max-width: 42rem;
+            width: 100%;
+        }
+
+        .header-search-input {
+            width: 100%;
+            height: 2.85rem;
+            background: #f8f7f5 !important;
+            border: 1px solid #e5e0d8 !important;
+            border-radius: 999px !important;
+            padding: 0 1.5rem 0 3.25rem !important;
+            font-size: 0.92rem !important;
+            color: #171717;
+            transition: all 0.2s ease;
+            box-shadow: none !important;
+            display: block !important;
+            line-height: 2.85rem !important;
+        }
+
+        .header-search-input:focus {
+            outline: none !important;
+            border-color: #0e3b2e !important;
+            background: #ffffff !important;
+            box-shadow: 0 0 0 3px rgba(14, 59, 46, 0.08) !important;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(20, 20, 20, 0.45);
+            pointer-events: none;
+            z-index: 20;
+            display: block !important;
+        }
+
+        .header-utilities {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .utility-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: #211f1b;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+
+        .utility-btn:hover {
+            opacity: 0.7;
+        }
+
+        .utility-icon {
+            width: 1.35rem;
+            height: 1.35rem;
+            stroke-width: 1.8;
+        }
+
+        .cart-btn {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -0.45rem;
+            right: -1.1rem;
+            background: #0e3b2e;
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            min-width: 1.15rem;
+            height: 1.15rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffffff;
+        }
+
+        .printing-nav-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: #5d5851;
+            font-size: 0.88rem;
+        }
+
+        .printing-nav-meta a {
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .printing-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
+            overflow: hidden;
+            background: #ffffff;
+            border-bottom: 1px solid #ece9e5;
+            min-height: 236px;
+        }
+
+        .printing-hero-copy {
+            background: #765066;
+            color: #ffffff;
+            padding: 2.5rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 236px;
+        }
+
+        .printing-hero-title {
+            font-size: clamp(2.1rem, 4.4vw, 3.75rem);
+            line-height: 0.92;
+            letter-spacing: -0.06em;
+            font-weight: 500;
+            max-width: 20rem;
+        }
+
+        .printing-hero-text {
+            margin-top: 1rem;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: rgba(255, 255, 255, 0.84);
+            max-width: 19rem;
+        }
+
+        .printing-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.35rem;
+        }
+
+        .printing-hero-primary,
+        .printing-hero-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.9rem;
+            padding: 0 1.3rem;
+            border-radius: 0.35rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease;
+        }
+
+        .printing-hero-primary {
+            background: #ffffff;
+            color: #141414;
+        }
+
+        .printing-hero-secondary {
+            background: #143422;
+            color: #ffffff;
+        }
+
+        .printing-hero-primary:hover,
+        .printing-hero-secondary:hover {
+            transform: translateY(-2px);
+        }
+
+        .printing-hero-visual {
+            position: relative;
+            min-height: 236px;
+            background: #e0c59e;
+            overflow: hidden;
+        }
+
+        .printing-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .service-line-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.25rem;
+            height: 3.25rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+            backdrop-filter: blur(8px);
+            border: 0;
+            padding: 0;
+            color: #111111;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            pointer-events: auto;
+        }
+
+        .service-line-arrow:hover {
+            transform: translateY(-2px);
+        }
+
+        .service-line-arrow span {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .seasonal-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .seasonal-card-link {
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.22s ease, opacity 0.22s ease;
+        }
+
+        .seasonal-card-link:hover {
+            transform: translateY(-4px);
+        }
+
+        .seasonal-visual {
+            aspect-ratio: 1 / 1;
+            border-radius: 1.7rem;
+            background: #f5f4f2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .seasonal-pill {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            background: #16845d;
+            color: #ffffff;
+            border-radius: 9999px;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .seasonal-expanded-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .seasonal-expanded-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .editorial-footer {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top left, rgba(146, 112, 128, 0.16), transparent 30%),
+                linear-gradient(180deg, #f7f3ec 0%, #efe8de 100%);
+            color: #151515;
+        }
+
+        .editorial-footer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(120deg, rgba(255, 255, 255, 0.38), transparent 40%),
+                linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.035) 100%);
+            pointer-events: none;
+        }
+
+        .editorial-footer>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.72rem;
+            line-height: 1;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: rgba(21, 21, 21, 0.56);
+        }
+
+        .footer-badge::before {
+            content: "";
+            width: 3.5rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.7;
+        }
+
+        .footer-link-stack a {
+            color: rgba(21, 21, 21, 0.68);
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer-link-stack a:hover {
+            color: #151515;
+            transform: translateX(2px);
+        }
+
+        .footer-contact-card {
+            border: 1px solid rgba(21, 21, 21, 0.08);
+            background: rgba(255, 255, 255, 0.52);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+        }
+
+        .seasonal-expanded {
+            display: none;
+        }
+
+        .seasonal-expanded.open {
+            display: block;
+        }
+
+        .seasonal-collapsed.closed {
+            display: none;
+        }
+
+        .seasonal-heading.hidden {
+            display: none;
+        }
+
+        .seasonal-rail {
+            position: relative;
+        }
+
+        .seasonal-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .seasonal-title {
+            font-size: 0.95rem;
+            line-height: 1.3;
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .seasonal-arrow {
+            position: absolute;
+            top: 5.9rem;
+            width: 3.9rem;
+            height: 3.9rem;
+            border-radius: 1rem;
+            border: 1px solid #dddddd;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            font-size: 2rem;
+        }
+
+        .seasonal-arrow.left {
+            left: -2.2rem;
+        }
+
+        .seasonal-arrow.right {
+            right: -2.2rem;
+        }
+
+        .print-editorial-band {
+            background: #171717;
+            color: #f6f0e6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .print-editorial-band::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top right, rgba(118, 80, 102, 0.28), transparent 22%),
+                radial-gradient(circle at bottom left, rgba(34, 96, 88, 0.32), transparent 28%);
+            pointer-events: none;
+        }
+
+        .print-editorial-band>*,
+        .print-material-grid>*,
+        .print-finish-grid>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .print-section-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.7rem;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.34em;
+            color: rgba(246, 240, 230, 0.62);
+        }
+
+        .print-section-kicker::before {
+            content: "";
+            width: 3rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.75;
+        }
+
+        .print-material-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            gap: 2rem;
+        }
+
+        .print-card-soft {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+        }
+
+        .print-card-light {
+            border: 1px solid rgba(21, 21, 21, 0.08);
+            background: #ffffff;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.04);
+        }
+
+        .print-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(246, 240, 230, 0.88);
+        }
+
+        .print-finish-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .print-process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .print-process-step {
+            border-top: 1px solid rgba(21, 21, 21, 0.12);
+            padding-top: 1rem;
+        }
+
+        .print-process-step span {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(21, 21, 21, 0.45);
+            margin-bottom: 0.9rem;
+        }
+
+        .print-proof-panel {
+            background:
+                radial-gradient(circle at top left, rgba(118, 80, 102, 0.14), transparent 30%),
+                linear-gradient(180deg, #f7f3ec 0%, #f0e8de 100%);
+        }
+
+        .print-case-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .print-case-photo {
+            min-height: 36rem;
+            overflow: hidden;
+            border-radius: 2rem;
+            background: #ddd4c7;
+        }
+
+        .print-case-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .print-case-copy {
+            border-radius: 2rem;
+            background: #ffffff;
+            border: 1px solid rgba(21, 21, 21, 0.08);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.04);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .print-metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .print-gallery-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 1.5rem;
+        }
+
+        .print-gallery-stack {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .print-gallery-card {
+            overflow: hidden;
+            border-radius: 2rem;
+            background: #ece7df;
+            position: relative;
+        }
+
+        .print-gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .print-gallery-caption {
+            position: absolute;
+            left: 1.4rem;
+            bottom: 1.4rem;
+            right: 1.4rem;
+            padding: 1rem 1.1rem;
+            border-radius: 1.25rem;
+            background: rgba(20, 20, 20, 0.72);
+            color: #f7f3ec;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 1200px) {
+            .seasonal-expanded-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .seasonal-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .print-material-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .print-finish-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .print-process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .print-case-grid,
+            .print-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .printing-header-inner {
+                padding: 1rem 1.25rem;
+                flex-wrap: wrap;
+            }
+
+            .printing-nav {
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+                gap: 1rem;
+                font-size: 0.82rem;
+                overflow-x: auto;
+            }
+
+            .printing-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .printing-hero-copy {
+                padding: 2rem 1.25rem;
+                min-height: auto;
+            }
+
+            .printing-hero-visual {
+                min-height: 16rem;
+            }
+
+            .seasonal-expanded-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .seasonal-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .print-finish-grid,
+            .print-process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .print-metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .seasonal-expanded-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .seasonal-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8F9FA] text-[#111111] overflow-x-hidden">
+    <div class="printing-topbar">
+        Impresión premium, detalles elevados y primeras impresiones impactantes para cada punto de contacto de la marca.
+    </div>
+    <header class="printing-header">
+        <div class="printing-header-top">
+            <a class="printing-logo" href="index.html">Studio Mark &amp; Print</a>
+
+            <div class="header-search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="header-search-input"
+                    placeholder="Search for products, designs or inspiration...">
+            </div>
+
+            <div class="header-utilities">
+                <a href="#" class="utility-btn">
+                    <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Ingresar</span>
+                </a>
+                <a href="#" class="utility-btn cart-btn">
+                    <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span>Carrito</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="printing-header-bottom">
+            <div class="printing-header-inner">
+                <nav class="printing-nav" aria-label="Printing navigation">
+                    <a href="business-cards.html">Tarjetas de Presentación</a>
+                        <a href="menus.html">Menus</a>
+                    <a href="posters.html">Postales</a>
+                    <a href="door-hangers.html">Door Hangers</a>
+                    <a href="flyers.html">Flyers</a>
+                    <a href="invitations.html">Invitaciones</a>
+                </nav>
+                <div class="printing-nav-meta">
+                    <a href="index.html">Volver al Inicio</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="printing-hero">
+        <div class="printing-hero-copy">
+            <h1 class="printing-hero-title">Tarjetas que significan negocios</h1>
+            <p class="printing-hero-text">
+                Acabados especiales, tamaños únicos, factor wow instantáneo. Haz un impacto que perdure con nuestras
+                Tarjetas de Presentación personalizadas.
+            </p>
+            <div class="printing-hero-actions">
+                <a href="business-cards.html" class="printing-hero-primary">Comprar Tarjetas</a>
+                <a href="#" class="printing-hero-secondary">Ver Diseños</a>
+            </div>
+        </div>
+        <div class="printing-hero-visual">
+            <img class="printing-hero-image"
+                src="https://images.unsplash.com/photo-1586892478025-2b5472316f22?auto=format&fit=crop&w=1600&q=80"
+                alt="Premium business card collection displayed on a studio surface">
+        </div>
+    </section>
+    <main>
+        <section class="bg-white px-8 pt-8 min-h-screen">
+            <div class="max-w-screen-2xl mx-auto">
+                <h2 class="text-3xl md:text-[2.55rem] font-sans font-bold tracking-tight text-zinc-950 mb-10"
+                    id="seasonal-heading">
+                    Explore our seasonal favorites
+                </h2>
+                <div class="seasonal-collapsed" id="seasonal-collapsed">
+                    <div class="seasonal-rail">
+                        <button class="seasonal-arrow left" type="button" aria-label="Previous favorites">‹</button>
+                        <div class="seasonal-grid">
+                            <a class="seasonal-card seasonal-card-link" href="business-cards.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-52 h-32">
+                                        <div
+                                            class="absolute left-8 top-5 w-36 h-24 bg-[#34345c] rounded-sm rotate-[7deg] shadow-lg">
+                                        </div>
+                                        <div
+                                            class="absolute left-5 top-2 w-36 h-24 bg-[#34345c] rounded-sm rotate-[3deg] shadow-lg">
+                                        </div>
+                                        <div
+                                            class="absolute left-1 top-0 w-36 h-24 bg-[#34345c] rounded-sm rotate-[-2deg] shadow-lg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Tarjetas de Presentación</h3>
+                            </a>
+                            <a class="seasonal-card seasonal-card-link" href="stickers.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-44 h-32">
+                                        <div
+                                            class="absolute left-3 top-5 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                            TH</div>
+                                        <div
+                                            class="absolute right-0 bottom-0 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                            TH</div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Stickers</h3>
+                            </a>
+                            <a class="seasonal-card seasonal-card-link" href="menus.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-52 h-36">
+                                        <div
+                                            class="absolute left-3 top-12 w-24 h-20 bg-[#59463c] rotate-[-10deg] rounded-md">
+                                        </div>
+                                        <div
+                                            class="absolute left-16 top-2 w-28 h-36 bg-white rounded-md shadow-md rotate-[-10deg] border border-zinc-200">
+                                        </div>
+                                        <div
+                                            class="absolute right-1 top-8 w-28 h-24 bg-[#3d6c60] rounded-md shadow-md rotate-[10deg]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Menus</h3>
+                            </a>
+                            <a class="seasonal-card seasonal-card-link" href="door-hangers.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-44 h-40">
+                                        <div class="absolute left-10 top-3 w-28 h-36 bg-[#1f1f22] rotate-[-10deg]">
+                                        </div>
+                                        <div class="absolute left-1 top-14 w-20 h-20 bg-white border border-zinc-200">
+                                        </div>
+                                        <div
+                                            class="absolute left-20 top-14 w-20 h-20 bg-[#d6b6ab] border border-zinc-200">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Door Hangers</h3>
+                            </a>
+                            <a class="seasonal-card seasonal-card-link" href="invitations.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-36 h-44 bg-[#456e65] rounded-sm shadow-lg">
+                                        <div class="absolute inset-x-5 top-10 bottom-10 bg-white rounded-full"></div>
+                                        <div
+                                            class="absolute inset-x-8 bottom-6 text-[10px] uppercase tracking-[0.24em] text-white text-center">
+                                            Invitation</div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Invitations</h3>
+                            </a>
+                        </div>
+                        <button class="seasonal-arrow right" id="seasonal-open" type="button"
+                            aria-label="View all services">›</button>
+                    </div>
+                </div>
+                <div class="seasonal-expanded pt-2" id="seasonal-expanded">
+                    <div class="seasonal-expanded-head">
+                        <h2 class="text-3xl md:text-[2.55rem] font-sans font-bold tracking-tight text-zinc-950">
+                            Explore our seasonal favorites
+                        </h2>
+                        <button class="service-line-arrow" id="seasonal-close" type="button"
+                            aria-label="Close all services">
+                            <span>←</span>
+                        </button>
+                    </div>
+                    <div class="seasonal-expanded-grid">
+                        <a class="seasonal-card seasonal-card-link" href="business-cards.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-52 h-32">
+                                    <div
+                                        class="absolute left-8 top-5 w-36 h-24 bg-[#34345c] rounded-sm rotate-[7deg] shadow-lg">
+                                    </div>
+                                    <div
+                                        class="absolute left-5 top-2 w-36 h-24 bg-[#34345c] rounded-sm rotate-[3deg] shadow-lg">
+                                    </div>
+                                    <div
+                                        class="absolute left-1 top-0 w-36 h-24 bg-[#34345c] rounded-sm rotate-[-2deg] shadow-lg">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Tarjetas de Presentación</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="stickers.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-44 h-32">
+                                    <div
+                                        class="absolute left-3 top-5 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                        TH</div>
+                                    <div
+                                        class="absolute right-0 bottom-0 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                        TH</div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Stickers</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="menus.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-52 h-36">
+                                    <div
+                                        class="absolute left-3 top-12 w-24 h-20 bg-[#59463c] rotate-[-10deg] rounded-md">
+                                    </div>
+                                    <div
+                                        class="absolute left-16 top-2 w-28 h-36 bg-white rounded-md shadow-md rotate-[-10deg] border border-zinc-200">
+                                    </div>
+                                    <div
+                                        class="absolute right-1 top-8 w-28 h-24 bg-[#3d6c60] rounded-md shadow-md rotate-[10deg]">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Menus</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="door-hangers.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-44 h-40">
+                                    <div class="absolute left-10 top-3 w-28 h-36 bg-[#1f1f22] rotate-[-10deg]"></div>
+                                    <div class="absolute left-1 top-14 w-20 h-20 bg-white border border-zinc-200"></div>
+                                    <div class="absolute left-20 top-14 w-20 h-20 bg-[#d6b6ab] border border-zinc-200">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Door Hangers</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="flyers.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-36 h-44 bg-[#456e65] rounded-sm shadow-lg">
+                                    <div class="absolute inset-x-5 top-10 bottom-10 bg-white rounded-full"></div>
+                                    <div
+                                        class="absolute inset-x-8 bottom-6 text-[10px] uppercase tracking-[0.24em] text-white text-center">
+                                        Invitation</div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Flyers</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="photos.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <span class="seasonal-pill">Up to 25% off</span>
+                                <div class="relative w-52 h-36">
+                                    <div class="absolute right-2 top-0 w-28 h-20 bg-white rotate-[18deg] shadow-md">
+                                    </div>
+                                    <div
+                                        class="absolute left-5 bottom-0 w-32 h-20 bg-[#31385e] rotate-[-18deg] shadow-md">
+                                    </div>
+                                    <div
+                                        class="absolute left-14 bottom-5 text-[#ff7b3d] text-2xl font-black rotate-[-18deg]">
+                                        THANK YOU</div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Photos</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="posters.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-44 h-32">
+                                    <div
+                                        class="absolute left-3 top-5 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                        TH</div>
+                                    <div
+                                        class="absolute right-0 bottom-0 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                        TH</div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Posters</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="invitations.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-52 h-36">
+                                    <div
+                                        class="absolute left-3 top-12 w-24 h-20 bg-[#59463c] rotate-[-10deg] rounded-md">
+                                    </div>
+                                    <div
+                                        class="absolute left-16 top-2 w-28 h-36 bg-white rounded-md shadow-md rotate-[-10deg] border border-zinc-200">
+                                    </div>
+                                    <div
+                                        class="absolute right-1 top-8 w-28 h-24 bg-[#3d6c60] rounded-md shadow-md rotate-[10deg]">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Invitations</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#f7f3ec] px-8 py-24">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="print-case-grid">
+                    <div class="print-case-photo">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80"
+                            alt="Luxury business card set arranged on a studio desk">
+                    </div>
+                    <div class="print-case-copy">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Featured Direction</p>
+                            <h2
+                                class="mt-4 text-4xl md:text-6xl font-serif tracking-[-0.06em] leading-[0.95] text-zinc-950">
+                                Print systems built like a brand set, not isolated pieces.
+                            </h2>
+                            <p class="mt-6 text-zinc-600 leading-relaxed text-lg">
+                                The strongest print work usually doesn’t stop at one card. It carries into stationery,
+                                menus, packaging inserts, invitations, and leave-behinds that all feel related without
+                                feeling repetitive.
+                            </p>
+                        </div>
+
+                        <div class="mt-10">
+                            <div class="print-metric-grid">
+                                <div class="print-card-light rounded-[1.5rem] p-5">
+                                    <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Stock</p>
+                                    <p class="mt-3 text-2xl font-medium text-zinc-950">18pt to 38pt</p>
+                                </div>
+                                <div class="print-card-light rounded-[1.5rem] p-5">
+                                    <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Finish</p>
+                                    <p class="mt-3 text-2xl font-medium text-zinc-950">Foil / Soft-touch</p>
+                                </div>
+                                <div class="print-card-light rounded-[1.5rem] p-5">
+                                    <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Use</p>
+                                    <p class="mt-3 text-2xl font-medium text-zinc-950">Launch + Sales Kits</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white px-8 py-24">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+                    <div>
+                        <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Selected Print Systems</p>
+                        <h2
+                            class="mt-4 text-4xl md:text-6xl font-serif tracking-[-0.06em] leading-[0.95] text-zinc-950">
+                            A gallery with more presence, not just more blocks.
+                        </h2>
+                    </div>
+                    <p class="max-w-xl text-zinc-600 leading-relaxed">
+                        This is the part that was missing. Real visual pacing, varied proportions, and examples that
+                        actually feel like premium print work.
+                    </p>
+                </div>
+
+                <div class="print-gallery-grid mt-12">
+                    <article class="print-gallery-card min-h-[36rem]">
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80"
+                            alt="Branded stationery and business cards in neutral tones">
+                        <div class="print-gallery-caption">
+                            <p class="text-[11px] uppercase tracking-[0.28em] text-white/55">Identity Set</p>
+                            <p class="mt-2 text-xl font-medium">Neutral stock palette with restrained typography and
+                                soft-touch finish.</p>
+                        </div>
+                    </article>
+
+                    <div class="print-gallery-stack">
+                        <article class="print-gallery-card min-h-[17rem]">
+                            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80"
+                                alt="Elegant printed menus and folded cards on a restaurant table">
+                            <div class="print-gallery-caption">
+                                <p class="text-[11px] uppercase tracking-[0.28em] text-white/55">Hospitality</p>
+                                <p class="mt-2 text-lg font-medium">Menus, folded cards, and collateral for spaces that
+                                    need polish.</p>
+                            </div>
+                        </article>
+
+                        <article class="print-gallery-card min-h-[17rem]">
+                            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80"
+                                alt="Printed invitation pieces and branded envelopes laid out in a studio">
+                            <div class="print-gallery-caption">
+                                <p class="text-[11px] uppercase tracking-[0.28em] text-white/55">Invitations</p>
+                                <p class="mt-2 text-lg font-medium">Formal pieces that feel composed, tactile, and worth
+                                    keeping.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="print-editorial-band px-8 py-24">
+            <div class="max-w-screen-2xl mx-auto">
+                <span class="print-section-kicker">Material Direction</span>
+                <div class="print-material-grid mt-8">
+                    <div class="print-card-soft rounded-[2rem] p-8 md:p-10">
+                        <h2 class="text-4xl md:text-6xl font-serif tracking-[-0.06em] leading-[0.95] max-w-3xl">
+                            Printing that feels considered before a word is even read.
+                        </h2>
+                        <p class="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/72">
+                            We shape the first impression through paper weight, finish, color depth, edge detail, and
+                            the pace of whitespace. Every print piece is meant to feel intentional, not mass-produced.
+                        </p>
+                        <div class="mt-8 flex flex-wrap gap-3">
+                            <span class="print-chip">Soft touch</span>
+                            <span class="print-chip">Foil details</span>
+                            <span class="print-chip">Heavy stock</span>
+                            <span class="print-chip">Duplex builds</span>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-4">
+                        <div class="print-card-soft rounded-[2rem] p-8">
+                            <p class="text-[11px] uppercase tracking-[0.28em] text-white/42">Signature Stock</p>
+                            <p class="mt-4 text-2xl font-medium text-white">Uncoated cotton, silk-laminate, textured art
+                                paper.</p>
+                        </div>
+                        <div class="print-card-soft rounded-[2rem] p-8">
+                            <p class="text-[11px] uppercase tracking-[0.28em] text-white/42">Use Cases</p>
+                            <p class="mt-4 text-2xl font-medium text-white">Business cards, launch kits, menus,
+                                invitations, branded collateral.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white px-8 py-24">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+                    <div>
+                        <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">Signature Finishes</p>
+                        <h2
+                            class="mt-4 text-4xl md:text-6xl font-serif tracking-[-0.06em] leading-[0.95] text-zinc-950">
+                            Built to stand out subtly, not scream for attention.
+                        </h2>
+                    </div>
+                    <p class="max-w-xl text-zinc-600 leading-relaxed">
+                        The best pieces don’t feel loud. They feel expensive, measured, and resolved. That’s the
+                        direction here.
+                    </p>
+                </div>
+
+                <div class="print-finish-grid mt-12">
+                    <article class="print-card-light rounded-[2rem] p-8">
+                        <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">01</p>
+                        <h3 class="mt-6 text-3xl font-serif tracking-[-0.05em] text-zinc-950">Foil & Emboss</h3>
+                        <p class="mt-4 text-zinc-600 leading-relaxed">
+                            For names, marks, or short phrases that need to feel ceremonial and tactile on contact.
+                        </p>
+                    </article>
+                    <article class="print-card-light rounded-[2rem] p-8">
+                        <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">02</p>
+                        <h3 class="mt-6 text-3xl font-serif tracking-[-0.05em] text-zinc-950">Layered Stocks</h3>
+                        <p class="mt-4 text-zinc-600 leading-relaxed">
+                            Duplex and triplex constructions that create visual weight before the card is even turned.
+                        </p>
+                    </article>
+                    <article class="print-card-light rounded-[2rem] p-8">
+                        <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400">03</p>
+                        <h3 class="mt-6 text-3xl font-serif tracking-[-0.05em] text-zinc-950">Quiet Color Systems</h3>
+                        <p class="mt-4 text-zinc-600 leading-relaxed">
+                            Warm neutrals, deep charcoals, editorial greens, and controlled accents that age well.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="print-proof-panel px-8 py-24">
+            <div
+                class="max-w-screen-2xl mx-auto grid grid-cols-1 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-12 xl:gap-16 items-start">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-500">Print Process</p>
+                    <h2 class="mt-4 text-4xl md:text-6xl font-serif tracking-[-0.06em] leading-[0.95] text-zinc-950">
+                        A tighter process means a cleaner final piece.
+                    </h2>
+                </div>
+                <div class="print-process-grid">
+                    <div class="print-process-step">
+                        <span>01</span>
+                        <h3 class="text-2xl font-medium text-zinc-950">Direction</h3>
+                        <p class="mt-3 text-zinc-600 leading-relaxed">We define the look, material intent, and exact
+                            impression the piece should leave.</p>
+                    </div>
+                    <div class="print-process-step">
+                        <span>02</span>
+                        <h3 class="text-2xl font-medium text-zinc-950">Proofing</h3>
+                        <p class="mt-3 text-zinc-600 leading-relaxed">Spacing, color, stock, and finish are refined so
+                            the design reads correctly in hand.</p>
+                    </div>
+                    <div class="print-process-step">
+                        <span>03</span>
+                        <h3 class="text-2xl font-medium text-zinc-950">Production</h3>
+                        <p class="mt-3 text-zinc-600 leading-relaxed">We move into fabrication with high control over
+                            print quality and finishing details.</p>
+                    </div>
+                    <div class="print-process-step">
+                        <span>04</span>
+                        <h3 class="text-2xl font-medium text-zinc-950">Delivery</h3>
+                        <p class="mt-3 text-zinc-600 leading-relaxed">Final pieces arrive presentation-ready,
+                            consistent, and aligned with the brand standard.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#141414] px-8 py-24 text-white">
+            <div
+                class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-12 items-center">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.28em] text-white/42">Ready to Print</p>
+                    <h2 class="mt-4 text-4xl md:text-6xl font-serif tracking-[-0.06em] leading-[0.95]">
+                        If the brand already looks sharp, the print should feel inevitable.
+                    </h2>
+                </div>
+                <div class="print-card-soft rounded-[2rem] p-8 md:p-10">
+                    <p class="text-white/70 leading-relaxed text-lg">
+                        Send the idea, the reference, or the current file. We’ll help shape the right finish, stock,
+                        format, and production route so it lands with more presence.
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <a class="inline-flex items-center justify-center min-h-[3.2rem] px-6 rounded-md bg-white text-zinc-950 font-semibold"
+                            href="index.html#contact">Start an Inquiry</a>
+                        <a class="inline-flex items-center justify-center min-h-[3.2rem] px-6 rounded-md border border-white/18 text-white/88"
+                            href="mailto:hello@markandprint.co">Email the Studio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="editorial-footer w-full py-24 px-8">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] gap-14 xl:gap-20">
+                <div>
+                    <span class="footer-badge">Premium Printing</span>
+                    <h3
+                        class="mt-8 text-5xl md:text-7xl font-serif font-bold tracking-[-0.06em] leading-[0.92] text-zinc-950 max-w-4xl">
+                        Crafted to feel substantial in hand, distinctive on the desk, and unforgettable after the first
+                        exchange.
+                    </h3>
+                    <p class="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-zinc-600">
+                        From business cards to brochures, every print piece is developed to look refined, communicate
+                        clearly,
+                        and elevate how your brand shows up in the real world.
+                    </p>
+                </div>
+
+                <div class="footer-contact-card rounded-[2rem] p-8 md:p-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div class="footer-link-stack flex flex-col gap-4">
+                            <h6 class="text-[11px] uppercase tracking-[0.28em] text-zinc-500">Navigate</h6>
+                            <a class="text-lg" href="index.html">Home</a>
+                            <a class="text-lg" href="printing.html">Premium Printing</a>
+                            <a class="text-lg" href="third-hero.html">Studio</a>
+                            <a class="text-lg" href="index.html#contact">Inquire</a>
+                        </div>
+                        <div class="footer-link-stack flex flex-col gap-4">
+                            <h6 class="text-[11px] uppercase tracking-[0.28em] text-zinc-500">Contact</h6>
+                            <a class="text-lg" href="mailto:hello@markandprint.co">hello@markandprint.co</a>
+                            <a class="text-lg" href="tel:+1-555-0147">+1 (555) 014-7782</a>
+                            <a class="text-lg" href="#">Instagram</a>
+                            <a class="text-lg" href="#">LinkedIn</a>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-black/10">
+                        <p class="text-sm uppercase tracking-[0.24em] text-zinc-500">Production Notes</p>
+                        <p class="mt-3 text-zinc-700 leading-relaxed">
+                            Luxury cards, brochures, invitations, and premium collateral handled with the same editorial
+                            standard from proofing to final delivery.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="mt-20 pt-8 border-t border-black/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-500">
+                    © 2026 Studio Mark &amp; Print. Premium print, professionally curated.
+                </p>
+                <div class="footer-link-stack flex items-center gap-6 text-sm">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Availability</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const seasonalCollapsed = document.getElementById('seasonal-collapsed');
+        const seasonalExpanded = document.getElementById('seasonal-expanded');
+        const seasonalHeading = document.getElementById('seasonal-heading');
+        const seasonalOpen = document.getElementById('seasonal-open');
+        const seasonalClose = document.getElementById('seasonal-close');
+
+        seasonalOpen?.addEventListener('click', () => {
+            seasonalCollapsed?.classList.add('closed');
+            seasonalExpanded?.classList.add('open');
+            seasonalHeading?.classList.add('hidden');
+        });
+
+        seasonalClose?.addEventListener('click', () => {
+            seasonalExpanded?.classList.remove('open');
+            seasonalCollapsed?.classList.remove('closed');
+            seasonalHeading?.classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html> Crafted to feel substantial in hand, distinctive on the desk, and unforgettable after the first
+exchange.
+</h3>
+<p class="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-zinc-600">
+    From business cards to brochures, every print piece is developed to look refined, communicate
+    clearly,
+    and elevate how your brand shows up in the real world.
+</p>
+</div>
+
+<div class="footer-contact-card rounded-[2rem] p-8 md:p-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="footer-link-stack flex flex-col gap-4">
+            <h6 class="text-[11px] uppercase tracking-[0.28em] text-zinc-500">Navigate</h6>
+            <a class="text-lg" href="index.html">Home</a>
+            <a class="text-lg" href="printing.html">Premium Printing</a>
+            <a class="text-lg" href="third-hero.html">Studio</a>
+            <a class="text-lg" href="index.html#contact">Inquire</a>
+        </div>
+        <div class="footer-link-stack flex flex-col gap-4">
+            <h6 class="text-[11px] uppercase tracking-[0.28em] text-zinc-500">Contact</h6>
+            <a class="text-lg" href="mailto:hello@markandprint.co">hello@markandprint.co</a>
+            <a class="text-lg" href="tel:+1-555-0147">+1 (555) 014-7782</a>
+            <a class="text-lg" href="#">Instagram</a>
+            <a class="text-lg" href="#">LinkedIn</a>
+        </div>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-black/10">
+        <p class="text-sm uppercase tracking-[0.24em] text-zinc-500">Production Notes</p>
+        <p class="mt-3 text-zinc-700 leading-relaxed">
+            Luxury cards, brochures, invitations, and premium collateral handled with the same editorial
+            standard from proofing to final delivery.
+        </p>
+    </div>
+</div>
+</div>
+
+<div class="mt-20 pt-8 border-t border-black/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-500">
+        © 2026 Studio Mark &amp; Print. Premium print, professionally curated.
+    </p>
+    <div class="footer-link-stack flex items-center gap-6 text-sm">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Availability</a>
+    </div>
+</div>
+</div>
+</footer>
+
+</body>
+
+</html>

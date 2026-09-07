@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Mark & Print | Grow Your Business</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+}
+
+h1,h2,h3,h4 {
+  font-family: 'Noto Serif', serif;
+}
+
+/* Smooth animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all .8s ease;
+}
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover */
+.hover-lift:hover {
+  transform: translateY(-6px);
+  transition: .3s;
+}
+</style>
+
+</head>
+
+<body class="bg-[#F8F9FA]">
+
+
+
+<!-- HERO -->
+<section class="min-h-screen flex items-center justify-center text-center px-6 pt-32">
+
+  <div class="fade-up max-w-4xl">
+    <span class="uppercase text-xs tracking-[0.4em] text-gray-400">The Digital Curator</span>
+
+    <h1 class="text-5xl md:text-8xl font-black mt-6 leading-tight">
+      Get More Clients <br>
+      <span class="italic font-normal">with Studio Mark & Print</span>
+    </h1>
+
+    <p class="mt-8 text-gray-500 text-lg">
+      We help businesses grow faster with powerful marketing strategies and premium print that converts.
+    </p>
+
+    <div class="mt-10 flex flex-col md:flex-row gap-6 justify-center">
+      <button class="bg-black text-white px-10 py-4 uppercase text-sm tracking-widest hover-lift">
+        Get More Customers
+      </button>
+      <button class="uppercase text-sm tracking-widest">
+        View Work →
+      </button>
+    </div>
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="py-24 px-6 bg-white">
+
+  <div class="max-w-6xl mx-auto fade-up">
+
+    <h2 class="text-5xl mb-12">Services That Grow Your Business</h2>
+
+    <div class="grid md:grid-cols-2 gap-10">
+
+      <div class="p-10 bg-gray-50 hover-lift">
+        <h3 class="text-2xl mb-6">Marketing</h3>
+        <ul class="text-gray-600 space-y-3">
+          <li>Brand identity that stands out</li>
+          <li>Social media that brings clients</li>
+          <li>Growth strategies that work</li>
+        </ul>
+      </div>
+
+      <div class="p-10 bg-gray-50 hover-lift">
+        <h3 class="text-2xl mb-6">Print</h3>
+        <ul class="text-gray-600 space-y-3">
+          <li>Business cards that impress</li>
+          <li>Flyers & posters that convert</li>
+          <li>Banners & custom prints</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="py-24 px-6">
+
+  <div class="max-w-6xl mx-auto fade-up">
+
+    <h2 class="text-5xl mb-12">Our Work</h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <div class="hover-lift">
+        <img src="https://images.unsplash.com/photo-1586899028174-e7098604235b" class="mb-4">
+        <h4>Business Cards</h4>
+      </div>
+
+      <div class="hover-lift">
+        <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740" class="mb-4">
+        <h4>Flyers</h4>
+      </div>
+
+      <div class="hover-lift">
+        <img src="https://images.unsplash.com/photo-1593642532400-2682810df593" class="mb-4">
+        <h4>Marketing Campaigns</h4>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- WHY -->
+<section class="py-24 px-6 bg-white text-center">
+
+  <div class="max-w-5xl mx-auto fade-up">
+
+    <h2 class="text-5xl mb-12">Why Choose Us</h2>
+
+    <div class="grid md:grid-cols-3 gap-10 text-gray-600">
+      <div>⚡ Fast Delivery</div>
+      <div>🎯 Results Driven</div>
+      <div>🎨 Premium Design</div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="py-24 text-center fade-up">
+
+  <h2 class="text-5xl italic">Ready to Grow?</h2>
+
+  <p class="mt-6 text-gray-500">Start getting more clients today</p>
+
+  <button class="mt-10 bg-black text-white px-12 py-5 uppercase tracking-widest hover-lift">
+    Start Your Project
+  </button>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24 px-6 bg-white">
+
+  <div class="max-w-xl mx-auto fade-up">
+
+    <h3 class="text-3xl mb-8 text-center">Contact Us</h3>
+
+    <form class="space-y-6">
+
+      <input type="text" placeholder="Name" class="w-full p-3 border-b">
+
+      <input type="email" placeholder="Email" class="w-full p-3 border-b">
+
+      <textarea placeholder="Message" class="w-full p-3 border-b"></textarea>
+
+      <button class="w-full bg-black text-white py-4 uppercase">
+        Send Message
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-10 text-gray-500">
+  © 2026 Studio Mark & Print
+</footer>
+
+<script>
+const elements = document.querySelectorAll('.fade-up');
+
+window.addEventListener('scroll', () => {
+  elements.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 50){
+      el.classList.add('show');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

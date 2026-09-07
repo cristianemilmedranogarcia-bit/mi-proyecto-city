@@ -1,0 +1,453 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  phone        String?
+  avatarUrl    String?
+  bio          String?
+  resumeUrl    String?
+  
+  // Roles: "JOB_SEEKER", "EMPLOYER", "SERVICE_PROVIDER", "CUSTOMER", "SELLER", "ADMIN"
+  role         String   @default("JOB_SEEKER")
+  activeRole   String   @default("JOB_SEEKER")
+  
+  privacy      String   @default("PUBLIC") // PUBLIC, MEMBERS, PRIVATE
+  isVerified   Boolean  @default(false)
+  
+  locationId   String?
+  location     Location? @relation(fields: [locationId], references: [id])
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relationships
+  businesses        Business[]        @relation("BusinessOwner")
+  jobsPosted        Job[]             @relation("JobPoster")
+  jobApplications   JobApplication[]  @relation("Applicant")
+  servicesOffered   Service[]         @relation("ServiceProvider")
+  quoteRequestsSent QuoteRequest[]    @relation("CustomerQuotes")
+  quoteRequestsRecv QuoteRequest[]    @relation("ProviderQuotes")
+  
+  itemsForSale      MarketplaceItem[] @relation("SellerItems")
+  offersSent        ItemOffer[]       @relation("BuyerOffers")
+  offersReceived    ItemOffer[]       @relation("SellerOffers")
+  
+  reviewsWritten    Review[]          @relation("Reviewer")
+  reviewsReceived   Review[]          @relation("ReviewedProvider")
+  
+  conversations1    Conversation[]    @relation("Participant1")
+  conversations2    Conversation[]    @relation("Participant2")
+  messagesSent      Message[]         @relation("MessageSender")
+  
+  savedJobs         SavedJob[]
+  savedServices     SavedService[]
+  savedItems        SavedItem[]
+  notifications     Notification[]
+  reportsSubmitted  Report[]          @relation("Reporter")
+  
+  skills            UserSkill[]
+  experiences       UserExperience[]
+  educations        UserEducation[]
+}
+
+model City {
+  id        String     @id @default(uuid())
+  name      String
+  state     String
+  zipCodes  String     // Comma separated zip codes
+  lat       Float
+  lng       Float
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  
+  locations Location[]
+}
+
+model Location {
+  id           String     @id @default(uuid())
+  cityId       String
+  city         City       @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  addressLine  String?
+  neighborhood String?
+  zipCode      String?
+  lat          Float?
+  lng          Float?
+  
+  users        User[]
+  businesses   Business[]
+  jobs         Job[]
+  services     Service[]
+  items        MarketplaceItem[]
+}
+
+model Business {
+  id          String    @id @default(uuid())
+  ownerId     String
+  owner       User      @relation("BusinessOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  name        String
+  logoUrl     String?
+  coverUrl    String?
+  description String
+  category    String
+  website     String?
+  phone       String?
+  email       String?
+  isVerified  Boolean   @default(false)
+  rating      Float     @default(0.0)
+  reviewCount Int       @default(0)
+  
+  locationId  String?
+  location    Location? @relation(fields: [locationId], references: [id])
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  jobs        Job[]
+}
+
+model JobCategory {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  icon        String?
+  description String?
+  createdAt   DateTime @default(now())
+  
+  jobs        Job[]
+}
+
+model Job {
+  id              String   @id @default(uuid())
+  businessId      String?
+  business        Business? @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  postedById      String
+  postedBy        User     @relation("JobPoster", fields: [postedById], references: [id], onDelete: Cascade)
+  
+  title           String
+  categoryId      String
+  category        JobCategory @relation(fields: [categoryId], references: [id])
+  
+  description     String
+  responsibilities String?
+  requirements    String?
+  benefits        String?
+  galleryImages   String?  @default("[]")
+  
+  salaryMin       Float?
+  salaryMax       Float?
+  salaryType      String   @default("hourly") // hourly, yearly, gig
+  
+  employmentType  String   @default("full-time") // full-time, part-time, contract, temp, internship
+  schedule        String   @default("flexible") // morning, evening, flexible, weekend
+  experienceLevel String   @default("entry") // entry, mid, senior
+  
+  isRemote        String   @default("onsite") // onsite, hybrid, remote
+  languages       String?  @default("English Required")
+  status          String   @default("active") // active, paused, closed
+  viewsCount      Int      @default(0)
+  
+  locationId      String?
+  location        Location? @relation(fields: [locationId], references: [id])
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  applications    JobApplication[]
+  savedJobs       SavedJob[]
+}
+
+model JobApplication {
+  id              String   @id @default(uuid())
+  jobId           String
+  job             Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  applicantId     String
+  applicant       User     @relation("Applicant", fields: [applicantId], references: [id], onDelete: Cascade)
+  
+  resumeUrl       String?
+  coverLetter     String?
+  
+  // Statuses: APPLIED, VIEWED, SHORTLISTED, INTERVIEW, HIRED, REJECTED, WITHDRAWN
+  status          String   @default("APPLIED")
+  statusUpdatedAt DateTime @default(now())
+  createdAt       DateTime @default(now())
+}
+
+model ServiceCategory {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  slug        String    @unique
+  icon        String?
+  description String?
+  createdAt   DateTime  @default(now())
+  
+  services    Service[]
+}
+
+model Service {
+  id                String          @id @default(uuid())
+  providerId        String
+  provider          User            @relation("ServiceProvider", fields: [providerId], references: [id], onDelete: Cascade)
+  
+  name              String
+  categoryId        String
+  category          ServiceCategory @relation(fields: [categoryId], references: [id])
+  
+  description       String
+  pricingType       String          @default("starting_at") // fixed, starting_at, contact_quote
+  priceAmount       Float?
+  serviceAreaRadius Int             @default(10) // miles
+  experienceYears   Int             @default(1)
+  availability      String          @default("Weekdays & Weekends")
+  portfolioImages   String          @default("[]") // JSON string of image URLs
+  
+  isActive          Boolean         @default(true)
+  rating            Float           @default(5.0)
+  reviewCount       Int             @default(0)
+  responseTime      String          @default("Within 1 hour")
+  
+  locationId        String?
+  location          Location?       @relation(fields: [locationId], references: [id])
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  quoteRequests     QuoteRequest[]
+  reviews           Review[]
+  savedServices     SavedService[]
+}
+
+model QuoteRequest {
+  id                  String   @id @default(uuid())
+  customerId          String
+  customer            User     @relation("CustomerQuotes", fields: [customerId], references: [id], onDelete: Cascade)
+  
+  providerId          String
+  provider            User     @relation("ProviderQuotes", fields: [providerId], references: [id], onDelete: Cascade)
+  
+  serviceId           String
+  service             Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  description         String
+  budget              Float?
+  preferredDate       String?
+  preferredTime       String?
+  locationDescription String?
+  
+  // Statuses: PENDING, ACCEPTED, DECLINED, QUOTED, COMPLETED
+  status              String   @default("PENDING")
+  quoteAmount         Float?
+  quoteNotes          String?
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+// ----------------------------------------------------
+// NEW MARKETPLACE BUY & SELL MODELS
+// ----------------------------------------------------
+
+model MarketplaceCategory {
+  id          String            @id @default(uuid())
+  name        String            @unique
+  slug        String            @unique
+  icon        String?
+  description String?
+  createdAt   DateTime          @default(now())
+
+  items       MarketplaceItem[]
+}
+
+model MarketplaceItem {
+  id          String              @id @default(uuid())
+  sellerId    String
+  seller      User                @relation("SellerItems", fields: [sellerId], references: [id], onDelete: Cascade)
+  
+  title       String
+  categoryId  String
+  category    MarketplaceCategory @relation(fields: [categoryId], references: [id])
+  
+  description String
+  price       Float               // Price in USD (0 for Free items)
+  condition   String              @default("GOOD") // NEW, LIKE_NEW, GOOD, FAIR
+  images      String              @default("[]") // JSON string of image URLs
+  
+  // Statuses: AVAILABLE, PENDING, SOLD
+  status      String              @default("AVAILABLE")
+  viewsCount  Int                 @default(0)
+  
+  locationId  String?
+  location    Location?           @relation(fields: [locationId], references: [id])
+  
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  offers      ItemOffer[]
+  savedItems  SavedItem[]
+}
+
+model ItemOffer {
+  id          String          @id @default(uuid())
+  itemId      String
+  item        MarketplaceItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  buyerId     String
+  buyer       User            @relation("BuyerOffers", fields: [buyerId], references: [id], onDelete: Cascade)
+  sellerId    String
+  seller      User            @relation("SellerOffers", fields: [sellerId], references: [id], onDelete: Cascade)
+  
+  offerAmount Float
+  message     String?
+  
+  // Statuses: PENDING, ACCEPTED, DECLINED, COUNTERED
+  status      String          @default("PENDING")
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model SavedItem {
+  id        String          @id @default(uuid())
+  userId    String
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  itemId    String
+  item      MarketplaceItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  createdAt DateTime        @default(now())
+
+  @@unique([userId, itemId])
+}
+
+// ----------------------------------------------------
+// COMMUNICATION & AUDIT MODELS
+// ----------------------------------------------------
+
+model Conversation {
+  id             String    @id @default(uuid())
+  participant1Id String
+  participant1   User      @relation("Participant1", fields: [participant1Id], references: [id], onDelete: Cascade)
+  participant2Id String
+  participant2   User      @relation("Participant2", fields: [participant2Id], references: [id], onDelete: Cascade)
+  
+  relatedType    String?   // job_application, quote_request, item_offer, direct
+  relatedId      String?
+  
+  lastMessageAt  DateTime  @default(now())
+  createdAt      DateTime  @default(now())
+
+  messages       Message[]
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  
+  text           String
+  attachmentUrl  String?
+  isRead         Boolean      @default(false)
+  
+  createdAt      DateTime     @default(now())
+}
+
+model Review {
+  id           String   @id @default(uuid())
+  serviceId    String
+  service      Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  providerId   String
+  provider     User     @relation("ReviewedProvider", fields: [providerId], references: [id], onDelete: Cascade)
+  reviewerId   String
+  reviewer     User     @relation("Reviewer", fields: [reviewerId], references: [id], onDelete: Cascade)
+  
+  rating       Int      // 1-5
+  comment      String
+  providerReply String?
+  
+  createdAt    DateTime @default(now())
+}
+
+model SavedJob {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, jobId])
+}
+
+model SavedService {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, serviceId])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String   // application_update, message, quote_request, item_offer, review, job_alert
+  title     String
+  message   String
+  link      String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  reporterId  String
+  reporter    User     @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  targetType  String   // job, service, item, review, user
+  targetId    String
+  reason      String
+  details     String?
+  status      String   @default("pending") // pending, resolved, dismissed
+  createdAt   DateTime @default(now())
+}
+
+model UserSkill {
+  id        String @id @default(uuid())
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skillName String
+}
+
+model UserExperience {
+  id          String  @id @default(uuid())
+  userId      String
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  company     String
+  location    String?
+  startDate   String
+  endDate     String?
+  description String?
+}
+
+model UserEducation {
+  id          String  @id @default(uuid())
+  userId      String
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  institution String
+  degree      String
+  field       String?
+  startYear   String?
+  endYear     String?
+}
+
+

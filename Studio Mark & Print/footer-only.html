@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Studio Mark & Print | Footer Preview</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0047AB",
+                        surface: "#FFFFFF",
+                        "surface-dim": "#F8F9FA",
+                        "on-surface": "#1A1A1A",
+                        "on-surface-variant": "#666666",
+                        outline: "#E5E7EB",
+                        azure: "#DBEAFE",
+                        lavender: "#EDE9FE",
+                    },
+                    fontFamily: {
+                        serif: ["Noto Serif", "serif"],
+                        sans: ["Inter", "sans-serif"],
+                        headline: ["Noto Serif", "serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-on-surface font-body selection:bg-azure selection:text-primary">
+    <!-- ESPACIO VACÍO PARA SEPARAR EL FOOTER -->
+    <div style="min-height: 50vh;"></div>
+
+    <footer class="bg-[#09090b] text-zinc-400 py-16 px-6 md:px-12 border-t border-zinc-900">
+        <div class="max-w-screen-2xl mx-auto">
+            <!-- Top Section: Newsletter & Social -->
+            <div
+                class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 pb-16 border-b border-zinc-900">
+                <div class="max-w-md">
+                    <h3 class="text-white text-2xl md:text-3xl font-headline font-bold mb-4 italic">
+                        The newsletter you'll actually want to read.
+                    </h3>
+                    <p class="text-zinc-500 mb-6 font-light">
+                        Get exclusive offers, design inspiration, and print tips delivered to your inbox.
+                    </p>
+                    <form class="flex w-full max-w-sm gap-2">
+                        <input type="email" placeholder="Email address"
+                            class="flex-grow bg-transparent border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:border-white transition-colors outline-none text-white">
+                        <button
+                            class="bg-white text-black px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all">
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex flex-col items-start lg:items-end gap-6">
+                    <p class="text-white font-bold uppercase text-[10px] tracking-[0.3em]">Follow Us</p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/studiomarkprint/" target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@studiomarkprint" target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.81-.6-4.03-1.37-.01 2.39-.01 4.79-.01 7.18-.01 1.5-.63 3.12-1.74 4.12-1.29 1.21-3.11 1.9-4.91 1.91-2.95.14-5.89-1.92-6.59-4.75-.72-2.61.14-5.51 2.24-7.24 1.25-1.01 2.87-1.57 4.47-1.58v4.03c-.28-.01-.57-.01-.85.02-1.27.13-2.45.96-2.9 2.16-.41.97-.24 2.15.42 2.94.75.9 2.03 1.18 3.1.75 1.05-.4 1.69-1.51 1.71-2.62.01-4.03.01-8.06.01-12.09z"></path>
+                            </svg>
+                        </a>
+                        <a href="mailto:studiomarkprint@gmail.com"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-lg">mail</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Section: Links Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 py-16">
+                <!-- Column 1 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Products</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="printing.html" class="hover:text-white transition-colors">Business Cards</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Postcards</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Stickers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Flyers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Invitations</a></li>
+                    </ul>
+                </div>
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Services</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">Graphic Design</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Website Design</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Brand Identity</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Curation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Packaging</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Company</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Our Standard</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Carreers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Support</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Shipping Info</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Return Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="mailto:hello@markandprint.co"
+                                class="text-white font-medium">hello@markandprint.co</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Legal & Region -->
+            <div class="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div
+                    class="flex flex-col md:flex-row items-center gap-6 text-[10px] uppercase tracking-widest text-zinc-600">
+                    <p>© 2026 Studio Mark & Print</p>
+                    <div class="flex gap-6">
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Privacy</a>
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Terms</a>
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Security</a>
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 cursor-pointer hover:border-zinc-700 transition-colors">
+                    <div class="w-4 h-3 bg-blue-900 relative overflow-hidden">
+                        <!-- Tiny USA Flag representation -->
+                        <div class="absolute inset-0 bg-red-600 flex flex-col">
+                            <div class="h-1 bg-white"></div>
+                            <div class="h-1 bg-red-600"></div>
+                            <div class="h-1 bg-white"></div>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-zinc-400">United States / EN</span>
+                    <span class="material-symbols-outlined text-xs">expand_more</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

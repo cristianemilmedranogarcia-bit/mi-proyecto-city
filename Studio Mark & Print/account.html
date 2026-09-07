@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Account — Studio Mark & Print</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="print-product-v2.css">
+    <style>
+        :root {
+            --green: #0e3b2e;
+            --green-mid: #1a5c46;
+            --green-light: #f0fdf4;
+            --border: #e8e5e0;
+            --bg: #f7f6f3;
+            --text: #111;
+            --muted: #777;
+            --card-bg: #f3f2ef;
+        }
+
+
+
+        /* ══════════════════════════
+           AUTH LAYOUT
+        ══════════════════════════ */
+        .auth-wrap { display: flex; min-height: calc(100vh - 130px); align-items: center; justify-content: center; background: var(--bg); padding: 3rem 1.5rem; }
+        .auth-box { background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; width: 100%; max-width: 440px; padding: 2.5rem 2.5rem; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+        .auth-logo { font-size: 1.15rem; font-weight: 800; color: var(--green); letter-spacing: -0.04em; display: block; margin-bottom: 0.25rem; text-decoration: none; }
+        .auth-tagline { font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; }
+        .tab-row { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.75rem; }
+        .tab-btn { flex: 1; padding: 0.7rem; font-family: inherit; font-size: 0.88rem; font-weight: 600; color: var(--muted); background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; transition: all 0.2s; }
+        .tab-btn.active { color: var(--green); border-bottom-color: var(--green); }
+        .fld { margin-bottom: 1.1rem; }
+        .fld label { display: block; font-size: 0.78rem; font-weight: 600; color: #555; margin-bottom: 0.35rem; letter-spacing: 0.01em; }
+        .fld-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        .fld input { width: 100%; border: 1px solid var(--border); border-radius: 0.45rem; padding: 0.7rem 0.9rem; font-family: inherit; font-size: 0.9rem; color: var(--text); background: #fafaf8; outline: none; transition: all 0.2s; }
+        .fld input:focus { border-color: var(--green); background: #fff; box-shadow: 0 0 0 3px rgba(14,59,46,0.06); }
+        .label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem; }
+        .label-row label { margin-bottom: 0; font-size: 0.78rem; font-weight: 600; color: #555; }
+        .forgot { font-size: 0.78rem; color: var(--green); text-decoration: none; font-weight: 500; }
+        .forgot:hover { text-decoration: underline; }
+        .btn-main { width: 100%; padding: 0.82rem; border: none; border-radius: 0.45rem; background: var(--green); color: #fff; font-family: inherit; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 0.25rem; }
+        .btn-main:hover:not(:disabled) { background: var(--green-mid); }
+        .btn-main:disabled { opacity: 0.6; cursor: not-allowed; }
+        .auth-switch { text-align: center; margin-top: 1.1rem; font-size: 0.82rem; color: var(--muted); }
+        .auth-switch a { color: var(--green); font-weight: 600; text-decoration: none; }
+        .auth-alert { padding: 0.7rem 1rem; border-radius: 0.4rem; font-size: 0.83rem; margin-bottom: 1rem; display: none; }
+        .auth-alert.error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+        .auth-alert.success { background: var(--green-light); color: #15803d; border: 1px solid #bbf7d0; }
+
+        /* ══════════════════════════
+           DASHBOARD LAYOUT
+        ══════════════════════════ */
+        .dashboard { display: none; }
+        .dashboard-inner { max-width: 1280px; margin: 0 auto; padding: 2.5rem 2rem 4rem; display: grid; grid-template-columns: 210px 1fr; gap: 3.5rem; }
+
+        /* Sidebar */
+        .sidebar h3 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.6rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
+        .sidebar-section { margin-bottom: 1.75rem; }
+        .sidebar-link { display: block; font-size: 0.88rem; color: #333; text-decoration: none; padding: 0.28rem 0; cursor: pointer; transition: color 0.15s; border: none; background: none; font-family: inherit; width: 100%; text-align: left; }
+        .sidebar-link:hover { color: var(--green); }
+        .sidebar-link.active { color: var(--green); font-weight: 600; }
+        .sidebar-link.logout { color: #c0392b; margin-top: 0.5rem; }
+        .sidebar-link.logout:hover { text-decoration: underline; }
+
+        /* Main */
+        .dash-greeting { font-size: clamp(1.65rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 0.3rem; }
+        .dash-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 2.25rem; }
+
+        /* Panels */
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        /* Snapshot cards */
+        .dash-section-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.85rem; }
+        .btn-view-all { background: none; border: none; color: var(--green); font-size: 0.82rem; font-weight: 600; cursor: pointer; text-decoration: none; }
+        .btn-view-all:hover { text-decoration: underline; }
+        .snapshot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 2.5rem; }
+        .snap-card { background: var(--card-bg); border-radius: 0.65rem; padding: 1.25rem 1.5rem; cursor: pointer; transition: background 0.2s; text-decoration: none; display: block; }
+        .snap-card:hover { background: #eceae5; }
+        .snap-card-title { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
+        .snap-card-action { font-size: 0.78rem; color: var(--green); font-weight: 500; }
+
+        /* Orders section */
+        .orders-section { }
+        .orders-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+        .empty-orders { border: 1px solid var(--border); border-radius: 0.65rem; padding: 3rem 2rem; text-align: center; }
+        .empty-orders-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .empty-orders-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
+        .btn-shop { display: inline-block; background: var(--green); color: #fff; padding: 0.7rem 1.5rem; border-radius: 0.45rem; font-size: 0.88rem; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+        .btn-shop:hover { background: var(--green-mid); }
+        .order-row { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+        .order-row:last-child { border-bottom: none; }
+        .order-id { font-weight: 600; font-size: 0.88rem; }
+        .order-date { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+        .order-products { font-size: 0.8rem; color: #555; margin-top: 0.3rem; }
+        .order-right { text-align: right; flex-shrink: 0; padding-left: 1rem; }
+        .order-total { font-weight: 700; font-size: 0.92rem; color: var(--text); }
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.3rem; }
+        .badge.completed { background: #dcfce7; color: #15803d; }
+        .badge.processing { background: #dbeafe; color: #1d4ed8; }
+        .badge.pending { background: #fef9c3; color: #854d0e; }
+        .panel-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+        .btn-settings { padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 0.4rem; font-size: 0.82rem; font-weight: 600; color: #333; background: #fff; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .btn-settings:hover { border-color: #999; }
+
+        /* Profile form */
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .pf { display: flex; flex-direction: column; gap: 0.35rem; }
+        .pf.full { grid-column: 1/-1; }
+        .pf label { font-size: 0.76rem; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 0.04em; }
+        .pf input { border: 1px solid var(--border); border-radius: 0.45rem; padding: 0.7rem 0.9rem; font-size: 0.9rem; font-family: inherit; color: var(--text); background: #fafaf8; outline: none; transition: all 0.2s; }
+        .pf input:focus { border-color: var(--green); background: #fff; box-shadow: 0 0 0 3px rgba(14,59,46,0.06); }
+        .btn-save { background: var(--green); color: #fff; border: none; border-radius: 0.45rem; padding: 0.72rem 1.75rem; font-size: 0.88rem; font-weight: 700; font-family: inherit; cursor: pointer; transition: background 0.2s; }
+        .btn-save:hover { background: var(--green-mid); }
+        .save-msg { display: none; font-size: 0.82rem; color: #15803d; font-weight: 500; margin-left: 1rem; }
+    </style>
+</head>
+<body class="bg-[#F8F9FA] text-[#111111] overflow-x-hidden">
+    <div class="product-shell">
+        <div class="printing-topbar" style="position:relative;">
+            <!-- Social icons: far left -->
+            <div style="position:absolute;left:1.5rem;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:10px;">
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter/X" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+                </a>
+            </div>
+            Premium printing, elevated details, and standout first impressions for every brand touchpoint.
+        </div>
+
+        <header class="printing-header">
+            <div class="printing-header-top">
+                <a class="printing-logo" href="index.html">Studio Mark &amp; Print</a>
+
+                <div class="header-search-container">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" class="header-search-input"
+                        placeholder="Search for products, designs or inspiration...">
+                </div>
+
+                <div class="header-utilities">
+                    <a href="account.html" class="utility-btn" id="header-account-btn">
+                        <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span id="header-account-label">Log In</span>
+                    </a>
+                    <a href="cart.html" class="utility-btn cart-btn">
+                        <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span>Cart</span>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="printing-header-bottom">
+                <div class="printing-header-inner">
+                    <nav class="printing-nav" aria-label="Printing navigation">
+                        <a href="business-cards.html">Business Cards</a>
+                        <a href="menus.html">Menus</a>
+                        <a href="posters.html">Posters</a>
+                        <a href="door-hangers.html">Door Hangers</a>
+                        <a href="flyers.html">Flyers</a>
+                        <a href="invitations.html">Invitations</a>
+                        <a href="stickers.html">Stickers</a>
+                        <a href="photos.html">Photos</a>
+                    </nav>
+                    <div class="printing-nav-meta">
+                        <a href="contact.html" class="hover:text-zinc-800 transition-colors">Contact Us</a>
+                        <span class="text-zinc-200">|</span>
+                        <a href="index.html" class="hover:text-zinc-800 transition-colors">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+<!-- ══════════════════════════
+     AUTH PAGE (logged out)
+══════════════════════════ -->
+<div id="auth-page">
+    <div class="auth-wrap">
+        <div class="auth-box">
+            <a href="index.html" class="auth-logo">Studio Mark &amp; Print</a>
+            <p class="auth-tagline">Sign in to manage your orders and account.</p>
+
+            <div class="tab-row">
+                <button class="tab-btn active" id="tab-login" onclick="showTab('login')">Sign In</button>
+                <button class="tab-btn" id="tab-register" onclick="showTab('register')">Create Account</button>
+            </div>
+
+            <div class="auth-alert" id="auth-alert"></div>
+
+            <!-- Login -->
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="fld">
+                    <label>Email</label>
+                    <input id="login-email" type="email" placeholder="you@example.com" required autocomplete="email"/>
+                </div>
+                <div class="fld">
+                    <div class="label-row">
+                        <label>Password</label>
+                        <a href="#" class="forgot">Forgot password?</a>
+                    </div>
+                    <input id="login-password" type="password" placeholder="••••••••" required autocomplete="current-password"/>
+                </div>
+                <button type="submit" class="btn-main" id="login-btn">Sign In</button>
+                <p class="auth-switch">New here? <a href="#" onclick="showTab('register')">Create a free account</a></p>
+            </form>
+
+            <!-- Register -->
+            <form id="register-form" onsubmit="handleRegister(event)" style="display:none;">
+                <div class="fld">
+                    <div class="fld-row">
+                        <div>
+                            <label style="font-size:0.78rem;font-weight:600;color:#555;display:block;margin-bottom:0.35rem;">First Name</label>
+                            <input id="reg-first" type="text" placeholder="Jane" required/>
+                        </div>
+                        <div>
+                            <label style="font-size:0.78rem;font-weight:600;color:#555;display:block;margin-bottom:0.35rem;">Last Name</label>
+                            <input id="reg-last" type="text" placeholder="Doe" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="fld">
+                    <label>Email</label>
+                    <input id="reg-email" type="email" placeholder="you@example.com" required autocomplete="email"/>
+                </div>
+                <div class="fld">
+                    <label>Password</label>
+                    <input id="reg-password" type="password" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password"/>
+                </div>
+                <div class="fld">
+                    <label>Confirm Password</label>
+                    <input id="reg-confirm" type="password" placeholder="Repeat password" required autocomplete="new-password"/>
+                </div>
+                <button type="submit" class="btn-main" id="register-btn">Create Account</button>
+                <p class="auth-switch">Already a member? <a href="#" onclick="showTab('login')">Sign in</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- ══════════════════════════
+     DASHBOARD (logged in)
+══════════════════════════ -->
+<div class="dashboard" id="dashboard">
+    <div class="dashboard-inner">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Account</h3>
+                <button class="sidebar-link active" id="nav-dashboard" onclick="switchPanel('dashboard')">Dashboard</button>
+                <button class="sidebar-link" id="nav-profile" onclick="switchPanel('profile')">Account Profile</button>
+            </div>
+            <div class="sidebar-section">
+                <h3>Orders</h3>
+                <button class="sidebar-link" id="nav-orders" onclick="switchPanel('orders')">Order History &amp; Reorder</button>
+                <button class="sidebar-link" id="nav-address" onclick="switchPanel('address')">Saved Addresses</button>
+            </div>
+            <div class="sidebar-section">
+                <h3>More</h3>
+                <a href="printing.html" class="sidebar-link">Browse Products</a>
+                <a href="contact.html" class="sidebar-link">Help &amp; Support</a>
+                <button class="sidebar-link logout" onclick="Auth.logout()">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main>
+
+            <!-- ── Dashboard Panel ── -->
+            <div class="panel active" id="panel-dashboard">
+                <div class="panel-header-row">
+                    <div>
+                        <h1 class="dash-greeting">Hello, <span id="dash-name">there</span>.</h1>
+                        <p class="dash-sub">Here's what's going on in your account.</p>
+                    </div>
+                    <button class="btn-settings" onclick="switchPanel('profile')">Account settings</button>
+                </div>
+
+                <div class="dash-section-title">Account snapshot</div>
+                <div class="snapshot-grid">
+                    <a href="business-cards.html" class="snap-card">
+                        <div class="snap-card-title">Business Cards</div>
+                        <div class="snap-card-action">Order now →</div>
+                    </a>
+                    <a href="flyers.html" class="snap-card">
+                        <div class="snap-card-title">Flyers &amp; Brochures</div>
+                        <div class="snap-card-action">Order now →</div>
+                    </a>
+                    <a href="stickers.html" class="snap-card">
+                        <div class="snap-card-title">Stickers &amp; Labels</div>
+                        <div class="snap-card-action">Order now →</div>
+                    </a>
+                    <a href="contact.html" class="snap-card">
+                        <div class="snap-card-title">Custom Quote</div>
+                        <div class="snap-card-action">Request a quote →</div>
+                    </a>
+                </div>
+
+                <div class="orders-section">
+                    <div class="orders-header">
+                        <div class="dash-section-title" style="margin-bottom:0;">Orders</div>
+                        <button class="btn-view-all" onclick="switchPanel('orders')">View all orders →</button>
+                    </div>
+                    <div id="dash-orders-body" style="margin-top:1rem;"></div>
+                </div>
+            </div>
+
+            <!-- ── Orders Panel ── -->
+            <div class="panel" id="panel-orders">
+                <h1 class="dash-greeting" style="margin-bottom:0.3rem;">Order History</h1>
+                <p class="dash-sub">All your past and current orders.</p>
+                <div id="full-orders-body" style="margin-top:1.5rem;"></div>
+            </div>
+
+            <!-- ── Profile Panel ── -->
+            <div class="panel" id="panel-profile">
+                <h1 class="dash-greeting" style="margin-bottom:0.3rem;">Account Profile</h1>
+                <p class="dash-sub">Manage your personal information.</p>
+                <div style="margin-top:1.75rem; background:#fff; border:1px solid var(--border); border-radius:0.65rem; padding:2rem;">
+                    <div class="profile-grid">
+                        <div class="pf">
+                            <label>First Name</label>
+                            <input id="edit-first" type="text" required/>
+                        </div>
+                        <div class="pf">
+                            <label>Last Name</label>
+                            <input id="edit-last" type="text" required/>
+                        </div>
+                        <div class="pf full">
+                            <label>Email Address</label>
+                            <input id="edit-email" type="email" required/>
+                        </div>
+                        <div class="pf full">
+                            <label>Phone Number</label>
+                            <input id="edit-phone" type="tel" placeholder="+1 (555) 000-0000"/>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center;">
+                        <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+                        <span class="save-msg" id="save-msg">✓ Saved successfully!</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Address Panel ── -->
+            <div class="panel" id="panel-address">
+                <h1 class="dash-greeting" style="margin-bottom:0.3rem;">Saved Addresses</h1>
+                <p class="dash-sub">Your shipping addresses for faster checkout.</p>
+                <div class="empty-orders" style="margin-top:1.75rem;">
+                    <div class="empty-orders-title">No saved addresses yet</div>
+                    <div class="empty-orders-sub">Addresses will be saved after you complete your first order.</div>
+                    <a href="printing.html" class="btn-shop">Start Shopping</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+</div> <!-- product-shell -->
+
+<script src="cart.js"></script>
+<script src="account.js"></script>
+<script>
+/* ── Auth tab ── */
+function showTab(t) {
+    const isLogin = t === 'login';
+    document.getElementById('login-form').style.display = isLogin ? 'block' : 'none';
+    document.getElementById('register-form').style.display = isLogin ? 'none' : 'block';
+    document.getElementById('tab-login').className = 'tab-btn' + (isLogin ? ' active' : '');
+    document.getElementById('tab-register').className = 'tab-btn' + (!isLogin ? ' active' : '');
+    const el = document.getElementById('auth-alert');
+    el.style.display = 'none';
+}
+function showAlert(msg, type) {
+    const el = document.getElementById('auth-alert');
+    el.textContent = msg; el.className = 'auth-alert ' + type; el.style.display = 'block';
+}
+
+/* ── Auth handlers ── */
+function handleLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('login-btn');
+    btn.textContent = 'Signing in…'; btn.disabled = true;
+    setTimeout(() => {
+        const res = Auth.login(
+            document.getElementById('login-email').value,
+            document.getElementById('login-password').value
+        );
+        if (res.ok) { renderDashboard(res.user); }
+        else { showAlert(res.error, 'error'); btn.textContent = 'Sign In'; btn.disabled = false; }
+    }, 350);
+}
+function handleRegister(e) {
+    e.preventDefault();
+    if (document.getElementById('reg-password').value !== document.getElementById('reg-confirm').value) {
+        showAlert('Passwords do not match.', 'error'); return;
+    }
+    const btn = document.getElementById('register-btn');
+    btn.textContent = 'Creating…'; btn.disabled = true;
+    setTimeout(() => {
+        const name = (document.getElementById('reg-first').value + ' ' + document.getElementById('reg-last').value).trim();
+        const res = Auth.register(name, document.getElementById('reg-email').value, document.getElementById('reg-password').value);
+        if (res.ok) { renderDashboard(res.user); }
+        else { showAlert(res.error, 'error'); btn.textContent = 'Create Account'; btn.disabled = false; }
+    }, 350);
+}
+
+/* ── Panel switching ── */
+function switchPanel(name) {
+    ['dashboard','orders','profile','address'].forEach(p => {
+        document.getElementById('panel-' + p).className = 'panel' + (p === name ? ' active' : '');
+        const btn = document.getElementById('nav-' + p);
+        if (btn) btn.className = 'sidebar-link' + (p === name ? ' active' : '');
+    });
+}
+
+/* ── Profile save ── */
+function saveProfile() {
+    const user = Auth.getCurrentUser();
+    const first = document.getElementById('edit-first').value.trim();
+    const last = document.getElementById('edit-last').value.trim();
+    Auth.updateProfile(user.id, { name: first + ' ' + last, email: document.getElementById('edit-email').value.trim() });
+    const msg = document.getElementById('save-msg');
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 2500);
+    renderDashboard(Auth.getCurrentUser());
+}
+
+/* ── Render orders ── */
+function renderOrders(orders, targetId) {
+    const el = document.getElementById(targetId);
+    if (!orders.length) {
+        el.innerHTML = `<div class="empty-orders">
+            <div class="empty-orders-title">You don't have any orders yet.</div>
+            <div class="empty-orders-sub">When you've placed your first order, you'll see it here.</div>
+            <a href="printing.html" class="btn-shop">Continue Shopping</a>
+        </div>`;
+    } else {
+        el.innerHTML = orders.map(o => `
+            <div class="order-row">
+                <div>
+                    <div class="order-id">Order #${String(o.id).slice(-6).toUpperCase()}</div>
+                    <div class="order-date">${new Date(o.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+                    <div class="order-products">${(o.items||[]).map(i=>i.name+'×'+i.qty).join(', ')||'Printing order'}</div>
+                </div>
+                <div class="order-right">
+                    <div class="order-total">$${(o.total||0).toFixed(2)}</div>
+                    <span class="badge ${o.status||'completed'}">${o.status||'Completed'}</span>
+                </div>
+            </div>`).join('');
+    }
+}
+
+/* ── Render dashboard ── */
+function renderDashboard(user) {
+    document.getElementById('auth-page').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+
+    document.getElementById('dash-name').textContent = user.name.split(' ')[0];
+    document.getElementById('header-account-label').textContent = user.name.split(' ')[0];
+
+    const parts = user.name.split(' ');
+    document.getElementById('edit-first').value = parts[0] || '';
+    document.getElementById('edit-last').value = parts.slice(1).join(' ') || '';
+    document.getElementById('edit-email').value = user.email;
+
+    const orders = user.orders || [];
+    renderOrders(orders, 'dash-orders-body');
+    renderOrders(orders, 'full-orders-body');
+}
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', () => {
+    const user = Auth.getCurrentUser();
+    if (user) {
+        renderDashboard(user);
+        const lbl = document.getElementById('header-account-label');
+        if (lbl) lbl.textContent = user.name.split(' ')[0];
+    }
+    if (location.search.includes('register')) showTab('register');
+});
+</script>
+</body>
+</html>

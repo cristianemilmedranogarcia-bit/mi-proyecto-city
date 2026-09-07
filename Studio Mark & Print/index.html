@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html class="light scroll-smooth" lang="en" style="overflow-x: hidden; scroll-snap-type: y proximity;">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Studio Mark & Print | The Digital Curator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0047AB",
+                        surface: "#FFFFFF",
+                        "surface-dim": "#F8F9FA",
+                        "on-surface": "#1A1A1A",
+                        "on-surface-variant": "#666666",
+                        outline: "#E5E7EB",
+                        azure: "#DBEAFE",
+                        lavender: "#EDE9FE",
+                    },
+                    fontFamily: {
+                        serif: ["Noto Serif", "serif"],
+                        sans: ["Inter", "sans-serif"],
+                        headline: ["Noto Serif", "serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .soft-gradient {
+            background: linear-gradient(135deg, #DBEAFE 0%, #EDE9FE 100%);
+        }
+
+        .editorial-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        section {
+            padding-top: 10rem;
+            padding-bottom: 10rem;
+            scroll-snap-align: start;
+        }
+
+        #hero {
+            position: relative;
+            background: #ffffff;
+            min-height: 100svh;
+        }
+
+        #hero>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Transition requested from ChatGPT version */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all .8s ease;
+        }
+
+        .fade-up.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-right {
+            opacity: 0;
+            transform: translate3d(65vw, 0, 0);
+            transition:
+                transform 1.85s cubic-bezier(0.22, 0.61, 0.36, 1),
+                opacity 1.1s ease 0.22s;
+            will-change: transform, opacity;
+        }
+
+        .fade-right.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .hero-stage {
+            transition: opacity .5s ease, transform .5s ease;
+        }
+
+        .tt-interphases {
+            font-family: "TT Interphases", "TT Interphases Pro", "Inter", sans-serif;
+        }
+
+        .about-mark {
+            position: relative;
+            width: 4.5rem;
+            height: 3rem;
+            overflow: visible;
+            cursor: ew-resize;
+            z-index: 4;
+        }
+
+        .about-mark-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform: translate(var(--about-mark-shift-x, 0px), var(--about-mark-shift-y, 0px));
+            transition: transform 110ms linear;
+            will-change: transform;
+        }
+
+        .about-mark-band {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1.45rem;
+            border-radius: 999px;
+            transform-origin: center;
+            will-change: transform, opacity;
+        }
+
+        .about-mark-band--solid {
+            top: 0;
+            background: #ffffff;
+            box-shadow: 0 14px 28px rgba(255, 255, 255, 0.08);
+            z-index: 5;
+            animation: aboutMarkPressSolid 3.2s cubic-bezier(0.72, 0.02, 0.28, 1) infinite alternate;
+        }
+
+        .about-mark-band--middle {
+            top: 0.62rem;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            z-index: 3;
+            animation: aboutMarkPressMiddle 3.2s cubic-bezier(0.72, 0.02, 0.28, 1) infinite alternate;
+        }
+
+        .about-mark-band--bottom {
+            top: 1.24rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            z-index: 2;
+            animation: aboutMarkPressBottom 3.2s cubic-bezier(0.72, 0.02, 0.28, 1) infinite alternate;
+        }
+
+        .about-mark-band--base {
+            top: 1.86rem;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            z-index: 1;
+            animation: aboutMarkPressBase 3.2s cubic-bezier(0.72, 0.02, 0.28, 1) infinite alternate;
+        }
+
+        @keyframes aboutMarkPressSolid {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(0.82rem);
+            }
+        }
+
+        @keyframes aboutMarkPressMiddle {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(0.08rem);
+                opacity: 0.72;
+            }
+        }
+
+        @keyframes aboutMarkPressBottom {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-0.22rem);
+                opacity: 0.48;
+            }
+        }
+
+        @keyframes aboutMarkPressBase {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-0.46rem);
+                opacity: 0.28;
+            }
+        }
+
+        #services {
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #services .about-mark-track {
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-guide {
+            position: absolute;
+            left: 5.25rem;
+            right: 42%;
+            top: 15.85rem;
+            height: 4.75rem;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+            transition: opacity 0.35s ease;
+        }
+
+        .services-guide svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .services-guide path {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.88);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 10 16;
+        }
+
+        .services-guide-tag {
+            position: absolute;
+            right: -1.25rem;
+            top: 1.32rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.8rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .services-guide-tag::before {
+            content: "";
+            width: 2.2rem;
+            height: 1px;
+            background: currentColor;
+        }
+
+        #services.services-impact .services-guide path {
+            stroke: rgba(17, 17, 17, 0.72);
+        }
+
+        #services.services-impact .services-guide-tag {
+            color: rgba(17, 17, 17, 0.8);
+        }
+
+        #services.services-impact .services-guide {
+            opacity: 0;
+        }
+
+        .services-impact-ball {
+            position: absolute;
+            top: -3.5rem;
+            left: 0;
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 999px;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.95);
+            transform: translate3d(var(--impact-x, 0px), 0, 0);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .services-impact-line {
+            position: absolute;
+            left: 0.85rem;
+            top: 1.55rem;
+            width: 0.24rem;
+            height: 15rem;
+            border-radius: 999px;
+            background:
+                radial-gradient(circle at 50% 7%, rgba(17, 17, 17, 1) 0 38%, transparent 39%),
+                linear-gradient(180deg, rgba(17, 17, 17, 0.95) 0%, rgba(17, 17, 17, 0.95) 100%);
+            mask: linear-gradient(180deg, #000 0%, #000 74%, transparent 100%);
+            opacity: 0;
+        }
+
+        .services-impact-ready .services-impact-ball {
+            opacity: 1;
+            animation: servicesImpactDrop 0.9s cubic-bezier(0.2, 0.9, 0.24, 1) forwards;
+        }
+
+        .services-impact-ready .services-impact-line {
+            opacity: 1;
+            animation: servicesImpactLine 0.55s ease-out forwards;
+        }
+
+        #services.services-impact {
+            background: #ffffff;
+        }
+
+        #services.services-impact h2,
+        #services.services-impact p {
+            color: #111111 !important;
+            transition: color 0.55s ease;
+        }
+
+        #services.services-impact .about-mark-band--solid {
+            background: #111111;
+            box-shadow: 0 14px 28px rgba(17, 17, 17, 0.12);
+            transition: background-color 0.55s ease, box-shadow 0.55s ease;
+        }
+
+        #services.services-impact .about-mark-band--middle {
+            border-color: rgba(17, 17, 17, 0.6);
+            transition: border-color 0.55s ease;
+        }
+
+        #services.services-impact .about-mark-band--bottom {
+            border-color: rgba(17, 17, 17, 0.35);
+            transition: border-color 0.55s ease;
+        }
+
+        #services.services-impact .about-mark-band--base {
+            border-color: rgba(17, 17, 17, 0.2);
+            transition: border-color 0.55s ease;
+        }
+
+        @keyframes servicesImpactDrop {
+            0% {
+                transform: translate3d(var(--impact-x, 0px), 0, 0) scale(0.92);
+            }
+
+            72% {
+                transform: translate3d(var(--impact-x, 0px), 20.5rem, 0) scale(1);
+            }
+
+            84% {
+                transform: translate3d(var(--impact-x, 0px), 19.6rem, 0) scale(1.08, 0.92);
+            }
+
+            100% {
+                transform: translate3d(var(--impact-x, 0px), 20.1rem, 0) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes servicesImpactLine {
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+
+            100% {
+                height: 15rem;
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .services-guide {
+                display: none;
+            }
+        }
+
+        .hero-minimal {
+            opacity: 0;
+            transform: translateY(72px);
+            animation: heroMinimalRise 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        }
+
+        .hero-minimal,
+        .hero-full {
+            transition: opacity .5s ease, transform .5s ease;
+        }
+
+        .hero-full {
+            opacity: 0;
+            transform: translateY(36px);
+            pointer-events: none;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .hero-expanded .hero-minimal {
+            opacity: 0;
+            transform: translateY(-24px);
+            pointer-events: none;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .hero-expanded .hero-full {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            max-height: 900px;
+            margin-top: 2rem;
+        }
+
+        .hero-expanded,
+        .hero-services-expanded {
+            min-height: auto;
+            align-items: flex-start;
+            padding-top: 8rem;
+            padding-bottom: 3rem;
+        }
+
+        .hero-services {
+            opacity: 0;
+            pointer-events: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity .1s ease;
+            scroll-snap-align: start;
+        }
+
+        .hero-services-expanded .hero-minimal {
+            opacity: 0;
+            transform: translateY(-24px);
+            pointer-events: none;
+            max-height: 0;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .hero-services-expanded .hero-full {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            max-height: 900px;
+            margin-top: 2rem;
+            overflow: visible;
+        }
+
+        .hero-services-expanded .hero-services {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            max-height: 900px;
+            margin-top: 3rem;
+            overflow: visible;
+        }
+
+        .hero-card-left,
+        .hero-card-right {
+            opacity: 0;
+            transition: transform 1.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.5s ease;
+            will-change: transform, opacity;
+        }
+
+        .hero-card-left {
+            transform: translate3d(-300px, 0, 0);
+        }
+
+        .hero-card-right {
+            transform: translate3d(300px, 0, 0);
+        }
+
+        .hero-services-expanded .hero-card-left,
+        .hero-services-expanded .hero-card-right {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .bg-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            left: 0;
+            right: 0;
+            transform: translateX(-100%);
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            will-change: transform;
+        }
+
+        #dark-bg-overlay {
+            background-color: #09090b;
+            /* zinc-950 */
+        }
+
+        #ivory-bg-overlay {
+            background-color: #FDFBF7;
+            /* Ivory */
+        }
+
+        body.dark-mode-active #dark-bg-overlay {
+            transform: translateX(0);
+        }
+
+        body.ivory-mode-active #ivory-bg-overlay {
+            transform: translateX(0);
+        }
+
+        @keyframes heroMinimalRise {
+            from {
+                opacity: 0;
+                transform: translateY(72px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-reveal {
+            opacity: 0;
+            transform: translateY(72px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-reveal-delay {
+            transition-delay: 0.15s;
+        }
+
+        .service-showcase {
+            overflow: hidden;
+            border-radius: 0;
+        }
+
+        .service-copy {
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(243, 244, 246, 0.96) 100%);
+            color: #111111;
+            position: relative;
+        }
+
+        .service-copy::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top left, rgba(0, 0, 0, 0.06), transparent 38%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.02));
+            pointer-events: none;
+        }
+
+        .service-stage {
+            background: #e7c79f;
+        }
+
+        .mock-card {
+            position: absolute;
+            border-radius: 1.75rem;
+            box-shadow: 14px 18px 0 rgba(12, 38, 35, 0.92);
+        }
+
+        .mock-card-soft {
+            box-shadow: 12px 16px 0 rgba(0, 0, 0, 0.18);
+        }
+
+        .mock-card-lines::before {
+            content: "";
+            position: absolute;
+            inset: 1.2rem;
+            border-radius: 1rem;
+            background:
+                repeating-linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.95) 0,
+                    rgba(255, 255, 255, 0.95) 4px,
+                    transparent 4px,
+                    transparent 30px);
+        }
+
+        .mock-card-coral::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0 33%, transparent 33% 66%, rgba(255, 255, 255, 0.1) 66% 100%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0 50%, transparent 50% 100%);
+            opacity: 0.5;
+        }
+
+        .service-carousel-nav {
+            position: absolute;
+            inset: 50% auto auto 0.5rem;
+            transform: translateY(-50%);
+            display: flex;
+            z-index: 30;
+        }
+
+        .service-stage-next {
+            position: absolute;
+            top: 50%;
+            right: 0.9rem;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+
+        .service-line-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.25rem;
+            height: 3.25rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+            backdrop-filter: blur(8px);
+            border: 0;
+            padding: 0;
+            color: #111111;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            pointer-events: auto;
+        }
+
+        .service-line-arrow:hover {
+            transform: translateY(-2px);
+        }
+
+        .service-line-arrow span {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .editorial-footer {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top left, rgba(146, 112, 128, 0.16), transparent 30%),
+                linear-gradient(180deg, #f7f3ec 0%, #efe8de 100%);
+            color: #151515;
+        }
+
+        .editorial-footer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(120deg, rgba(255, 255, 255, 0.38), transparent 40%),
+                linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.035) 100%);
+            pointer-events: none;
+        }
+
+        .editorial-footer>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.72rem;
+            line-height: 1;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: rgba(21, 21, 21, 0.56);
+        }
+
+        .footer-badge::before {
+            content: "";
+            width: 3.5rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.7;
+        }
+
+        .footer-link-stack a {
+            color: rgba(21, 21, 21, 0.68);
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer-link-stack a:hover {
+            color: #151515;
+            transform: translateX(2px);
+        }
+
+        .footer-contact-card {
+            border: 1px solid rgba(21, 21, 21, 0.08);
+            background: rgba(255, 255, 255, 0.52);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+        }
+
+        .service-slide {
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .service-slide.is-switching {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .services-promo {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+            align-items: center;
+            gap: 4.75rem;
+        }
+
+        .services-copy-wrap {
+            display: flex;
+            align-items: center;
+            min-height: 415px;
+        }
+
+        .services-copy {
+            width: 100%;
+            max-width: 34rem;
+            margin: 0 auto;
+        }
+
+        .services-panel {
+            background: #f5f8f7;
+        }
+
+        .services-visual {
+            position: relative;
+            width: 553px;
+            height: 415px;
+            min-height: 415px;
+            overflow: hidden;
+            background: #eef4f4;
+        }
+
+        .services-visual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: transparent;
+            z-index: 0;
+        }
+
+        .services-visual::after {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 42%;
+            width: 9%;
+            background: rgba(255, 255, 255, 0.08);
+            filter: blur(12px);
+            transform: skewX(-10deg);
+            z-index: 1;
+        }
+
+        .services-photo {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .services-copy h3 {
+            font-size: 1.5rem;
+            line-height: 1.15;
+            letter-spacing: 0;
+            font-weight: 400;
+            max-width: 31rem;
+            font-family: "Trebuchet MS", Trebuchet, "Liberation Sans", sans-serif;
+            color: #07120c;
+        }
+
+        .services-copy p {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            max-width: 30rem;
+            font-family: Verdana, Geneva, sans-serif;
+            font-weight: 400;
+            color: #364d3f;
+        }
+
+        .services-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 1.5rem;
+            max-width: 27rem;
+        }
+
+        .services-cta a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 3rem;
+            padding: 0 1.875rem;
+            background: #122e1d;
+            color: #ffffff;
+            font-size: 1.125rem;
+            line-height: 2.875rem;
+            border-radius: 0.1875rem;
+            transition: transform 0.25s ease, background-color 0.25s ease;
+            font-weight: 400;
+            width: 100%;
+            max-width: 25rem;
+            font-family: "Trebuchet MS", Trebuchet, "Liberation Sans", sans-serif;
+        }
+
+        .services-cta a:hover {
+            transform: translateY(-2px);
+            background: #2a4334;
+        }
+
+        @media (max-width: 1024px) {
+            .services-promo {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .services-copy-wrap {
+                min-height: auto;
+                display: block;
+            }
+
+            .services-copy {
+                max-width: none;
+                margin: 0;
+            }
+
+            .services-visual {
+                width: 100%;
+                max-width: 553px;
+                height: 415px;
+                min-height: 415px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .services-visual {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 553 / 415;
+                min-height: 0;
+            }
+
+            .services-copy h3 {
+                font-size: 1.3125rem;
+            }
+
+            .services-copy p {
+                font-size: 1rem;
+            }
+
+            .services-cta a {
+                min-height: 2.75rem;
+                font-size: 1rem;
+                line-height: 2.625rem;
+            }
+        }
+
+        .service-stage.theme-menu {
+            background: #d9c8ab;
+        }
+
+        .service-stage.theme-stickers {
+            background: #d7e3d3;
+        }
+
+        .service-stage.theme-door-hangers {
+            background: #ddd5c7;
+        }
+
+        .service-stage.theme-poster {
+            background: #d8d0c5;
+        }
+
+
+
+
+        /* Hover effect from ChatGPT version */
+        .hover-lift:hover {
+            transform: translateY(-6px);
+            transition: 0.3s;
+        }
+
+        /* Staggered Reveal Effect */
+        .reveal-mask {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+            padding: 0.2em 0.2em;
+            /* Prevents clipping */
+            margin: -0.2em -0.2em;
+        }
+
+        .reveal-char {
+            display: inline-block;
+            transform: translateY(115%) rotate(4deg);
+            transform-origin: top left;
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+            will-change: transform, opacity;
+        }
+
+        .hero-expanded .reveal-char {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+        }
+
+        /* Optimization: GPU acceleration for animated elements */
+        .hero-stage,
+        .hero-card-left,
+        .hero-card-right,
+        .reveal-line,
+        .bg-overlay,
+        .reveal-char {
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+
+<body id="main-body"
+    class="bg-white text-on-surface font-body selection:bg-azure selection:text-primary overflow-x-hidden">
+    <div id="ivory-bg-overlay" class="bg-overlay"></div>
+    <div id="dark-bg-overlay" class="bg-overlay">
+        <!-- Faint Wall of Code, sweeps in with the black background -->
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-[0.05] grayscale mix-blend-screen scale-105 pointer-events-none">
+        </div>
+    </div>
+
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="flex items-center justify-center text-center px-6 pt-8 pb-[20vh] md:pb-[15vh]">
+            <div class="fade-up hero-stage max-w-6xl w-full mx-auto">
+                <div class="hero-minimal">
+                    <span class="block text-[10px] uppercase tracking-[0.45em] text-zinc-400 mb-8">The Digital
+                        Curator</span>
+                    <h1
+                        class="font-headline text-5xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight text-zinc-900 leading-[0.92]">
+                        Studio Mark <span class="italic font-normal">&amp;</span> Print
+                    </h1>
+                </div>
+
+                <div class="hero-full max-w-4xl mx-auto">
+                    <span class="uppercase text-xs tracking-[0.4em] text-gray-400">The Digital Curator</span>
+
+                    <!-- prettier-ignore -->
+                    <h1 class="text-5xl md:text-8xl font-headline font-black mt-6 leading-tight max-w-none mx-auto">
+                        <span class="block reveal-line" data-base-delay="0.1">Get Your Business Noticed</span>
+                        <span class="italic font-normal block reveal-line" data-base-delay="0.45">with Studio Mark &
+                            Print</span>
+                    </h1>
+
+                    <p class="mt-8 text-gray-500 text-lg">
+                        We help businesses grow faster with powerful marketing strategies and premium print that
+                        converts.
+                    </p>
+
+                    <div class="mt-10 flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        <a href="printing.html" class="bg-black text-white px-10 py-4 uppercase text-sm font-bold tracking-widest hover-lift text-center transition-all inline-block no-underline border border-black">
+                            Printing
+                        </a>
+                        <a href="#website-card" class="bg-black text-white px-10 py-4 uppercase text-sm font-bold tracking-widest hover-lift text-center transition-all inline-block no-underline border border-black">
+                            Website Design
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-services max-w-5xl mx-auto w-full text-left">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                        <!-- Printing Card -->
+                        <a href="printing.html"
+                            class="printing-card hero-card-left group relative rounded-[2rem] bg-[#2b0b57] shadow-[0_24px_60px_rgba(35,20,70,0.18)] hover:shadow-[0_38px_90px_rgba(35,20,70,0.24)] transition-[box-shadow,transform] duration-700 hover:-translate-y-2 cursor-pointer flex flex-col justify-between min-h-[440px] overflow-hidden">
+
+                            <div class="absolute inset-0 z-0">
+                                <div
+                                    class="absolute inset-0 bg-[radial-gradient(circle_at_15%_85%,rgba(18,123,145,0.92)_0,rgba(18,123,145,0.92)_24%,transparent_56%),radial-gradient(circle_at_8%_42%,rgba(163,95,32,0.75)_0,rgba(163,95,32,0.75)_16%,transparent_35%),radial-gradient(circle_at_68%_18%,rgba(95,26,147,0.92)_0,rgba(63,10,112,0.98)_52%,rgba(28,6,60,1)_100%)]">
+                                </div>
+                                <div
+                                    class="absolute -left-[10%] top-[34%] h-[34%] w-[92%] rounded-[45%] bg-[rgba(129,95,79,0.42)] blur-[1px] rotate-[13deg]">
+                                </div>
+                                <div
+                                    class="absolute left-[6%] top-[54%] h-[44%] w-[92%] rounded-[50%] bg-[rgba(11,89,110,0.94)] rotate-[8deg]">
+                                </div>
+                                <div
+                                    class="absolute left-[44%] top-[60%] h-[30%] w-[60%] rounded-[45%] bg-[rgba(10,7,96,0.9)] rotate-[-22deg] blur-[2px]">
+                                </div>
+                            </div>
+
+                            <div class="relative z-10 p-12 flex flex-col justify-between h-full pointer-events-none">
+                                <div>
+                                    <span
+                                        class="block uppercase text-[10px] tracking-[0.45em] text-white/75 transition-colors duration-700 mb-8 border-b border-white/25 pb-4 w-12 pointer-events-auto">01</span>
+                                    <h3
+                                        class="font-headline font-black text-5xl md:text-[4rem] text-white transition-colors duration-700 tracking-tight leading-[0.95] pointer-events-auto">
+                                        Premium <br><span
+                                            class="italic font-normal text-white/72 transition-colors duration-700">Printing.</span>
+                                    </h3>
+                                </div>
+                                <div class="mt-16 pointer-events-auto">
+                                    <p
+                                        class="text-white/84 transition-colors duration-700 text-[15px] leading-relaxed max-w-sm mb-12">
+                                        From luxury business cards to high-impact promotional materials, crafted to
+                                        perfection.</p>
+                                    <div
+                                        class="flex items-center text-[10px] font-bold tracking-[0.3em] uppercase text-white transition-colors duration-700">
+                                        Explore Print <span
+                                            class="ml-3 transition-transform duration-300 group-hover:translate-x-2">→</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Website Design Card -->
+                        <a href="third-hero.html" id="website-card"
+                            class="website-card hero-card-right group relative rounded-[2rem] bg-[#19191d] shadow-[0_24px_60px_rgba(0,0,0,0.18)] hover:shadow-[0_38px_90px_rgba(0,0,0,0.24)] transition-[box-shadow,transform] duration-700 hover:-translate-y-2 cursor-pointer flex flex-col justify-between min-h-[440px] overflow-hidden">
+
+                            <div class="relative z-10 p-12 flex flex-col justify-between h-full pointer-events-none">
+                                <div>
+                                    <span
+                                        class="block uppercase text-[10px] tracking-[0.45em] text-zinc-500 transition-colors duration-700 mb-8 border-b border-zinc-700 pb-4 w-12 pointer-events-auto">02</span>
+                                    <h3
+                                        class="font-headline font-black text-5xl md:text-[4rem] text-white tracking-tight leading-[0.95] pointer-events-auto">
+                                        Website <br><span
+                                            class="italic font-normal text-zinc-500 transition-colors duration-700">Design.</span>
+                                    </h3>
+                                </div>
+                                <div class="mt-16 pointer-events-auto">
+                                    <p
+                                        class="text-zinc-400 transition-colors duration-700 text-[15px] leading-relaxed max-w-sm mb-12">
+                                        Stunning, high-performance digital experiences optimized to turn your visitors
+                                        into clients.</p>
+                                    <div
+                                        class="flex items-center text-[10px] font-bold tracking-[0.3em] uppercase text-white">
+                                        Explore Digital <span
+                                            class="ml-3 transition-transform duration-300 group-hover:translate-x-2">→</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+        <!-- Testimonials -->
+        <section
+            class="relative py-24 md:py-32 px-4 md:px-8 bg-zinc-900 overflow-hidden flex items-center justify-center">
+            <!-- Background Image -->
+            <div class="absolute inset-0 w-full h-full">
+                <!-- 4K High Res Gallery Image generated earlier -->
+                <img src="./gallery_bg_4k.png" class="w-full h-full object-cover opacity-90 brightness-[0.6]"
+                    alt="Gallery Background">
+            </div>
+
+            <div class="relative z-10 max-w-screen-xl mx-auto w-full">
+                <div class="text-center mb-14">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[3.5rem] uppercase text-white leading-none drop-shadow-md lg:whitespace-nowrap"
+                        style="font-family: 'Noto Serif', serif; font-weight: 900; letter-spacing: -0.02em;">
+                        We also listen to your feedback
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 items-stretch">
+                    <!-- Review 1 -->
+                    <div class="bg-white rounded-3xl p-8 text-left flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="mb-1 text-zinc-900" style="font-family: 'Inter', Arial, sans-serif;">
+                                <span class="font-extrabold text-[17px] mr-1">Jake O</span>
+                                <span class="text-[17px]">★★★★★</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-[12px] text-zinc-500 mb-6 font-medium">
+                                <span class="material-symbols-outlined text-[13px]">check_circle</span>
+                                Verified Customer
+                            </div>
+                            <p class="text-[15px] text-zinc-800 leading-relaxed mb-8 font-medium">
+                                Digital Download Was Nice. I was able to download a print and bring it to Staples the
+                                same day.
+                            </p>
+                        </div>
+                        <p class="text-[12px] text-zinc-500 font-medium">Edmonton, Canada</p>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white rounded-3xl p-8 text-left flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="mb-1 text-zinc-900" style="font-family: 'Inter', Arial, sans-serif;">
+                                <span class="font-extrabold text-[17px] mr-1">Ryan</span>
+                                <span class="text-[17px]">★★★★★</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-[12px] text-zinc-500 mb-6 font-medium">
+                                <span class="material-symbols-outlined text-[13px]">check_circle</span>
+                                Verified Customer
+                            </div>
+                            <p class="text-[15px] text-zinc-800 leading-relaxed mb-8 font-medium">
+                                Finally, something I can hang in my living room. Really dig the look of these prints.
+                            </p>
+                        </div>
+                        <p class="text-[12px] text-zinc-500 font-medium">Coventry, United Kingdom</p>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white rounded-3xl p-8 text-left flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="mb-1 text-zinc-900" style="font-family: 'Inter', Arial, sans-serif;">
+                                <span class="font-extrabold text-[17px] mr-1">Madi P</span>
+                                <span class="text-[17px]">★★★★★</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-[12px] text-zinc-500 mb-6 font-medium">
+                                <span class="material-symbols-outlined text-[13px]">check_circle</span>
+                                Verified Customer
+                            </div>
+                            <p class="text-[15px] text-zinc-800 leading-relaxed mb-8 font-medium">
+                                Bought for my boyfriend. He loves them! Something we can hang in the house that we both
+                                like!
+                            </p>
+                        </div>
+                        <p class="text-[12px] text-zinc-500 font-medium">Austin, United States</p>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="bg-white rounded-3xl p-8 text-left flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="mb-1 text-zinc-900" style="font-family: 'Inter', Arial, sans-serif;">
+                                <span class="font-extrabold text-[17px] mr-1">Tony</span>
+                                <span class="text-[17px]">★★★★★</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-[12px] text-zinc-500 mb-6 font-medium">
+                                <span class="material-symbols-outlined text-[13px]">check_circle</span>
+                                Verified Customer
+                            </div>
+                            <p class="text-[15px] text-zinc-800 leading-relaxed mb-8 font-medium">
+                                Sweet. Found a print of my S15!
+                            </p>
+                        </div>
+                        <p class="text-[12px] text-zinc-500 font-medium">Vancouver, Canada</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#09090b] text-zinc-400 py-16 px-6 md:px-12 border-t border-zinc-900">
+        <div class="max-w-screen-2xl mx-auto">
+            <!-- Top Section: Newsletter & Social -->
+            <div
+                class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 pb-16 border-b border-zinc-900">
+                <div class="max-w-md">
+                    <h3 class="text-white text-2xl md:text-3xl font-headline font-bold mb-4 italic">
+                        The newsletter you'll actually want to read.
+                    </h3>
+                    <p class="text-zinc-500 mb-6 font-light">
+                        Get exclusive offers, design inspiration, and print tips delivered to your inbox.
+                    </p>
+                    <form class="flex w-full max-w-sm gap-2">
+                        <input type="email" placeholder="Email address"
+                            class="flex-grow bg-transparent border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:border-white transition-colors outline-none text-white">
+                        <button
+                            class="bg-white text-black px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all">
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
+
+                <div class="flex flex-col items-start lg:items-end gap-6">
+                    <p class="text-white font-bold uppercase text-[10px] tracking-[0.3em]">Follow Us</p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/studiomarkprint/" target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@studiomarkprint" target="_blank" rel="noopener noreferrer"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.81-.6-4.03-1.37-.01 2.39-.01 4.79-.01 7.18-.01 1.5-.63 3.12-1.74 4.12-1.29 1.21-3.11 1.9-4.91 1.91-2.95.14-5.89-1.92-6.59-4.75-.72-2.61.14-5.51 2.24-7.24 1.25-1.01 2.87-1.57 4.47-1.58v4.03c-.28-.01-.57-.01-.85.02-1.27.13-2.45.96-2.9 2.16-.41.97-.24 2.15.42 2.94.75.9 2.03 1.18 3.1.75 1.05-.4 1.69-1.51 1.71-2.62.01-4.03.01-8.06.01-12.09z"></path>
+                            </svg>
+                        </a>
+                        <a href="mailto:studiomarkprint@gmail.com"
+                            class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-lg">mail</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Section: Links Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 py-16">
+                <!-- Column 1 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Products</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="printing.html" class="hover:text-white transition-colors">Business Cards</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Postcards</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Stickers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Flyers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Invitations</a></li>
+                    </ul>
+                </div>
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Services</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">Graphic Design</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Website Design</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Brand Identity</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Curation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Packaging</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Company</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Our Standard</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Carreers</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4 -->
+                <div>
+                    <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Support</h4>
+                    <ul class="space-y-4 text-sm font-light">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Shipping Info</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Return Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="mailto:hello@markandprint.co"
+                                class="text-white font-medium">hello@markandprint.co</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Legal & Region -->
+            <div class="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div
+                    class="flex flex-col md:flex-row items-center gap-6 text-[10px] uppercase tracking-widest text-zinc-600">
+                    <p>© 2026 Studio Mark & Print</p>
+                    <div class="flex gap-6">
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Privacy</a>
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Terms</a>
+                        <a href="#" class="hover:text-zinc-400 transition-colors">Security</a>
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 cursor-pointer hover:border-zinc-700 transition-colors">
+                    <div class="w-4 h-3 bg-blue-900 relative overflow-hidden">
+                        <!-- Tiny USA Flag representation -->
+                        <div class="absolute inset-0 bg-red-600 flex flex-col">
+                            <div class="h-1 bg-white"></div>
+                            <div class="h-1 bg-red-600"></div>
+                            <div class="h-1 bg-white"></div>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-zinc-400">United States / EN</span>
+                    <span class="material-symbols-outlined text-xs">expand_more</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const elements = document.querySelectorAll('.fade-up, .fade-right');
+        const hero = document.getElementById('hero');
+        const heroServicesBlock = hero?.querySelector('.hero-services');
+        const serviceSlide = document.getElementById('service-slide');
+        const serviceTitle = document.getElementById('service-title');
+        const serviceDescription = document.getElementById('service-description');
+        const servicePrimary = document.getElementById('service-primary');
+        const serviceSecondary = document.getElementById('service-secondary');
+        const serviceStage = document.getElementById('service-stage');
+        const servicePrev = document.getElementById('service-prev');
+        const serviceNext = document.getElementById('service-next');
+
+        const cardMain = document.getElementById('card-main');
+        const cardMainTitle = document.getElementById('card-main-title');
+        const cardMainSubtitle = document.getElementById('card-main-subtitle');
+        const cardMainCopy = document.getElementById('card-main-copy');
+        const cardDark = document.getElementById('card-dark');
+        const cardDarkTitle = document.getElementById('card-dark-title');
+        const cardDarkSubtitle = document.getElementById('card-dark-subtitle');
+        const cardDarkMark = document.getElementById('card-dark-mark');
+        const cardFormTitle = document.getElementById('card-form-title');
+        const mainBody = document.getElementById('main-body');
+        const websiteCard = document.querySelector('.website-card');
+        const printingCard = document.querySelector('.printing-card');
+        const aboutMarkZones = document.querySelectorAll('.about-mark-zone');
+        const servicesSection = document.getElementById('services');
+
+        if (websiteCard && mainBody) {
+            websiteCard.addEventListener('mouseenter', () => {
+                mainBody.classList.add('dark-mode-active');
+            });
+            websiteCard.addEventListener('mouseleave', () => {
+                mainBody.classList.remove('dark-mode-active');
+            });
+        }
+
+        if (printingCard && mainBody) {
+            printingCard.addEventListener('mouseenter', () => {
+                mainBody.classList.add('ivory-mode-active');
+            });
+            printingCard.addEventListener('mouseleave', () => {
+                mainBody.classList.remove('ivory-mode-active');
+            });
+        }
+
+        aboutMarkZones.forEach((zone) => {
+            const mark = zone.querySelector('.about-mark');
+            const track = zone.closest('.about-mark-track');
+            if (!mark) {
+                return;
+            }
+
+            const activeArea = track || zone;
+            const impactBall = activeArea.querySelector('.services-impact-ball');
+            const guideTag = activeArea.querySelector('.services-guide-tag');
+            const guidePath = activeArea.querySelector('.services-guide path');
+            const guideSvg = activeArea.querySelector('.services-guide svg');
+            let markEngaged = false;
+            let impactTriggered = false;
+            let impactTimer = null;
+
+            mark.addEventListener('pointerenter', () => {
+                markEngaged = true;
+            });
+
+            activeArea.addEventListener('pointermove', (event) => {
+                if (!markEngaged) {
+                    return;
+                }
+
+                const rect = activeArea.getBoundingClientRect();
+                const guideRectForTravel = guideSvg?.getBoundingClientRect();
+                const travelRect = guideRectForTravel || rect;
+                const relativeX = event.clientX - travelRect.left;
+                const maxTravel = Math.max(0, travelRect.width);
+                const guideRect = guideTag?.getBoundingClientRect();
+                const targetProgress = guideRect ? 1 : 1;
+                const normalizedX = Math.max(0, Math.min(maxTravel * targetProgress, relativeX));
+                let progress = maxTravel > 0 ? normalizedX / maxTravel : 0;
+
+                if (guidePath && guideSvg) {
+                    const pathLength = guidePath.getTotalLength();
+                    const svgRect = guideSvg.getBoundingClientRect();
+                    const viewBox = guideSvg.viewBox.baseVal;
+                    const scaleX = viewBox && viewBox.width ? svgRect.width / viewBox.width : 1;
+                    const scaleY = viewBox && viewBox.height ? svgRect.height / viewBox.height : 1;
+                    const clampedTargetX = Math.min(normalizedX, maxTravel * targetProgress);
+                    let nearestLength = 0;
+                    let nearestDistance = Number.POSITIVE_INFINITY;
+
+                    for (let i = 0; i <= 120; i += 1) {
+                        const testLength = pathLength * (i / 120) * targetProgress;
+                        const testPoint = guidePath.getPointAtLength(testLength);
+                        const renderedX = testPoint.x * scaleX;
+                        const distance = Math.abs(renderedX - clampedTargetX);
+
+                        if (distance < nearestDistance) {
+                            nearestDistance = distance;
+                            nearestLength = testLength;
+                        }
+                    }
+
+                    progress = pathLength > 0 ? nearestLength / pathLength : progress;
+                    const point = guidePath.getPointAtLength(nearestLength);
+                    const markRect = mark.getBoundingClientRect();
+                    const targetLeft = (svgRect.left - rect.left) + (point.x * scaleX) - markRect.width * 0.34;
+                    const targetTop = (svgRect.top - rect.top) + (point.y * scaleY) - markRect.height * 0.26;
+                    const originLeft = mark.offsetLeft;
+                    const originTop = mark.offsetTop;
+
+                    mark.style.setProperty('--about-mark-shift-x', `${targetLeft - originLeft}px`);
+                    mark.style.setProperty('--about-mark-shift-y', `${targetTop - originTop}px`);
+                } else {
+                    mark.style.setProperty('--about-mark-shift-x', `${normalizedX}px`);
+                    mark.style.setProperty('--about-mark-shift-y', '0px');
+                }
+
+                if (!impactTriggered && progress >= targetProgress - 0.002) {
+                    impactTriggered = true;
+
+                    if (impactBall) {
+                        const ballX = guideRect
+                            ? (guideRect.left - rect.left) - 14
+                            : (mark.getBoundingClientRect().left - rect.left) + (mark.getBoundingClientRect().width / 2) - 14;
+                        impactBall.style.setProperty('--impact-x', `${ballX}px`);
+                    }
+
+                    servicesSection?.classList.remove('services-impact');
+                    activeArea.classList.remove('services-impact-ready');
+                    void activeArea.offsetWidth;
+                    activeArea.classList.add('services-impact-ready');
+
+                    window.clearTimeout(impactTimer);
+                    impactTimer = window.setTimeout(() => {
+                        servicesSection?.classList.add('services-impact');
+                    }, 620);
+                }
+            });
+
+            const resetMarkShift = () => {
+                markEngaged = false;
+                mark.style.setProperty('--about-mark-shift-x', '0px');
+                mark.style.setProperty('--about-mark-shift-y', '0px');
+                impactTriggered = false;
+                window.clearTimeout(impactTimer);
+                activeArea.classList.remove('services-impact-ready');
+                servicesSection?.classList.remove('services-impact');
+            };
+
+            activeArea.addEventListener('pointerleave', resetMarkShift);
+            activeArea.addEventListener('pointercancel', resetMarkShift);
+        });
+
+        let heroExpanded = false;
+        let heroServicesExpanded = false;
+        let heroFullyUnlocked = false;
+        let heroScrollLock = false;
+        let heroExpandedAt = 0;
+        let heroServicesExpandedAt = 0;
+        let touchStartY = 0;
+        let touchCanExpandHeroServices = false;
+        let touchCanUnlockHero = false;
+        let activeService = 0;
+
+        const serviceSlides = [
+            {
+                title: 'Business Cards',
+                description: 'Stand out with the best custom business cards – special finishes, unique sizes, and instant impressions! Let your cards speak for themselves.',
+                primary: 'Shop Business Cards',
+                secondary: 'Reorder',
+                theme: '',
+                mainBg: '#c8e6c2',
+                mainText: '#0f5a4f',
+                mainTitle: 'Sophie Rowe',
+                mainSubtitle: 'Marketing Manager',
+                mainCopy: '029 380 0283<br>sophie@palette.com',
+                darkBg: '#17312f',
+                darkTitle: 'PAMPEZ',
+                darkSub: 'ESTD 2020',
+                darkMark: '✦',
+                formTitle: 'NORDSIKA <span class="text-sm font-normal">by appointment</span>'
+            },
+            {
+                title: 'Menu',
+                description: 'Present every item with clean hierarchy, elegant spacing, and menu layouts that make every offering feel premium and intentional.',
+                primary: 'Shop Menus',
+                secondary: 'Request Quote',
+                theme: 'theme-menu',
+                mainBg: '#f1dfc6',
+                mainText: '#5b341e',
+                mainTitle: 'Dinner Menu',
+                mainSubtitle: 'Seasonal Selection',
+                mainCopy: 'Starters, mains and signatures<br>crafted with clear hierarchy',
+                darkBg: '#2e2925',
+                darkTitle: 'BRUNCH',
+                darkSub: 'SATURDAY EDITION',
+                darkMark: '•',
+                formTitle: 'MENU FORMAT <span class="text-sm font-normal">folded / flat</span>'
+            },
+            {
+                title: 'Stickers',
+                description: 'Custom stickers for packaging, bottles, giveaways, and branding moments that need to feel sharp, playful, and impossible to ignore.',
+                primary: 'Shop Stickers',
+                secondary: 'Reorder',
+                theme: 'theme-stickers',
+                mainBg: '#d9efcf',
+                mainText: '#184c3f',
+                mainTitle: 'Brand Set',
+                mainSubtitle: 'Custom Sticker Pack',
+                mainCopy: 'Gloss, matte and die-cut options<br>for boxes, bags and bottles',
+                darkBg: '#21352f',
+                darkTitle: 'STICKER',
+                darkSub: 'VINYL COLLECTION',
+                darkMark: '✦',
+                formTitle: 'LABEL SHEET <span class="text-sm font-normal">size guide</span>'
+            },
+            {
+                title: 'Door Hangers',
+                description: 'Door hangers built for local campaigns that stop the hand, carry the offer clearly, and make neighborhood marketing feel premium.',
+                primary: 'Shop Door Hangers',
+                secondary: 'Request Quote',
+                theme: 'theme-door-hangers',
+                mainBg: '#efe1cb',
+                mainText: '#574230',
+                mainTitle: 'Local Offer',
+                mainSubtitle: 'Neighborhood Campaign',
+                mainCopy: 'Punch-hole format with bold headlines<br>for direct response distribution',
+                darkBg: '#2d312d',
+                darkTitle: 'OPEN NOW',
+                darkSub: 'LIMITED OFFER',
+                darkMark: '•',
+                formTitle: 'HANGER SIZE <span class="text-sm font-normal">standard / custom</span>'
+            },
+            {
+                title: 'Poster',
+                description: 'Posters with bold type, strong contrast, and premium print quality for events, launches, storefronts, and large-format promotions.',
+                primary: 'Shop Posters',
+                secondary: 'Request Quote',
+                theme: 'theme-poster',
+                mainBg: '#f0e4d8',
+                mainText: '#463129',
+                mainTitle: 'Launch Night',
+                mainSubtitle: 'Large Format Poster',
+                mainCopy: 'Event messaging with bold scale<br>and premium print finish',
+                darkBg: '#1f2628',
+                darkTitle: 'POSTER',
+                darkSub: 'DISPLAY SERIES',
+                darkMark: '✦',
+                formTitle: 'POSTER SIZE <span class="text-sm font-normal">A3 / A2 / custom</span>'
+            }
+        ];
+
+        function renderService(index) {
+            const slide = serviceSlides[index];
+            if (!slide) return;
+
+            activeService = index;
+            serviceSlide.classList.add('is-switching');
+
+            window.setTimeout(() => {
+                serviceTitle.textContent = slide.title;
+                serviceDescription.textContent = slide.description;
+                servicePrimary.textContent = slide.primary;
+                serviceSecondary.textContent = slide.secondary;
+
+                serviceStage.classList.remove('theme-menu', 'theme-stickers', 'theme-door-hangers', 'theme-poster');
+                if (slide.theme) serviceStage.classList.add(slide.theme);
+
+                cardMain.style.background = slide.mainBg;
+                cardMainTitle.style.color = slide.mainText;
+                cardMainSubtitle.style.color = slide.mainText;
+                cardMainCopy.style.color = slide.mainText;
+                cardMainTitle.textContent = slide.mainTitle;
+                cardMainSubtitle.textContent = slide.mainSubtitle;
+                cardMainCopy.innerHTML = slide.mainCopy;
+
+                cardDark.style.background = slide.darkBg;
+                cardDarkTitle.textContent = slide.darkTitle;
+                cardDarkSubtitle.textContent = slide.darkSub;
+                cardDarkMark.textContent = slide.darkMark;
+                cardFormTitle.innerHTML = slide.formTitle;
+
+                serviceSlide.classList.remove('is-switching');
+            }, 160);
+        }
+
+        function revealOnScroll() {
+            elements.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 50) {
+                    el.classList.add('show');
+                }
+            });
+        }
+
+        function resetHeroOnReload() {
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+
+            document.body.style.overflow = 'hidden';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            heroFullyUnlocked = false;
+        }
+
+        function expandHeroOnFirstScroll() {
+            if (!hero || heroExpanded) {
+                return;
+            }
+
+            hero.classList.add('hero-expanded');
+            heroExpanded = true;
+            heroExpandedAt = Date.now();
+            touchCanExpandHeroServices = false;
+            heroScrollLock = true;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.setTimeout(() => {
+                heroScrollLock = false;
+            }, 450);
+        }
+
+        function expandHeroServices() {
+            if (!hero || heroServicesExpanded) {
+                return;
+            }
+
+            hero.classList.add('hero-services-expanded');
+            heroServicesExpanded = true;
+            heroServicesExpandedAt = Date.now();
+            touchCanExpandHeroServices = false;
+            heroScrollLock = true;
+
+            // STAY LOCKED HERE - DON'T UNLOCK OVERFLOW YET
+            const heroServicesTop = heroServicesBlock
+                ? window.scrollY + heroServicesBlock.getBoundingClientRect().top - 112
+                : 0;
+            window.scrollTo({ top: Math.max(0, heroServicesTop), behavior: 'smooth' });
+
+            window.setTimeout(() => {
+                heroScrollLock = false;
+            }, 800);
+        }
+
+        function unlockHeroFully() {
+            if (heroFullyUnlocked) return;
+
+            heroFullyUnlocked = true;
+            document.body.style.overflow = '';
+
+            // Critical Optimization: Stop listening to trapped scroll events once unlocked
+            window.removeEventListener('wheel', handleWheel);
+            window.removeEventListener('touchmove', handleTouchMove);
+            console.log("Scroll unlocked: native performance restored.");
+        }
+
+        let lastInteractionTime = 0;
+
+        function handleWheel(event) {
+            // Already unlocked? Let native scroll take over
+            if (heroFullyUnlocked) return;
+
+            // Trap it here
+            event.preventDefault();
+
+            const now = Date.now();
+            const timeSinceLast = now - lastInteractionTime;
+
+            // If deltaY is very tiny, ignore it (could be accidental touch/bump)
+            if (Math.abs(event.deltaY) < 1) return;
+
+            // Only update time if it's a real vertical movement
+            lastInteractionTime = now;
+
+            // Strict debounce and scroll lock
+            // We use a smaller threshold (50ms) for better responsiveness
+            if (event.deltaY <= 0 || timeSinceLast < 50 || heroScrollLock) {
+                return;
+            }
+
+            if (!heroExpanded) {
+                expandHeroOnFirstScroll();
+                heroScrollLock = true;
+                window.setTimeout(() => { heroScrollLock = false; }, 450); // Faster recovery
+            } else if (!heroServicesExpanded) {
+                if (Date.now() - heroExpandedAt > 400) { // Much faster response
+                    expandHeroServices();
+                }
+            } else {
+                unlockHeroFully();
+            }
+        }
+
+        function handleTouchStart(event) {
+            touchStartY = event.touches[0]?.clientY ?? 0;
+            touchCanExpandHeroServices = heroExpanded && !heroServicesExpanded && !heroScrollLock;
+            touchCanUnlockHero = heroServicesExpanded && !heroFullyUnlocked && !heroScrollLock;
+        }
+
+        function handleTouchMove(event) {
+            if (heroFullyUnlocked) return;
+            event.preventDefault();
+
+            const currentY = event.touches[0]?.clientY ?? touchStartY;
+            // More sensitive swipe detection (10px instead of 20px)
+            const isScrollingDown = currentY < touchStartY - 10;
+
+            const now = Date.now();
+            const timeSinceLast = now - lastInteractionTime;
+            lastInteractionTime = now;
+
+            // Using 50ms for better response
+            if (!isScrollingDown || timeSinceLast < 50 || heroScrollLock) {
+                return;
+            }
+
+            if (!heroExpanded) {
+                expandHeroOnFirstScroll();
+                heroScrollLock = true;
+                window.setTimeout(() => { heroScrollLock = false; }, 450);
+                touchStartY = currentY;
+            } else if (!heroServicesExpanded) {
+                if (touchCanExpandHeroServices && Date.now() - heroExpandedAt > 900) {
+                    expandHeroServices();
+                    touchStartY = currentY;
+                }
+            } else {
+                // High-FPS Handoff for Touch: Immediate unlock to allow momentum to carry through
+                if (touchCanUnlockHero) {
+                    unlockHeroFully();
+                    touchStartY = currentY;
+                }
+            }
+        }
+
+        window.addEventListener('load', () => {
+            resetHeroOnReload();
+            revealOnScroll();
+        });
+        window.addEventListener('pageshow', resetHeroOnReload);
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('wheel', handleWheel, { passive: false });
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+        if (servicePrev && serviceNext) {
+            servicePrev.addEventListener('click', () => {
+                renderService((activeService - 1 + serviceSlides.length) % serviceSlides.length);
+            });
+            serviceNext.addEventListener('click', () => {
+                renderService((activeService + 1) % serviceSlides.length);
+            });
+        }
+
+
+
+        if (serviceSlide && serviceTitle && serviceDescription && servicePrimary && serviceSecondary && serviceStage && cardMain && cardMainTitle && cardMainSubtitle && cardMainCopy && cardDark && cardDarkTitle && cardDarkSubtitle && cardDarkMark && cardFormTitle) {
+            renderService(0);
+        }
+
+        // Letter-by-letter staggering setup
+        document.querySelectorAll('.reveal-line').forEach((line) => {
+            // Clean text: removes extra spaces and newlines that break alignment
+            const text = line.textContent.replace(/\s+/g, ' ').trim();
+            line.innerHTML = '';
+            let baseDelay = parseFloat(line.getAttribute('data-base-delay') || '0');
+            const words = text.split(' ');
+            let charIndex = 0;
+
+            words.forEach((word, wordIndex) => {
+                const maskSpan = document.createElement('span');
+                maskSpan.className = 'reveal-mask';
+                maskSpan.style.display = 'inline-block';
+                maskSpan.style.whiteSpace = 'nowrap'; // Enforces word boundaries!
+
+                for (let i = 0; i < word.length; i++) {
+                    const span = document.createElement('span');
+                    span.textContent = word[i];
+                    span.className = 'reveal-char';
+                    span.style.transitionDelay = `${baseDelay + (charIndex * 0.035)}s`;
+                    maskSpan.appendChild(span);
+                    charIndex++;
+                }
+
+                line.appendChild(maskSpan);
+
+                // Add spaces between words
+                if (wordIndex < words.length - 1) {
+                    const spaceSpan = document.createElement('span');
+                    spaceSpan.innerHTML = '&nbsp;';
+                    line.appendChild(spaceSpan);
+                    charIndex++;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

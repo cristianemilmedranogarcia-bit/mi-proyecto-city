@@ -1,0 +1,2382 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Studio Mark & Print | Premium Printing</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            background: #f8f9fa;
+            color: #111111;
+            font-family: "Inter", sans-serif;
+        }
+
+        .printing-topbar {
+            background: #f4f1eb;
+            border-bottom: 1px solid #ece7df;
+            color: #3f3a34;
+            font-size: 0.82rem;
+            line-height: 1.2;
+            text-align: center;
+            padding: 0.7rem 1.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        .printing-header {
+            background: #ffffff;
+            border-bottom: 1px solid #ece9e5;
+        }
+
+        .printing-header-top {
+            max-width: 96rem;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .printing-header-bottom {
+            background: #ffffff;
+            border-top: 1px solid #f2f0ed;
+        }
+
+        .printing-header-inner {
+            max-width: 96rem;
+            margin: 0 auto;
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .printing-logo {
+            text-decoration: none;
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            color: #0e3b2e;
+            line-height: 1;
+        }
+
+        .printing-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            font-size: 0.95rem;
+            color: #211f1b;
+        }
+
+        .printing-nav a {
+            position: relative;
+        }
+
+        .printing-nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.3rem;
+            width: 100%;
+            height: 1px;
+            background: currentColor;
+            opacity: 0;
+            transform: scaleX(0.4);
+            transform-origin: center;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .printing-nav a:hover::after {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        .header-search-container {
+            position: relative;
+            max-width: 42rem;
+            width: 100%;
+        }
+
+        .header-search-input {
+            width: 100%;
+            height: 2.85rem;
+            background: #f8f7f5 !important;
+            border: 1px solid #e5e0d8 !important;
+            border-radius: 999px !important;
+            padding: 0 1.5rem 0 3.25rem !important;
+            font-size: 0.92rem !important;
+            color: #171717;
+            transition: all 0.2s ease;
+            box-shadow: none !important;
+            display: block !important;
+            line-height: 2.85rem !important;
+        }
+
+        .header-search-input:focus {
+            outline: none !important;
+            border-color: #0e3b2e !important;
+            background: #ffffff !important;
+            box-shadow: 0 0 0 3px rgba(14, 59, 46, 0.08) !important;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(20, 20, 20, 0.45);
+            pointer-events: none;
+            z-index: 20;
+            display: block !important;
+        }
+
+        .header-utilities {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .utility-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: #211f1b;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+        }
+
+        .utility-btn:hover {
+            opacity: 0.7;
+        }
+
+        .utility-icon {
+            width: 1.35rem;
+            height: 1.35rem;
+            stroke-width: 1.8;
+        }
+
+        .cart-btn {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -0.45rem;
+            right: -1.1rem;
+            background: #0e3b2e;
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            min-width: 1.15rem;
+            height: 1.15rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffffff;
+        }
+
+        .printing-nav-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: #5d5851;
+            font-size: 0.88rem;
+        }
+
+        .printing-nav-meta a {
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .printing-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
+            overflow: hidden;
+            background: #ffffff;
+            border-bottom: 1px solid #ece9e5;
+            min-height: 236px;
+        }
+
+        .printing-hero-copy {
+            background: #765066;
+            color: #ffffff;
+            padding: 2.5rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 236px;
+        }
+
+        .printing-hero-title {
+            font-size: clamp(2.1rem, 4.4vw, 3.75rem);
+            line-height: 0.92;
+            letter-spacing: -0.06em;
+            font-weight: 500;
+            max-width: 20rem;
+        }
+
+        .printing-hero-text {
+            margin-top: 1rem;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: rgba(255, 255, 255, 0.84);
+            max-width: 19rem;
+        }
+
+        .printing-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.35rem;
+        }
+
+        .printing-hero-primary,
+        .printing-hero-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.9rem;
+            padding: 0 1.3rem;
+            border-radius: 0.35rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease;
+        }
+
+        .printing-hero-primary {
+            background: #ffffff;
+            color: #141414;
+        }
+
+        .printing-hero-secondary {
+            background: #143422;
+            color: #ffffff;
+        }
+
+        .printing-hero-primary:hover,
+        .printing-hero-secondary:hover {
+            transform: translateY(-2px);
+        }
+
+        .printing-hero-visual {
+            position: relative;
+            min-height: 236px;
+            background: #e0c59e;
+            overflow: hidden;
+        }
+
+        .printing-hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .service-line-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.25rem;
+            height: 3.25rem;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+            backdrop-filter: blur(8px);
+            border: 0;
+            padding: 0;
+            color: #111111;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            pointer-events: auto;
+        }
+
+        .service-line-arrow:hover {
+            transform: translateY(-2px);
+        }
+
+        .service-line-arrow span {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .seasonal-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .seasonal-card-link {
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.22s ease, opacity 0.22s ease;
+        }
+
+        .seasonal-card-link:hover {
+            transform: translateY(-4px);
+        }
+
+        .seasonal-visual {
+            aspect-ratio: 1 / 1;
+            border-radius: 1.7rem;
+            background: #f5f4f2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .seasonal-pill {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            background: #16845d;
+            color: #ffffff;
+            border-radius: 9999px;
+            padding: 0.45rem 0.85rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .seasonal-expanded-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .seasonal-expanded-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .editorial-footer {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at top left, rgba(146, 112, 128, 0.16), transparent 30%),
+                linear-gradient(180deg, #f7f3ec 0%, #efe8de 100%);
+            color: #151515;
+        }
+
+        .editorial-footer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(120deg, rgba(255, 255, 255, 0.38), transparent 40%),
+                linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.035) 100%);
+            pointer-events: none;
+        }
+
+        .editorial-footer>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.72rem;
+            line-height: 1;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: rgba(21, 21, 21, 0.56);
+        }
+
+        .footer-badge::before {
+            content: "";
+            width: 3.5rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.7;
+        }
+
+        .footer-link-stack a {
+            color: rgba(21, 21, 21, 0.68);
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer-link-stack a:hover {
+            color: #151515;
+            transform: translateX(2px);
+        }
+
+        .footer-contact-card {
+            border: 1px solid rgba(21, 21, 21, 0.08);
+            background: rgba(255, 255, 255, 0.52);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.06);
+        }
+
+        .seasonal-expanded {
+            display: none;
+        }
+
+        .seasonal-expanded.open {
+            display: block;
+        }
+
+        .seasonal-collapsed.closed {
+            display: none;
+        }
+
+        .seasonal-heading.hidden {
+            display: none;
+        }
+
+        .seasonal-rail {
+            position: relative;
+        }
+
+        .seasonal-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .seasonal-title {
+            font-size: 0.95rem;
+            line-height: 1.3;
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .seasonal-arrow {
+            position: absolute;
+            top: 5.9rem;
+            width: 3.9rem;
+            height: 3.9rem;
+            border-radius: 1rem;
+            border: 1px solid #dddddd;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            font-size: 2rem;
+        }
+
+        .seasonal-arrow.left {
+            left: -2.2rem;
+        }
+
+        .seasonal-arrow.right {
+            right: -2.2rem;
+        }
+
+        .print-editorial-band {
+            background: #171717;
+            color: #f6f0e6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .print-editorial-band::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top right, rgba(118, 80, 102, 0.28), transparent 22%),
+                radial-gradient(circle at bottom left, rgba(34, 96, 88, 0.32), transparent 28%);
+            pointer-events: none;
+        }
+
+        .print-editorial-band>*,
+        .print-material-grid>*,
+        .print-finish-grid>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .print-section-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.7rem;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.34em;
+            color: rgba(246, 240, 230, 0.62);
+        }
+
+        .print-section-kicker::before {
+            content: "";
+            width: 3rem;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.75;
+        }
+
+        .print-material-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            gap: 2rem;
+        }
+
+        .print-card-soft {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+        }
+
+        .print-card-light {
+            border: 1px solid rgba(21, 21, 21, 0.08);
+            background: #ffffff;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.04);
+        }
+
+        .print-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(246, 240, 230, 0.88);
+        }
+
+        .print-finish-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .print-process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .print-process-step {
+            border-top: 1px solid rgba(21, 21, 21, 0.12);
+            padding-top: 1rem;
+        }
+
+        .print-process-step span {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(21, 21, 21, 0.45);
+            margin-bottom: 0.9rem;
+        }
+
+        .print-proof-panel {
+            background:
+                radial-gradient(circle at top left, rgba(118, 80, 102, 0.14), transparent 30%),
+                linear-gradient(180deg, #f7f3ec 0%, #f0e8de 100%);
+        }
+
+        .print-case-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .print-case-photo {
+            min-height: 36rem;
+            overflow: hidden;
+            border-radius: 2rem;
+            background: #ddd4c7;
+        }
+
+        .print-case-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .print-case-copy {
+            border-radius: 2rem;
+            background: #ffffff;
+            border: 1px solid rgba(21, 21, 21, 0.08);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.04);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .print-metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .print-gallery-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 1.5rem;
+        }
+
+        .print-gallery-stack {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .print-gallery-card {
+            overflow: hidden;
+            border-radius: 2rem;
+            background: #ece7df;
+            position: relative;
+        }
+
+        .print-gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .print-gallery-caption {
+            position: absolute;
+            left: 1.4rem;
+            bottom: 1.4rem;
+            right: 1.4rem;
+            padding: 1rem 1.1rem;
+            border-radius: 1.25rem;
+            background: rgba(20, 20, 20, 0.72);
+            color: #f7f3ec;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 1200px) {
+            .seasonal-expanded-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .seasonal-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .print-material-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .print-finish-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .print-process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .print-case-grid,
+            .print-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .printing-header-inner {
+                padding: 1rem 1.25rem;
+                flex-wrap: wrap;
+            }
+
+            .printing-nav {
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+                gap: 1rem;
+                font-size: 0.82rem;
+                overflow-x: auto;
+            }
+
+            .printing-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .printing-hero-copy {
+                padding: 2rem 1.25rem;
+                min-height: auto;
+            }
+
+            .printing-hero-visual {
+                min-height: 16rem;
+            }
+
+            .seasonal-expanded-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .seasonal-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .print-finish-grid,
+            .print-process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .print-metric-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .seasonal-expanded-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .seasonal-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="print-product-v2.css">
+    <style>
+        .product-shell-override {
+            min-height: auto;
+            background: transparent;
+        }
+
+        :root {
+            --hero-bg: #404B57;
+            --hero-fg: #F1F4F7;
+            --visual-bg: #E4E8ED;
+            --shape-a: #2b7d92;
+            --shape-b: #7e5a85;
+            --shape-c: #1a1c5e;
+            --card-one: #fbfaf6;
+            --card-two: #235f73;
+            --note-color: #d7c78b;
+            --circle-color: #b94f7c;
+            --ticket-color: #1d245f;
+        }
+
+        .product-hero {
+            position: relative;
+            min-height: 460px;
+        }
+
+        .product-hero-copy {
+            position: relative;
+            padding-top: 2.2rem;
+            padding-bottom: 1.7rem;
+            padding-left: 2.2rem;
+        }
+
+        .product-title {
+            font-size: clamp(2.9rem, 4.95vw, 4.75rem);
+            line-height: 0.92;
+        }
+
+        .product-copy {
+            font-size: 1rem;
+            line-height: 1.5;
+            max-width: 28.5rem;
+        }
+
+        .product-hero-visual {
+            position: relative;
+            min-height: 460px;
+        }
+
+        .business-cards-visual {
+            position: relative;
+            width: min(100%, 27rem);
+            margin: 0 auto;
+            padding: 1.65rem 0 0;
+        }
+
+        .bc-stack {
+            position: relative;
+            width: 100%;
+            height: 20.75rem;
+        }
+
+        .bc-card {
+            position: absolute;
+            width: 18.8rem;
+            height: 11rem;
+            border-radius: 1.35rem;
+            overflow: hidden;
+            box-shadow: 0 1.8rem 3.8rem rgba(30, 24, 21, 0.18), 0 0.5rem 1.4rem rgba(30, 24, 21, 0.08);
+            cursor: pointer;
+            transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, z-index 0.2s ease;
+        }
+
+        .bc-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 35%, rgba(0, 0, 0, 0.03));
+            pointer-events: none;
+        }
+
+        .bc-card.dark {
+            top: 1.8rem;
+            left: 3.2rem;
+            transform: rotate(-7deg);
+            background: #151515;
+            color: #f4efe7;
+            padding: 1.8rem 1.8rem 1.35rem;
+            z-index: 3;
+            animation: bcFloatA 6s ease-in-out infinite alternate;
+        }
+
+        .bc-card.light {
+            top: 5.9rem;
+            left: 4.9rem;
+            transform: rotate(3.5deg);
+            background: linear-gradient(135deg, #faf4eb 0%, #efe5d7 100%);
+            color: #202020;
+            border: 1px solid rgba(29, 24, 20, 0.08);
+            padding: 1.8rem 1.8rem 1.35rem;
+            z-index: 4;
+            animation: bcFloatB 7s ease-in-out infinite alternate;
+        }
+
+        .bc-card.green {
+            top: 9.8rem;
+            left: 3.9rem;
+            transform: rotate(-1.2deg);
+            background: #0f4a37;
+            color: #edf5ef;
+            padding: 1.65rem 1.75rem 1.25rem;
+            z-index: 5;
+            animation: bcFloatC 5.5s ease-in-out infinite alternate;
+        }
+
+        .bc-card.dark:hover {
+            z-index: 10;
+            transform: rotate(-4deg) translateY(-1rem) scale(1.03);
+        }
+
+        .bc-card.light:hover {
+            z-index: 10;
+            transform: rotate(1deg) translateY(-1rem) scale(1.03);
+        }
+
+        .bc-card.green:hover {
+            z-index: 10;
+            transform: rotate(0deg) translateY(-1rem) scale(1.03);
+        }
+
+        @keyframes bcFloatA {
+            from {
+                transform: rotate(-7deg) translateY(0);
+            }
+
+            to {
+                transform: rotate(-7deg) translateY(-0.7rem);
+            }
+        }
+
+        @keyframes bcFloatB {
+            from {
+                transform: rotate(3.5deg) translateY(0);
+            }
+
+            to {
+                transform: rotate(3.5deg) translateY(-0.55rem);
+            }
+        }
+
+        @keyframes bcFloatC {
+            from {
+                transform: rotate(-1.2deg) translateY(0);
+            }
+
+            to {
+                transform: rotate(-1.2deg) translateY(-0.85rem);
+            }
+        }
+
+        .bc-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1rem;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            font-weight: 700;
+        }
+
+        .bc-role {
+            margin-top: 0.55rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.34em;
+            text-transform: uppercase;
+            opacity: 0.42;
+        }
+
+        .bc-dark-line {
+            width: 2.2rem;
+            height: 0.15rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #d0ae63, #a98039);
+            margin: 1rem 0 1.2rem;
+        }
+
+        .bc-small {
+            font-size: 0.78rem;
+            line-height: 1.65;
+            opacity: 0.34;
+        }
+
+        .bc-mark {
+            position: absolute;
+            right: 1.25rem;
+            top: 1.25rem;
+            width: 2.1rem;
+            height: 2.1rem;
+            border-radius: 0.65rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .bc-edge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0.28rem;
+            background: linear-gradient(90deg, #0e3b2e, #1f6a4d, #0e3b2e);
+        }
+
+        .bc-right-note {
+            position: absolute;
+            top: 1.55rem;
+            right: 1.7rem;
+            text-align: right;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(20, 20, 20, 0.32);
+            line-height: 1.35;
+        }
+
+        .bc-right-note strong {
+            display: block;
+            margin-top: 0.15rem;
+            font-family: Georgia, "Times New Roman", serif;
+            letter-spacing: -0.04em;
+            text-transform: none;
+            font-size: 0.95rem;
+            color: #212121;
+        }
+
+        .bc-divider {
+            position: absolute;
+            left: 1.8rem;
+            right: 1.8rem;
+            bottom: 3.1rem;
+            height: 1px;
+            background: rgba(20, 20, 20, 0.1);
+        }
+
+        .bc-bottom-left,
+        .bc-bottom-right {
+            position: absolute;
+            bottom: 1.2rem;
+            font-size: 0.76rem;
+            color: rgba(20, 20, 20, 0.34);
+            letter-spacing: 0.1em;
+        }
+
+        .bc-bottom-left {
+            left: 1.8rem;
+        }
+
+        .bc-bottom-right {
+            right: 1.8rem;
+        }
+
+        .bc-orb {
+            position: absolute;
+            right: 1.55rem;
+            top: 1.55rem;
+            width: 2.3rem;
+            height: 2.3rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .bc-orb::after {
+            content: "";
+            position: absolute;
+            inset: 0.52rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .bc-green-footer {
+            position: absolute;
+            left: 1.75rem;
+            right: 1.75rem;
+            bottom: 1.35rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: rgba(237, 245, 239, 0.26);
+        }
+
+        .bc-green-list {
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .bc-green-list span::before {
+            content: "";
+            display: inline-block;
+            width: 0.46rem;
+            height: 0.46rem;
+            border-radius: 999px;
+            background: rgba(237, 245, 239, 0.24);
+            margin-right: 0.45rem;
+            vertical-align: middle;
+        }
+
+        .bc-finish-tabs {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            margin-top: 0.2rem;
+        }
+
+        .bc-finish-chip {
+            min-height: 2.7rem;
+            padding: 0 1.45rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.46);
+            background: rgba(255, 255, 255, 0.18);
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .bc-finish-chip.is-active {
+            background: #ffffff;
+            color: #1b1b1b;
+            border-color: #ffffff;
+            box-shadow: 0 0.6rem 1.4rem rgba(35, 24, 18, 0.08);
+        }
+
+        .bc-finish-chip:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+
+        .bc-finish-chip.is-active:hover {
+            color: #1b1b1b;
+            background: #ffffff;
+        }
+
+        .bc-finish-note {
+            margin-top: 0.8rem;
+            text-align: center;
+            font-size: 0.88rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.62);
+        }
+
+        .sizes-section .section-kicker {
+            margin-bottom: 0.9rem;
+        }
+
+        .sizes-section .section-title {
+            margin-bottom: 2.2rem;
+            max-width: 28rem;
+            text-wrap: balance;
+        }
+
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .size-card {
+            background: #fff;
+            border: 1px solid #e8e5e1;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .size-card:hover {
+            border-color: #141414;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .size-card.popular {
+            border-color: #0e3b2e;
+            padding-top: 2rem;
+        }
+
+        .size-popular-tag {
+            position: absolute;
+            top: 0.85rem;
+            left: 1rem;
+            background: #0e3b2e;
+            color: #fff;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .size-visual {
+            background: #f0ece8;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .size-rect {
+            background: #d6d0ca;
+            border-radius: 3px;
+        }
+
+        .size-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #141414;
+        }
+
+        .size-dim {
+            font-size: 0.78rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        .pricing-section-head {
+            text-align: center;
+            max-width: 42rem;
+            margin: 0 auto 2.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pricing-section-head .section-title {
+            margin-bottom: 1.1rem;
+        }
+
+        .pricing-container {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+
+        .pricing-copy p {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: rgba(20, 20, 20, 0.62);
+            text-wrap: balance;
+        }
+
+        .pricing-panel {
+            background: #fff;
+            border: 1px solid #ebe6df;
+            border-radius: 1.4rem;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(21, 21, 21, 0.05);
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pricing-table th {
+            text-align: left;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #8a8278;
+            padding: 1.1rem 1.25rem;
+            background: #faf7f2;
+            border-bottom: 1px solid #ebe6df;
+        }
+
+        .pricing-table td {
+            padding: 1.15rem 1.25rem;
+            border-bottom: 1px solid #f0ebe4;
+            vertical-align: middle;
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table tr:hover td {
+            background: rgba(20, 20, 20, 0.018);
+        }
+
+        .pricing-qty {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #151515;
+        }
+
+        .pricing-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #151515;
+        }
+
+        .pricing-per {
+            font-size: 0.95rem;
+            color: rgba(20, 20, 20, 0.64);
+        }
+
+        .pricing-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 1.9rem;
+            padding: 0 0.75rem;
+            border-radius: 999px;
+            background: #0e3b2e;
+            color: #fff;
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .preview-layout {
+            display: grid;
+            grid-template-columns: 0.82fr 1.18fr;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .preview-controls {
+            background: #ffffff;
+            border: 1px solid #ebe6df;
+            border-radius: 1.4rem;
+            padding: 1.6rem;
+            box-shadow: 0 16px 40px rgba(21, 21, 21, 0.05);
+            display: grid;
+            gap: 0.9rem;
+            align-content: start;
+        }
+
+        .preview-controls label {
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #7b7369;
+            font-weight: 700;
+        }
+
+        .preview-controls input,
+        .preview-controls select {
+            width: 100%;
+            min-height: 3rem;
+            border: 1px solid #ddd6cd;
+            border-radius: 0.9rem;
+            background: #fbf8f3;
+            padding: 0 1rem;
+            font-size: 0.98rem;
+            color: #171717;
+        }
+
+        .preview-controls input[type="color"] {
+            padding: 0.35rem;
+            min-height: 3.2rem;
+        }
+
+        .preview-controls input[type="file"] {
+            padding: 0.8rem 1rem;
+            background: #fbf8f3;
+        }
+
+        .preview-stage {
+            background:
+                radial-gradient(circle at top left, rgba(155, 112, 131, 0.22), transparent 26%),
+                linear-gradient(180deg, #f5efe6 0%, #efe7db 100%);
+            border: 1px solid #ebe6df;
+            border-radius: 1.7rem;
+            min-height: 36rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-card {
+            width: min(100%, 31rem);
+            aspect-ratio: 1.72 / 1;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2rem 4rem rgba(21, 21, 21, 0.16), 0 0.6rem 1.5rem rgba(21, 21, 21, 0.08);
+            background: #171717;
+            color: #ffffff;
+        }
+
+        .preview-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--preview-image, none);
+            background-size: cover;
+            background-position: center;
+            opacity: var(--preview-image-opacity, 0);
+            mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+
+        .preview-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 32%, rgba(0, 0, 0, 0.04));
+            pointer-events: none;
+        }
+
+        .preview-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .preview-card-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 0.95;
+        }
+
+        .preview-card-role {
+            margin-top: 0.55rem;
+            font-size: 0.92rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            opacity: 0.64;
+        }
+
+        .preview-card-brand {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.35rem;
+            letter-spacing: -0.04em;
+            text-align: right;
+        }
+
+        .preview-card-meta {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.72;
+        }
+
+        .preview-card-footer {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .preview-card-style {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2rem;
+            padding: 0 0.75rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 760px) {
+            .product-hero-copy {
+                padding-left: 2rem;
+            }
+
+            .business-cards-visual {
+                width: 100%;
+                padding-top: 1.1rem;
+            }
+
+            .bc-stack {
+                height: 18.5rem;
+            }
+
+            .bc-card {
+                width: 15.5rem;
+                height: 9.2rem;
+            }
+
+            .bc-card.dark {
+                left: 1.6rem;
+            }
+
+            .bc-card.light {
+                left: 2.8rem;
+                top: 3.9rem;
+            }
+
+            .bc-card.green {
+                left: 2rem;
+                top: 7.6rem;
+            }
+
+            .bc-finish-chip {
+                min-height: 2.45rem;
+                padding: 0 1.1rem;
+                font-size: 0.82rem;
+            }
+
+            .bc-finish-note {
+                font-size: 0.72rem;
+                letter-spacing: 0.2em;
+            }
+
+            .pricing-section-head {
+                margin-bottom: 2rem;
+            }
+
+            .preview-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-with-rail {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
+
+            .filters-rail {
+                position: static;
+            }
+
+            .filters-toggle span {
+                font-size: 1.55rem;
+            }
+
+            .preview-stage {
+                min-height: 28rem;
+            }
+        }
+
+        /* PRODUCT GRID */
+        .scard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .scard {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: all 0.25s cubic-bezier(0.1, 0.7, 0.1, 1);
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(20, 20, 20, 0.02);
+        }
+
+        .scard:hover {
+            border-color: rgba(20, 20, 20, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(20, 20, 20, 0.08);
+        }
+
+        .scard-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--cream-mid);
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+            display: block;
+        }
+
+        .scard-info {
+            padding: 1.4rem 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .scard-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.25rem;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .scard-price {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+        }
+
+        @media (max-width: 900px) {
+            .scard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .scard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-main-override {
+            padding-top: 1.2rem !important;
+            padding-bottom: 2rem;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .printing-header-inner {
+            padding: 0.85rem 2rem !important;
+        }
+
+        .product-hero {
+            min-height: 460px !important;
+        }
+
+        .product-hero-copy {
+            padding: 3rem 3rem 2.8rem 3rem !important;
+            gap: 1.5rem !important;
+        }
+
+        .product-title {
+            font-size: clamp(2.9rem, 4.95vw, 4.75rem) !important;
+            line-height: 0.94 !important;
+        }
+
+        .product-copy {
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+            max-width: 28.5rem !important;
+        }
+
+        .product-hero-visual {
+            min-height: 460px !important;
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8F9FA] text-[#111111] overflow-x-hidden">
+    <div class="printing-topbar" style="position:relative;">
+        <!-- Social icons: far left -->
+        <div style="position:absolute;left:1.5rem;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:10px;">
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter/X" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok" style="display:inline-flex;align-items:center;color:#5d5851;text-decoration:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+            </a>
+        </div>
+        Premium printing, elevated details, and impactful first impressions for every brand touchpoint.
+    </div>
+    <header class="printing-header">
+        <div class="printing-header-top">
+            <a class="printing-logo" href="index.html">Studio Mark &amp; Print</a>
+
+            <div class="header-search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="header-search-input"
+                    placeholder="Search for products, designs or inspiration...">
+            </div>
+
+            <div class="header-utilities">
+                <a href="account.html" class="utility-btn">
+                    <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Log In</span>
+                </a>
+                <a href="cart.html" class="utility-btn cart-btn">
+                    <svg class="utility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span>Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="printing-header-bottom">
+            <div class="printing-header-inner">
+                <nav class="printing-nav" aria-label="Printing navigation">
+                    <a href="business-cards.html">Business Cards</a>
+                        <a href="menus.html">Menus</a>
+                    <a href="posters.html">Posters</a>
+                    <a href="door-hangers.html">Door Hangers</a>
+                    <a href="flyers.html">Flyers</a>
+                    <a href="invitations.html">Invitations</a>
+                    <a href="stickers.html">Stickers</a>
+                    <a href="photos.html">Photos</a>
+                </nav>
+                <div class="printing-nav-meta">
+                    <a href="contact.html" class="hover:text-zinc-800 transition-colors">Contact Us</a>
+                    <span class="text-zinc-200">|</span>
+                    <a href="index.html" class="hover:text-zinc-800 transition-colors">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="product-shell product-shell-override">
+        <main class="product-main product-main-override">
+            <section class="product-hero">
+                <div class="product-hero-copy">
+                    <div><span class="product-kicker">Printing Services</span>
+                        <h1 class="product-title">Print that <em>elevates your brand</em></h1>
+                    </div>
+                    <p class="product-copy">Impeccable finishes, premium materials, and exceptional quality in every
+                        detail. Discover our services: business cards, flyers, postcards, invitations, and more.</p>
+                    <div class="product-actions"><a class="product-btn primary" href="index.html">Back to
+                            Home</a><a class="product-btn secondary" href="contact.html">Contact Us</a></div>
+                </div>
+                <div class="product-hero-visual">
+                    <div class="business-cards-visual" aria-hidden="true"
+                        style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <img src="Custom Business Cards - Design & Print Online_files/0813WF-Collection-Launch-TR-752x564.jpg"
+                            alt="Premium Printing Services" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <main>
+        <section class="bg-white px-8 pt-16 pb-12">
+            <div class="max-w-screen-2xl mx-auto">
+                <h2 class="text-3xl md:text-[2.55rem] font-sans font-bold tracking-tight text-zinc-950 mb-10"
+                    id="seasonal-heading">
+                    Explore our seasonal favorites
+                </h2>
+                <div class="seasonal-collapsed" id="seasonal-collapsed">
+                    <div class="seasonal-rail">
+                        <button class="seasonal-arrow left" type="button" aria-label="Previous favorites">‹</button>
+                        <div class="seasonal-grid">
+                            <a class="seasonal-card seasonal-card-link" href="business-cards.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-52 h-32">
+                                        <div
+                                            class="absolute left-8 top-5 w-36 h-24 bg-[#34345c] rounded-sm rotate-[7deg] shadow-lg">
+                                        </div>
+                                        <div
+                                            class="absolute left-5 top-2 w-36 h-24 bg-[#34345c] rounded-sm rotate-[3deg] shadow-lg">
+                                        </div>
+                                        <div
+                                            class="absolute left-1 top-0 w-36 h-24 bg-[#34345c] rounded-sm rotate-[-2deg] shadow-lg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Business Cards</h3>
+                            </a>
+                            <a class="seasonal-card seasonal-card-link" href="stickers.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-44 h-32">
+                                        <div
+                                            class="absolute left-3 top-5 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                            TH</div>
+                                        <div
+                                            class="absolute right-0 bottom-0 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                            TH</div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Stickers</h3>
+                            </a>
+                            <a class="seasonal-card seasonal-card-link" href="menus.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-52 h-36">
+                                        <div
+                                            class="absolute left-3 top-12 w-24 h-20 bg-[#59463c] rotate-[-10deg] rounded-md">
+                                        </div>
+                                        <div
+                                            class="absolute left-16 top-2 w-28 h-36 bg-white rounded-md shadow-md rotate-[-10deg] border border-zinc-200">
+                                        </div>
+                                        <div
+                                            class="absolute right-1 top-8 w-28 h-24 bg-[#3d6c60] rounded-md shadow-md rotate-[10deg]">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Menus</h3>
+                            </a>
+                            <a class="seasonal-card seasonal-card-link" href="door-hangers.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-44 h-40">
+                                        <div class="absolute left-10 top-3 w-28 h-36 bg-[#1f1f22] rotate-[-10deg]">
+                                        </div>
+                                        <div class="absolute left-1 top-14 w-20 h-20 bg-white border border-zinc-200">
+                                        </div>
+                                        <div
+                                            class="absolute left-20 top-14 w-20 h-20 bg-[#d6b6ab] border border-zinc-200">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Door Hangers</h3>
+                            </a>
+                            <a class="seasonal-card seasonal-card-link" href="invitations.html">
+                                <div class="seasonal-visual flex items-center justify-center">
+                                    <div class="relative w-36 h-44 bg-[#456e65] rounded-sm shadow-lg">
+                                        <div class="absolute inset-x-5 top-10 bottom-10 bg-white rounded-full"></div>
+                                        <div
+                                            class="absolute inset-x-8 bottom-6 text-[10px] uppercase tracking-[0.24em] text-white text-center">
+                                            Invitation</div>
+                                    </div>
+                                </div>
+                                <h3 class="seasonal-title">Invitations</h3>
+                            </a>
+                        </div>
+                        <button class="seasonal-arrow right" id="seasonal-open" type="button"
+                            aria-label="View all services">›</button>
+                    </div>
+                </div>
+                <div class="seasonal-expanded pt-2" id="seasonal-expanded">
+                    <div class="seasonal-expanded-head">
+                        <h2 class="text-3xl md:text-[2.55rem] font-sans font-bold tracking-tight text-zinc-950">
+                            Explore our seasonal favorites
+                        </h2>
+                        <button class="service-line-arrow" id="seasonal-close" type="button"
+                            aria-label="Close all services">
+                            <span>←</span>
+                        </button>
+                    </div>
+                    <div class="seasonal-expanded-grid">
+                        <a class="seasonal-card seasonal-card-link" href="business-cards.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-52 h-32">
+                                    <div
+                                        class="absolute left-8 top-5 w-36 h-24 bg-[#34345c] rounded-sm rotate-[7deg] shadow-lg">
+                                    </div>
+                                    <div
+                                        class="absolute left-5 top-2 w-36 h-24 bg-[#34345c] rounded-sm rotate-[3deg] shadow-lg">
+                                    </div>
+                                    <div
+                                        class="absolute left-1 top-0 w-36 h-24 bg-[#34345c] rounded-sm rotate-[-2deg] shadow-lg">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Business Cards</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="stickers.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-44 h-32">
+                                    <div
+                                        class="absolute left-3 top-5 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                        TH</div>
+                                    <div
+                                        class="absolute right-0 bottom-0 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                        TH</div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Stickers</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="menus.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-52 h-36">
+                                    <div
+                                        class="absolute left-3 top-12 w-24 h-20 bg-[#59463c] rotate-[-10deg] rounded-md">
+                                    </div>
+                                    <div
+                                        class="absolute left-16 top-2 w-28 h-36 bg-white rounded-md shadow-md rotate-[-10deg] border border-zinc-200">
+                                    </div>
+                                    <div
+                                        class="absolute right-1 top-8 w-28 h-24 bg-[#3d6c60] rounded-md shadow-md rotate-[10deg]">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Menus</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="door-hangers.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-44 h-40">
+                                    <div class="absolute left-10 top-3 w-28 h-36 bg-[#1f1f22] rotate-[-10deg]"></div>
+                                    <div class="absolute left-1 top-14 w-20 h-20 bg-white border border-zinc-200"></div>
+                                    <div class="absolute left-20 top-14 w-20 h-20 bg-[#d6b6ab] border border-zinc-200">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Door Hangers</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="flyers.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-36 h-44 bg-[#456e65] rounded-sm shadow-lg">
+                                    <div class="absolute inset-x-5 top-10 bottom-10 bg-white rounded-full"></div>
+                                    <div
+                                        class="absolute inset-x-8 bottom-6 text-[10px] uppercase tracking-[0.24em] text-white text-center">
+                                        Flyer</div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Flyers</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="photos.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <span class="seasonal-pill">Up to 25% off</span>
+                                <div class="relative w-52 h-36">
+                                    <div class="absolute right-2 top-0 w-28 h-20 bg-white rotate-[18deg] shadow-md">
+                                    </div>
+                                    <div
+                                        class="absolute left-5 bottom-0 w-32 h-20 bg-[#31385e] rotate-[-18deg] shadow-md">
+                                    </div>
+                                    <div
+                                        class="absolute left-14 bottom-5 text-[#ff7b3d] text-2xl font-black rotate-[-18deg]">
+                                        THANK YOU</div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Photos</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="posters.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-44 h-32">
+                                    <div
+                                        class="absolute left-3 top-5 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                        POST</div>
+                                    <div
+                                        class="absolute right-0 bottom-0 w-24 h-24 rounded-full bg-[#bb4a78] shadow-[0_10px_0_rgba(122,31,72,0.24)] flex items-center justify-center text-white text-3xl font-black">
+                                        CARD</div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Postcards &amp; Posters</h3>
+                        </a>
+                        <a class="seasonal-card seasonal-card-link" href="invitations.html">
+                            <div class="seasonal-visual flex items-center justify-center">
+                                <div class="relative w-52 h-36">
+                                    <div
+                                        class="absolute left-3 top-12 w-24 h-20 bg-[#59463c] rotate-[-10deg] rounded-md">
+                                    </div>
+                                    <div
+                                        class="absolute left-16 top-2 w-28 h-36 bg-white rounded-md shadow-md rotate-[-10deg] border border-zinc-200">
+                                    </div>
+                                    <div
+                                        class="absolute right-1 top-8 w-28 h-24 bg-[#3d6c60] rounded-md shadow-md rotate-[10deg]">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="seasonal-title">Invitations</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pt-16 pb-32 px-8 bg-white border-t border-zinc-100">
+            <div class="max-w-screen-xl mx-auto text-center">
+                <p class="text-[11px] uppercase tracking-[0.28em] text-zinc-400 mb-8">Studio Mark & Print</p>
+                <h2
+                    class="text-4xl md:text-5xl lg:text-7xl font-serif tracking-[-0.05em] leading-[0.95] text-zinc-950 mb-10 max-w-5xl mx-auto">
+                    We love creativity. We print so your best ideas become tactile.
+                </h2>
+                <p class="text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed">
+                    We don't believe in template designs or soulless printing.
+                    Every project that comes to us is an opportunity to challenge the limits of paper,
+                    textures, and ink. We support you from the prototype to the final cut.
+                </p>
+
+                <div class="mt-20 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0 relative">
+                    <div
+                        class="relative w-72 h-80 md:w-64 md:h-80 transform hover:rotate-0 transition-all duration-500 hover:scale-[1.03] hover:z-30 z-10 md:-rotate-3 md:translate-x-12 md:translate-y-6 shadow-2xl rounded-2xl overflow-hidden border-[6px] border-white cursor-pointer">
+                        <img src="Custom Business Cards - Design & Print Online_files/0075WF-TR-752x564-best-practice-inspiration.jpg"
+                            class="object-cover w-full h-full" alt="Creative samples">
+                    </div>
+
+                    <div
+                        class="relative w-80 h-96 md:w-96 md:h-[28rem] transform hover:rotate-1 transition-all duration-500 hover:scale-[1.03] hover:z-30 z-20 shadow-[0_20px_50px_rgba(0,0,0,0.15)] rounded-2xl overflow-hidden border-[6px] border-white cursor-pointer md:rotate-1">
+                        <img src="Custom Business Cards - Design & Print Online_files/0902WF-TR-752x564-Be-Scene-Business-Card.jpg"
+                            class="object-cover w-full h-full" alt="High-end printing">
+                    </div>
+
+                    <div
+                        class="relative w-72 h-80 md:w-64 md:h-80 transform hover:rotate-0 transition-all duration-500 hover:scale-[1.03] hover:z-30 z-10 md:rotate-6 md:-translate-x-12 md:translate-y-4 shadow-2xl rounded-2xl overflow-hidden border-[6px] border-white cursor-pointer">
+                        <img src="Custom Business Cards - Design & Print Online_files/0075WF-TR-752x564-runaway-remix-inspiration.jpg"
+                            class="object-cover w-full h-full" alt="Creative print portfolio">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pb-24 pt-8 px-8 bg-white">
+            <div class="max-w-screen-2xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                    <div class="max-w-2xl">
+                        <span
+                            class="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-zinc-500 font-bold block mb-4">Studio
+                            Mark Community</span>
+                        <h2
+                            class="text-3xl sm:text-4xl md:text-5xl font-serif tracking-tight text-zinc-900 italic font-light">
+                            Art designed by you.
+                        </h2>
+                        <p class="mt-4 text-zinc-500 text-sm md:text-base pr-4">
+                            We love seeing your packaging and branding come to life. Tag us or use the hashtag <span
+                                class="font-medium text-zinc-800">#StudioMarkPrint</span> to be featured in our gallery.
+                        </p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button
+                            class="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-zinc-100 transition-colors"
+                            onclick="document.getElementById('ugc-gallery').scrollBy({left: -350, behavior: 'smooth'})">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                        </button>
+                        <button
+                            class="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-zinc-100 transition-colors"
+                            onclick="document.getElementById('ugc-gallery').scrollBy({left: 350, behavior: 'smooth'})">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="ugc-gallery"
+                    class="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbars pb-8"
+                    style="scrollbar-width: none; -ms-overflow-style: none;">
+                    <!-- Card 1 -->
+                    <button onclick="openUgcModal(0)"
+                        class="flex-none w-[280px] md:w-[320px] aspect-[4/4.5] object-cover relative rounded-2xl overflow-hidden snap-start group shadow-sm bg-zinc-100 flex items-center justify-center cursor-pointer text-left focus:outline-none">
+                        <img src="cliente.jpg"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="UGC Cliente">
+                        <!-- VistaPrint style centered dark pill -->
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center pointer-events-none">
+                            <span
+                                class="bg-[#2b3544] text-white text-[11px] px-3 py-1.5 rounded-full font-medium shadow-md flex items-center gap-1 tracking-wide">
+                                @cliente_studiomark
+                            </span>
+                        </div>
+                    </button>
+
+                    <!-- Card 2 -->
+                    <button onclick="openUgcModal(1)"
+                        class="flex-none w-[280px] md:w-[320px] aspect-[4/4.5] object-cover relative rounded-2xl overflow-hidden snap-start group shadow-sm bg-zinc-100 flex items-center justify-center cursor-pointer text-left focus:outline-none">
+                        <img src="ugc_jar_1776048901867.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="UGC Jar">
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center pointer-events-none">
+                            <span
+                                class="bg-[#2b3544] text-white text-[11px] px-3 py-1.5 rounded-full font-medium shadow-md flex items-center gap-1 tracking-wide">
+                                @kitchen.pantry
+                            </span>
+                        </div>
+                    </button>
+
+                    <!-- Card 3 -->
+                    <button onclick="openUgcModal(2)"
+                        class="flex-none w-[280px] md:w-[320px] aspect-[4/4.5] object-cover relative rounded-2xl overflow-hidden snap-start group shadow-sm bg-zinc-100 flex items-center justify-center cursor-pointer text-left focus:outline-none">
+                        <img src="ugc_card_1776048922723.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="UGC Card">
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center pointer-events-none">
+                            <span
+                                class="bg-[#2b3544] text-white text-[11px] px-3 py-1.5 rounded-full font-medium shadow-md flex items-center gap-1 tracking-wide">
+                                @clara.vance
+                            </span>
+                        </div>
+                    </button>
+
+                    <!-- Card 4 -->
+                    <button onclick="openUgcModal(3)"
+                        class="flex-none w-[280px] md:w-[320px] aspect-[4/4.5] object-cover relative rounded-2xl overflow-hidden snap-start group shadow-sm bg-zinc-100 flex items-center justify-center cursor-pointer text-left focus:outline-none">
+                        <img src="ugc_tote_1776048944630.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            alt="UGC Tote">
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center pointer-events-none">
+                            <span
+                                class="bg-[#2b3544] text-white text-[11px] px-3 py-1.5 rounded-full font-medium shadow-md flex items-center gap-1 tracking-wide">
+                                @stillness.light
+                            </span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- UGC Modal System -->
+                <div id="ugc-modal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300">
+                    <!-- Backdrop -->
+                    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeUgcModal()"></div>
+
+                    <!-- Modal Window -->
+                    <div class="absolute inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-3xl bg-white rounded-2xl md:rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden transform scale-95 transition-transform duration-300"
+                        id="ugc-modal-content">
+
+                        <!-- Close Button -->
+                        <button onclick="closeUgcModal()"
+                            class="absolute top-4 right-4 z-20 w-8 h-8 bg-white/50 backdrop-blur-md md:bg-zinc-100 flex items-center justify-center text-zinc-900 border border-zinc-200/50 hover:bg-zinc-200 transition-colors"
+                            style="border-radius: 10px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M18 6L6 18M6 6l12 12" />
+                            </svg>
+                        </button>
+
+                        <!-- Left side: Image and Caption stack -->
+                        <div class="w-full md:w-[55%] relative flex flex-col h-[55vh] md:h-[520px] bg-white">
+                            <!-- Image Section -->
+                            <div class="relative flex-grow bg-zinc-50 flex items-center justify-center overflow-hidden">
+                                <img id="ugc-modal-img" src="" class="w-full h-full object-cover">
+
+                                <!-- Navigation Chevrons (Centered on Image) -->
+                                <button onclick="prevUgcModal(event)"
+                                    class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-10 bg-white/90 backdrop-blur-sm flex items-center justify-center text-zinc-900 hover:bg-white shadow-md transition-transform hover:-translate-x-1"
+                                    style="border-radius: 10px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M15 18l-6-6 6-6" />
+                                    </svg>
+                                </button>
+                                <button onclick="nextUgcModal(event)"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-10 bg-white/90 backdrop-blur-sm flex items-center justify-center text-zinc-900 hover:bg-white shadow-md transition-transform hover:translate-x-1"
+                                    style="border-radius: 10px;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M9 18l6-6-6-6" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Caption Section (White Card) -->
+                            <div class="p-6 md:p-7 bg-white">
+                                <span id="ugc-modal-handle"
+                                    class="font-bold text-sm tracking-wide block mb-2 text-zinc-900"></span>
+                                <p id="ugc-modal-caption"
+                                    class="text-xs md:text-[13px] text-zinc-600 leading-relaxed max-h-24 overflow-y-auto hide-scrollbars pr-2">
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right side: Product Link -->
+                        <div
+                            class="w-full md:w-[45%] p-6 md:p-8 bg-white flex flex-col justify-center relative items-center text-center">
+                            <div
+                                class="w-24 h-24 md:w-36 md:h-36 mb-6 rounded-xl bg-zinc-50 shadow-sm overflow-hidden flex items-center justify-center border border-zinc-100 p-2">
+                                <img id="ugc-modal-prod-img" src=""
+                                    class="max-w-full max-h-full object-cover rounded-lg">
+                            </div>
+                            <h3 id="ugc-modal-prod-name" class="text-lg md:text-xl font-bold text-zinc-900 mb-2"></h3>
+                            <p class="text-xs text-zinc-500 mb-6 font-serif italic">Impreso por Studio Mark</p>
+                            <a id="ugc-modal-prod-url" href="#"
+                                class="w-full py-3.5 bg-zinc-900 text-white rounded-xl font-bold uppercase tracking-widest text-[#10px] hover:bg-zinc-800 transition-colors shadow-lg shadow-zinc-900/20 text-xs">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .hide-scrollbars::-webkit-scrollbar {
+                        display: none;
+                    }
+                </style>
+                <script>
+                    const ugcData = [
+                        {
+                            image: 'cliente.jpg',
+                            handle: '@cliente_studiomark',
+                            caption: 'Unbelievable print quality! The texture is exactly what our brand needed to convey that organic and premium feel. 🤎✨',
+                            productName: 'Business Cards',
+                            productImage: 'Custom Business Cards - Design & Print Online_files/0075WF-TR-752x564-runaway-remix-inspiration.jpg',
+                            productUrl: 'business-cards.html'
+                        },
+                        {
+                            image: 'ugc_jar_1776048901867.png',
+                            handle: '@kitchen.pantry',
+                            caption: 'New seasonal jam collection with exclusive die-cut labels from Studio Mark. The adhesive is perfect and doesn\'t get damaged by fridge moisture. 🍓🌿',
+                            productName: 'Premium Stickers',
+                            productImage: 'premium_sticker_bg.png',
+                            productUrl: 'stickers.html'
+                        },
+                        {
+                            image: 'ugc_card_1776048922723.png',
+                            handle: '@clara.vance',
+                            caption: 'Nothing like receiving your business cards and having them exceed your expectations. The cotton paper thickness is on another level. Highly recommended.',
+                            productName: 'Premium Paper',
+                            productImage: 'Custom Business Cards - Design & Print Online_files/0075WF-TR-752x564-runaway-remix-inspiration.jpg',
+                            productUrl: 'premium-paper.html'
+                        },
+                        {
+                            image: 'ugc_tote_1776048944630.png',
+                            handle: '@stillness.light',
+                            caption: 'Our promotional tote bags turned out beautiful. The ink texture on raw cotton canvas keeps our minimalist aesthetic intact. 🤍',
+                            productName: 'Textile Printing',
+                            productImage: 'ugc_tote_1776048944630.png',
+                            productUrl: 'printing.html'
+                        }
+                    ];
+
+                    let currentUgcIndex = 0;
+                    const ugcModal = document.getElementById('ugc-modal');
+                    const ugcModalContent = document.getElementById('ugc-modal-content');
+
+                    function openUgcModal(index) {
+                        currentUgcIndex = index;
+                        updateUgcModalContent();
+
+                        ugcModal.classList.remove('hidden');
+                        // force browser layout to trigger transition
+                        void ugcModal.offsetWidth;
+                        ugcModal.classList.remove('opacity-0');
+                        ugcModalContent.classList.remove('scale-95');
+                        document.body.style.overflow = 'hidden';
+                    }
+
+                    function closeUgcModal() {
+                        ugcModal.classList.add('opacity-0');
+                        ugcModalContent.classList.add('scale-95');
+                        setTimeout(() => {
+                            ugcModal.classList.add('hidden');
+                            document.body.style.overflow = '';
+                        }, 300);
+                    }
+
+                    function updateUgcModalContent() {
+                        const item = ugcData[currentUgcIndex];
+                        document.getElementById('ugc-modal-img').src = item.image;
+                        document.getElementById('ugc-modal-handle').textContent = item.handle;
+                        document.getElementById('ugc-modal-caption').textContent = item.caption;
+                        document.getElementById('ugc-modal-prod-name').textContent = item.productName;
+                        document.getElementById('ugc-modal-prod-img').src = item.productImage;
+                        document.getElementById('ugc-modal-prod-url').href = item.productUrl;
+                    }
+
+                    function nextUgcModal(e) {
+                        if (e) e.stopPropagation();
+                        currentUgcIndex = (currentUgcIndex + 1) % ugcData.length;
+                        updateUgcModalContent();
+                    }
+
+                    function prevUgcModal(e) {
+                        if (e) e.stopPropagation();
+                        currentUgcIndex = (currentUgcIndex - 1 + ugcData.length) % ugcData.length;
+                        updateUgcModalContent();
+                    }
+
+                    // Close on Escape key
+                    document.addEventListener('keydown', function (event) {
+                        if (event.key === "Escape" && !ugcModal.classList.contains('hidden')) {
+                            closeUgcModal();
+                        }
+                    });
+                </script>
+            </div>
+            </div>
+        </section>
+        <footer class="bg-[#09090b] text-zinc-400 py-16 px-6 md:px-12 border-t border-zinc-900">
+            <div class="max-w-screen-2xl mx-auto">
+                <div
+                    class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 pb-16 border-b border-zinc-900">
+                    <div class="max-w-md">
+                        <h3 class="text-white text-2xl md:text-3xl font-bold mb-4 italic"
+                            style="font-family: 'Noto Serif', serif;">
+                            The newsletter you'll actually want to read.
+                        </h3>
+                        <p class="text-zinc-500 mb-6 font-light">Get exclusive offers, design inspiration, and print
+                            tips delivered to your inbox.</p>
+                        <form class="flex w-full max-w-sm gap-2">
+                            <input type="email" placeholder="Email address"
+                                class="flex-grow bg-transparent border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:border-white transition-colors outline-none text-white">
+                            <button
+                                class="bg-white text-black px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all">Sign
+                                Up</button>
+                        </form>
+                    </div>
+                    <div class="flex flex-col items-start lg:items-end gap-6">
+                        <p class="text-white font-bold uppercase text-[10px] tracking-[0.3em]">Follow Us</p>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                                <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    viewBox="0 0 24 24">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/studiomarkprint/" target="_blank"
+                                rel="noopener noreferrer"
+                                class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                                <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    viewBox="0 0 24 24">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="https://www.tiktok.com/@studiomarkprint" target="_blank" rel="noopener noreferrer"
+                                class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                                <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.81-.6-4.03-1.37-.01 2.39-.01 4.79-.01 7.18-.01 1.5-.63 3.12-1.74 4.12-1.29 1.21-3.11 1.9-4.91 1.91-2.95.14-5.89-1.92-6.59-4.75-.72-2.61.14-5.51 2.24-7.24 1.25-1.01 2.87-1.57 4.47-1.58v4.03c-.28-.01-.57-.01-.85.02-1.27.13-2.45.96-2.9 2.16-.41.97-.24 2.15.42 2.94.75.9 2.03 1.18 3.1.75 1.05-.4 1.69-1.51 1.71-2.62.01-4.03.01-8.06.01-12.09z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <a href="mailto:studiomarkprint@gmail.com"
+                                class="w-10 h-10 rounded-full border border-zinc-800 flex items-center justify-center hover:border-white hover:text-white transition-all">
+                                <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-12 py-16">
+                    <div>
+                        <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Products</h4>
+                        <ul class="space-y-4 text-sm font-light">
+                            <li><a href="printing.html" class="hover:text-white transition-colors">Business Cards</a>
+                            </li>
+                            <li><a href="#" class="hover:text-white transition-colors">Postcards</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Stickers</a></li>
+                            <li><a href="flyers.html" class="hover:text-white transition-colors">Flyers</a></li>
+                            <li><a href="invitations.html" class="hover:text-white transition-colors">Invitations</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Services</h4>
+                        <ul class="space-y-4 text-sm font-light">
+                            <li><a href="#" class="hover:text-white transition-colors">Graphic Design</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Website Design</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Brand Identity</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Curation</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Packaging</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Company</h4>
+                        <ul class="space-y-4 text-sm font-light">
+                            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Our Standard</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                            <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold uppercase text-[10px] tracking-[0.3em] mb-8">Support</h4>
+                        <ul class="space-y-4 text-sm font-light">
+                            <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Shipping Info</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Return Policy</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                            <li><a href="mailto:studiomarkprint@gmail.com"
+                                    class="text-white font-medium">studiomarkprint@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div
+                        class="flex flex-col md:flex-row items-center gap-6 text-[10px] uppercase tracking-widest text-zinc-600">
+                        <p>&copy; 2026 Studio Mark &amp; Print</p>
+                        <div class="flex gap-6">
+                            <a href="#" class="hover:text-zinc-400 transition-colors">Privacy</a>
+                            <a href="#" class="hover:text-zinc-400 transition-colors">Terms</a>
+                            <a href="#" class="hover:text-zinc-400 transition-colors">Security</a>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest text-zinc-400">United States / EN</span>
+                </div>
+            </div>
+        </footer>
+
+
+        <script>
+            const seasonalCollapsed = document.getElementById('seasonal-collapsed');
+            const seasonalExpanded = document.getElementById('seasonal-expanded');
+            const seasonalHeading = document.getElementById('seasonal-heading');
+            const seasonalOpen = document.getElementById('seasonal-open');
+            const seasonalClose = document.getElementById('seasonal-close');
+
+            seasonalOpen?.addEventListener('click', () => {
+                seasonalCollapsed?.classList.add('closed');
+                seasonalExpanded?.classList.add('open');
+                seasonalHeading?.classList.add('hidden');
+            });
+
+            seasonalClose?.addEventListener('click', () => {
+                seasonalExpanded?.classList.remove('open');
+                seasonalCollapsed?.classList.remove('closed');
+                seasonalHeading?.classList.remove('hidden');
+            });
+        </script>
+
+    <script src="cart.js"></script>
+    <script src="account.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var user = Auth.getCurrentUser();
+            if (user) {
+                var labels = document.querySelectorAll('.utility-btn span:last-of-type');
+                document.querySelectorAll('.utility-btn').forEach(function(btn) {
+                    if (btn.href && btn.href.includes('account.html')) {
+                        btn.querySelector('span') && (btn.querySelector('span').textContent = user.name.split(' ')[0]);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
