@@ -7,7 +7,7 @@ import JobCard from '@/components/JobCard';
 import FilterSidebar from './FilterSidebar';
 import { Search, MapPin, Briefcase } from 'lucide-react';
 
-export const revalidate = 60;
+export const revalidate = 300;
 
 export default async function JobsPage({
   searchParams,
