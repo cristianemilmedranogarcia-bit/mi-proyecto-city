@@ -4,9 +4,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  outputFileTracingIncludes: {
-    '/**': ['./prisma/dev.db'],
-  },
 };
 
 module.exports = nextConfig;
