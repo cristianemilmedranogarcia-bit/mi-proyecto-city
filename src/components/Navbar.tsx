@@ -133,10 +133,14 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
       localStorage.setItem('postplace_city', defaultCity);
     }
     const targetPath = pathname || '/';
-    const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
-    params.set('state', newState);
-    params.set('city', defaultCity);
-    router.push(`${targetPath}?${params.toString()}`);
+    if (newState === 'CT' && defaultCity.startsWith('All')) {
+      router.push(targetPath);
+    } else {
+      const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+      params.set('state', newState);
+      params.set('city', defaultCity);
+      router.push(`${targetPath}?${params.toString()}`);
+    }
   };
 
   const handleCityChange = (newCity: string) => {
@@ -145,10 +149,14 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
       localStorage.setItem('postplace_city', newCity);
     }
     const targetPath = pathname || '/';
-    const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
-    params.set('state', selectedState);
-    params.set('city', newCity);
-    router.push(`${targetPath}?${params.toString()}`);
+    if (selectedState === 'CT' && newCity.startsWith('All')) {
+      router.push(targetPath);
+    } else {
+      const params = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+      params.set('state', selectedState);
+      params.set('city', newCity);
+      router.push(`${targetPath}?${params.toString()}`);
+    }
   };
 
   const getNavHref = (basePath: string) => {
