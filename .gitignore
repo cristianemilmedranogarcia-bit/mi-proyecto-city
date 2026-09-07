@@ -16,6 +16,8 @@ node_modules
 # Misc & System
 .DS_Store
 *.pem
+*.db
+*.db-journal
 
 # Debug logs
 npm-debug.log*
