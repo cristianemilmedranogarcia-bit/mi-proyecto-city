@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev -H 0.0.0.0",
-    "build": "npx prisma generate && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "./node_modules/.bin/next lint",
-    "seed": "./node_modules/.bin/ts-node prisma/seed.ts"
+    "postinstall": "prisma generate",
+    "lint": "next lint",
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
