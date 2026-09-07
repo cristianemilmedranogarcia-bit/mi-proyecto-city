@@ -44,16 +44,16 @@ export default async function JobsPage({
   if (city && !city.startsWith('All') && city !== 'All Cities') {
     whereClause.location = {
       city: {
-        name: { contains: city }
+        name: { contains: city, mode: 'insensitive' }
       }
     };
   }
 
   if (q) {
     whereClause.OR = [
-      { title: { contains: q } },
-      { description: { contains: q } },
-      { requirements: { contains: q } },
+      { title: { contains: q, mode: 'insensitive' } },
+      { description: { contains: q, mode: 'insensitive' } },
+      { requirements: { contains: q, mode: 'insensitive' } },
     ];
   }
 

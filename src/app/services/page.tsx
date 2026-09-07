@@ -39,16 +39,16 @@ export default async function ServicesPage({
   if (city && !city.startsWith('All') && city !== 'All Cities') {
     whereClause.location = {
       city: {
-        name: { contains: city }
+        name: { contains: city, mode: 'insensitive' }
       }
     };
   }
 
   if (q) {
     whereClause.OR = [
-      { name: { contains: q } },
-      { description: { contains: q } },
-      { provider: { name: { contains: q } } },
+      { name: { contains: q, mode: 'insensitive' } },
+      { description: { contains: q, mode: 'insensitive' } },
+      { provider: { name: { contains: q, mode: 'insensitive' } } },
     ];
   }
 
