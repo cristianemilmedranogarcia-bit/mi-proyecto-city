@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0",
-    "build": "prisma generate && next build",
-    "start": "next start",
+    "dev": "./node_modules/.bin/next dev -H 0.0.0.0",
+    "build": "./node_modules/.bin/prisma generate && ./node_modules/.bin/next build",
+    "start": "./node_modules/.bin/next start",
     "lint": "./node_modules/.bin/next lint",
     "seed": "./node_modules/.bin/ts-node prisma/seed.ts"
   },
