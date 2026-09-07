@@ -114,26 +114,29 @@ export default async function JobsPage({
     orderBy = { salaryMin: 'desc' };
   }
 
-  const jobs = await prisma.job.findMany({
-    where: whereClause,
-    include: {
-      business: { include: { location: { include: { city: true } } } },
-      category: true,
-      location: { include: { city: true } },
-    },
-    orderBy,
-  });
-
-  const categories = await prisma.jobCategory.findMany({
-    orderBy: { name: 'asc' },
-  });
+  const [jobs, categories] = await Promise.all([
+    prisma.job.findMany({
+      where: whereClause,
+      include: {
+        business: { include: { location: { include: { city: true } } } },
+        category: true,
+        location: { include: { city: true } },
+      },
+      orderBy,
+    }),
+    prisma.jobCategory.findMany({
+      orderBy: { name: 'asc' },
+    }),
+  ]);
 
   let savedJobIds: string[] = [];
   let appliedJobIds: string[] = [];
   if (user) {
-    const sj = await prisma.savedJob.findMany({ where: { userId: user.id }, select: { jobId: true } });
+    const [sj, aj] = await Promise.all([
+      prisma.savedJob.findMany({ where: { userId: user.id }, select: { jobId: true } }),
+      prisma.jobApplication.findMany({ where: { applicantId: user.id }, select: { jobId: true } }),
+    ]);
     savedJobIds = sj.map((i) => i.jobId);
-    const aj = await prisma.jobApplication.findMany({ where: { applicantId: user.id }, select: { jobId: true } });
     appliedJobIds = aj.map((i) => i.jobId);
   }
 

@@ -100,19 +100,20 @@ export default async function MarketplacePage({
   if (sort === 'price_asc') orderBy = { price: 'asc' };
   if (sort === 'price_desc') orderBy = { price: 'desc' };
 
-  const items = await prisma.marketplaceItem.findMany({
-    where: whereClause,
-    include: {
-      seller: true,
-      category: true,
-      location: { include: { city: true } },
-    },
-    orderBy,
-  });
-
-  const categories = await prisma.marketplaceCategory.findMany({
-    orderBy: { name: 'asc' },
-  });
+  const [items, categories] = await Promise.all([
+    prisma.marketplaceItem.findMany({
+      where: whereClause,
+      include: {
+        seller: true,
+        category: true,
+        location: { include: { city: true } },
+      },
+      orderBy,
+    }),
+    prisma.marketplaceCategory.findMany({
+      orderBy: { name: 'asc' },
+    }),
+  ]);
 
   let savedItemIds: string[] = [];
   if (user) {
