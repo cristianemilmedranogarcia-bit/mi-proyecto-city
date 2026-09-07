@@ -95,9 +95,9 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
           user={user}
           cityName={selectedCityName}
           stateCode={selectedStateCode}
-          latestJob={jobs[0]}
-          latestService={services[0]}
-          latestItem={items[0]}
+          latestJob={jobs?.[0]}
+          latestService={services?.[0]}
+          latestItem={items?.[0]}
         />
 
         {/* Personalized Welcome Banner if Logged In */}
