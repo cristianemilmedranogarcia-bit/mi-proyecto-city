@@ -343,19 +343,19 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
           {/* Desktop Nav Links */}
           <ul className="nav-links">
             <li>
-              <Link prefetch={true} href={getNavHref('/jobs')} className={`nav-link ${pathname.startsWith('/jobs') ? 'active' : ''}`}>
+              <Link prefetch={true} href="/jobs" className={`nav-link ${pathname.startsWith('/jobs') ? 'active' : ''}`}>
                 <Briefcase size={17} strokeWidth={1.85} />
                 <span>Jobs</span>
               </Link>
             </li>
             <li>
-              <Link prefetch={true} href={getNavHref('/services')} className={`nav-link ${pathname.startsWith('/services') ? 'active' : ''}`}>
+              <Link prefetch={true} href="/services" className={`nav-link ${pathname.startsWith('/services') ? 'active' : ''}`}>
                 <Wrench size={17} strokeWidth={1.85} />
                 <span>Services</span>
               </Link>
             </li>
             <li>
-              <Link prefetch={true} href={getNavHref('/marketplace')} className={`nav-link ${pathname.startsWith('/marketplace') ? 'active' : ''}`}>
+              <Link prefetch={true} href="/marketplace" className={`nav-link ${pathname.startsWith('/marketplace') ? 'active' : ''}`}>
                 <ShoppingBag size={17} strokeWidth={1.85} />
                 <span>Buy & Sell</span>
               </Link>
