@@ -88,27 +88,27 @@ export default function SearchHero({ user, cityName, stateCode = 'CT', latestJob
                 className={`studio-tab-btn ${activeTab === 'job' ? 'active' : ''}`}
                 onClick={() => setActiveTab('job')}
               >
-                <Briefcase size={16} />
+                <Briefcase size={14} className="studio-tab-icon" />
                 <span>Jobs</span>
-                <span className="studio-tab-badge">30 hiring</span>
+                <span className="studio-tab-badge">30</span>
               </button>
               <button
                 type="button"
                 className={`studio-tab-btn ${activeTab === 'service' ? 'active' : ''}`}
                 onClick={() => setActiveTab('service')}
               >
-                <Wrench size={16} />
+                <Wrench size={14} className="studio-tab-icon" />
                 <span>Services</span>
-                <span className="studio-tab-badge">20 pros</span>
+                <span className="studio-tab-badge">20</span>
               </button>
               <button
                 type="button"
                 className={`studio-tab-btn ${activeTab === 'marketplace' ? 'active' : ''}`}
                 onClick={() => setActiveTab('marketplace')}
               >
-                <ShoppingBag size={16} />
+                <ShoppingBag size={14} className="studio-tab-icon" />
                 <span>Buy & Sell</span>
-                <span className="studio-tab-badge">20 items</span>
+                <span className="studio-tab-badge">20</span>
               </button>
             </div>
 

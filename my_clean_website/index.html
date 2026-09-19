@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PostPlace CT | Find Local Jobs & Hire Pros</title>
+  
+  <!-- Modern Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Top Navbar Header -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="#" class="brand-logo" style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em;">
+          <span>Post<span style="color: #16845d;">Place</span></span>
+          <span class="brand-badge-pill">CT <i data-lucide="chevron-down" style="width:12px; height:12px;"></i></span>
+        </a>
+
+        <div class="city-select-pill-btn">
+          <i data-lucide="map-pin" style="width:14px; height:14px; color:#16845d;"></i>
+          <span class="city-pill-text">All Connecticut</span>
+          <i data-lucide="chevron-down" style="width:12px; height:12px;"></i>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a href="#" class="nav-link active">
+            <i data-lucide="briefcase" style="width:16px; height:16px;"></i>
+            <span>Jobs</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i data-lucide="wrench" style="width:16px; height:16px;"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i data-lucide="shopping-bag" style="width:16px; height:16px;"></i>
+            <span>Buy & Sell</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i data-lucide="map" style="width:16px; height:16px;"></i>
+            <span>Maps</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i data-lucide="bookmark" style="width:16px; height:16px;"></i>
+            <span>Saved</span>
+          </a>
+        </li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button class="btn btn-primary" style="border-radius: 12px; background-color: #16845d;">
+          <i data-lucide="plus-circle" style="width:16px; height:16px;"></i>
+          <span>Post Something</span>
+        </button>
+        <button class="btn btn-outline" style="border-radius: 10px; padding: 0.5rem 1rem;">Sign In</button>
+        <button class="btn btn-dark" style="border-radius: 10px; padding: 0.5rem 1rem; background-color: #0e3b2e;">Create Account</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="studio-hero-open-section">
+    <img src="../public/images/norwalk_hero_bg.png" alt="Local Community" class="studio-hero-bg-img" />
+    <div class="studio-hero-bg-wash"></div>
+
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="studio-hero-open-grid">
+        <div class="studio-hero-open-left">
+          <div class="studio-kicker-badge">
+            <i data-lucide="map-pin" style="width:14px; height:14px; color:#16845d;"></i>
+            <span>LIVE IN CONNECTICUT & LOCAL REGION</span>
+          </div>
+
+          <h1 class="studio-hero-open-title">
+            Find local jobs.<br />
+            Hire trusted pros.<br />
+            <em class="studio-serif-italic">in Connecticut.</em>
+          </h1>
+
+          <p class="studio-hero-open-sub">
+            The authentic community marketplace connecting workers, verified businesses, independent contractors, and local buyers across Fairfield County.
+          </p>
+
+          <div class="studio-segmented-row">
+            <button type="button" class="studio-tab-btn active">
+              <i data-lucide="briefcase" style="width:16px; height:16px;"></i>
+              <span>Jobs</span>
+              <span class="studio-tab-badge">30 hiring</span>
+            </button>
+            <button type="button" class="studio-tab-btn">
+              <i data-lucide="wrench" style="width:16px; height:16px;"></i>
+              <span>Services</span>
+              <span class="studio-tab-badge">20 pros</span>
+            </button>
+            <button type="button" class="studio-tab-btn">
+              <i data-lucide="shopping-bag" style="width:16px; height:16px;"></i>
+              <span>Buy & Sell</span>
+              <span class="studio-tab-badge">20 items</span>
+            </button>
+          </div>
+
+          <form class="studio-floating-search-card" onsubmit="event.preventDefault();">
+            <div class="studio-search-inputs-group">
+              <div class="studio-input-cell">
+                <i data-lucide="search" style="width:18px; height:18px; color:#16845d;" class="studio-cell-icon"></i>
+                <input type="text" class="studio-input-element" placeholder="Job title, company or skill (e.g. Warehouse, Cook)" />
+              </div>
+
+              <div class="studio-cell-divider"></div>
+
+              <div class="studio-input-cell studio-loc-cell">
+                <i data-lucide="map-pin" style="width:18px; height:18px; color:#0e3b2e;" class="studio-cell-icon"></i>
+                <input type="text" class="studio-input-element" value="Connecticut" readonly />
+              </div>
+
+              <div class="studio-cell-divider"></div>
+
+              <div class="studio-input-cell studio-rad-cell">
+                <select class="studio-select-element">
+                  <option>15 mi</option>
+                  <option>25 mi</option>
+                  <option>50 mi</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="studio-main-search-btn">
+              <span>Search Jobs</span>
+              <i data-lucide="arrow-right" style="width:18px; height:18px;"></i>
+            </button>
+          </form>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <span class="hero-chip">Warehouse Jobs</span>
+            <span class="hero-chip">Handyman Repair</span>
+            <span class="hero-chip">Line Cook</span>
+            <span class="hero-chip">Laptops & Tech</span>
+            <span class="hero-chip">Free Local Items</span>
+          </div>
+        </div>
+
+        <!-- Right Side Real-Time Activity Card Widget -->
+        <div class="studio-hero-open-right">
+          <div class="studio-clean-stack">
+            <div class="studio-stack-topbar">
+              <div class="studio-stack-title">
+                <span class="live-pulse-wrapper">
+                  <span class="live-pulse-ring"></span>
+                  <span class="live-pulse-dot"></span>
+                </span>
+                <span>Real-Time Activity Near You</span>
+              </div>
+              <span class="studio-stack-verified">LIVE</span>
+            </div>
+
+            <!-- Job Card (Most Recent) -->
+            <div class="studio-live-card">
+              <div class="hero-card-header">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=100&q=80" alt="Panadería Qué Delicia" class="hero-card-avatar-img" />
+                <div style="flex: 1; min-width: 0;">
+                  <div class="hero-card-tag tag-urgent">
+                    <i data-lucide="zap" style="width:11px; height:11px;"></i> Recently Posted Job
+                  </div>
+                  <div class="hero-card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    Inventory Control Manager & Shipping Coordin...
+                  </div>
+                  <div class="hero-card-sub" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    Panadería Qué Delicia · Cranbury
+                  </div>
+                </div>
+              </div>
+              <div class="hero-card-footer">
+                <span class="hero-card-salary">$27 - $33 / hr</span>
+                <span class="hero-card-action">Apply 1-Click →</span>
+              </div>
+            </div>
+
+            <!-- Service Card (Most Recent) -->
+            <div class="studio-live-card">
+              <div class="hero-card-header">
+                <div style="position: relative; flex-shrink: 0;">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Carlos Mendez" class="hero-card-avatar-img avatar-circle" />
+                  <div class="hero-avatar-badge">
+                    <i data-lucide="shield-check" style="width:10px; height:10px; color:#FFFFFF;"></i>
+                  </div>
+                </div>
+                <div style="flex: 1; min-width: 0;">
+                  <div class="hero-card-tag tag-verified">
+                    <i data-lucide="shield-check" style="width:11px; height:11px;"></i> Verified Local Pro
+                  </div>
+                  <div class="hero-card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    Dr. Pet Grooming & At-Home Veterinary Care
+                  </div>
+                  <div class="hero-card-sub" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    Carlos Mendez · Cranbury
+                  </div>
+                </div>
+              </div>
+              <div class="hero-card-footer">
+                <div class="hero-card-rating">
+                  <i data-lucide="star" style="width:13px; height:13px; fill:#F59E0B; color:#F59E0B;"></i>
+                  <span>5.0 (19 reviews)</span>
+                </div>
+                <span class="hero-card-price">$55 / hr</span>
+              </div>
+            </div>
+
+            <!-- Marketplace Card (Most Recent) -->
+            <div class="studio-live-card">
+              <div class="hero-card-header">
+                <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=100&q=80" alt="Makita Saw" class="hero-card-avatar-img item-img-rect" />
+                <div style="flex: 1; min-width: 0;">
+                  <div class="hero-card-tag tag-marketplace">
+                    <i data-lucide="tag" style="width:11px; height:11px;"></i> Marketplace Deal
+                  </div>
+                  <div class="hero-card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    Makita 18V LXT Cordless Circular Saw & Ham...
+                  </div>
+                  <div class="hero-card-sub" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    Seller: Carlos · Mill Plain District
+                  </div>
+                </div>
+              </div>
+              <div class="hero-card-footer">
+                <span class="hero-card-price-green">$195</span>
+                <span class="hero-card-loc">Pickup in Mill Plain District</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ribbon Bar -->
+  <section class="value-ribbon-bar">
+    <div class="container">
+      <div class="ribbon-grid">
+        <div class="ribbon-item">
+          <div class="ribbon-icon-box"><i data-lucide="building-2"></i></div>
+          <div>
+            <h4>10+ Verified Employers</h4>
+            <p>Norwalk businesses hiring today</p>
+          </div>
+        </div>
+        <div class="ribbon-item">
+          <div class="ribbon-icon-box"><i data-lucide="zap"></i></div>
+          <div>
+            <h4>Direct 1-Click Apply</h4>
+            <p>No external spam or redirects</p>
+          </div>
+        </div>
+        <div class="ribbon-item">
+          <div class="ribbon-icon-box"><i data-lucide="wrench"></i></div>
+          <div>
+            <h4>Verified Local Pros</h4>
+            <p>Licensed handymen & contractors</p>
+          </div>
+        </div>
+        <div class="ribbon-item">
+          <div class="ribbon-icon-box"><i data-lucide="shield-check"></i></div>
+          <div>
+            <h4>Fairfield County Local</h4>
+            <p>Exclusively Norwalk & CT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Jobs Section -->
+  <section style="padding: 3.5rem 0 2.5rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="studio-section-kicker">
+            <i data-lucide="briefcase" style="width:14px; height:14px;"></i> Immediate Opportunities
+          </span>
+          <h2 class="section-title">Jobs Nearby in All Connecticut, CT</h2>
+          <p class="section-subtitle">Real full-time, part-time, and skilled labor positions hiring today</p>
+        </div>
+        <a href="#" class="see-all-link" style="display: flex; align-items: center; gap: 0.3rem;">
+          <span>View all jobs (6)</span>
+          <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
+        </a>
+      </div>
+
+      <div class="grid-3">
+        <!-- Job 1 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=120&q=80" alt="Panadería Qué Delicia" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">Inventory Control Manager & Shipping Coordinator</h3>
+                <div class="job-company">Panadería Qué Delicia</div>
+              </div>
+            </div>
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>400 Main Ave, Cranbury, Norwalk CT</span></div>
+              <div class="salary-tag">$27–$33/hr</div>
+            </div>
+            <div class="job-tags"><span class="tag-badge">Full-time</span><span class="tag-badge">Morning Shift</span><span class="tag-badge">On-site</span></div>
+          </div>
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Job 2 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=120&q=80" alt="Metro Freight Express Lines" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">Local CDL Class B Delivery Truck Driver</h3>
+                <div class="job-company">Metro Freight Express Lines</div>
+              </div>
+            </div>
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>400 Main Ave, Cranbury, Norwalk CT</span></div>
+              <div class="salary-tag">$28–$34/hr</div>
+            </div>
+            <div class="job-tags"><span class="tag-badge">Full-time</span><span class="tag-badge">Morning Shift</span><span class="tag-badge">On-site</span></div>
+          </div>
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Job 3 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=120&q=80" alt="SoNo Craft Coffee & Bakery" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">Lead Barista & Morning Cafe Supervisor</h3>
+                <div class="job-company">SoNo Craft Coffee & Bakery</div>
+              </div>
+            </div>
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>50 Washington St, Norwalk CT</span></div>
+              <div class="salary-tag">$18.5–$23/hr</div>
+            </div>
+            <div class="job-tags"><span class="tag-badge">Full-time</span><span class="tag-badge">Morning Shift</span><span class="tag-badge">On-site</span></div>
+          </div>
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplace Buy & Sell Deals Section -->
+  <section style="background-color: #FFFFFF; padding: 3.5rem 0; border-top: 1px solid #ece7df; border-bottom: 1px solid #ece7df;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="studio-section-kicker">
+            <i data-lucide="shopping-bag" style="width:14px; height:14px;"></i> Buy & Sell Deals
+          </span>
+          <h2 class="section-title">Marketplace Items in All Connecticut</h2>
+          <p class="section-subtitle">Electronics, furniture, vehicles, tools, and free local pickups from neighbors</p>
+        </div>
+        <a href="#" class="see-all-link" style="display: flex; align-items: center; gap: 0.3rem;">
+          <span>Explore all items (8)</span>
+          <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
+        </a>
+      </div>
+
+      <div class="grid-4">
+        <!-- Item 1 -->
+        <article class="marketplace-card">
+          <div class="item-img-box">
+            <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=400&q=80" alt="Makita Drill" />
+            <button class="item-save-btn"><i data-lucide="bookmark" style="width:16px; height:16px;"></i></button>
+            <span class="item-price-badge">$195</span>
+          </div>
+          <div class="item-details">
+            <h3 class="item-title">Makita 18V LXT Cordless Circular Saw & Hammer Drill</h3>
+            <div class="item-tags"><span class="badge-blue">Good Condition</span><span class="tag-badge">Tools</span></div>
+            <div class="item-footer">
+              <div style="display:flex; align-items:center; gap:0.3rem;"><i data-lucide="map-pin" style="width:13px; height:13px; color:#E05638;"></i><span>Mill Plain, Norwalk</span></div>
+              <span>Seller: Carlos</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 2 -->
+        <article class="marketplace-card">
+          <div class="item-img-box">
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="iPhone 13 Pro" />
+            <button class="item-save-btn"><i data-lucide="bookmark" style="width:16px; height:16px;"></i></button>
+            <span class="item-price-badge">$780</span>
+          </div>
+          <div class="item-details">
+            <h3 class="item-title">iPhone 13 Pro Max - 256GB Unlocked Graphite</h3>
+            <div class="item-tags"><span class="badge-blue">Like New</span><span class="tag-badge">Electronics</span></div>
+            <div class="item-footer">
+              <div style="display:flex; align-items:center; gap:0.3rem;"><i data-lucide="map-pin" style="width:13px; height:13px; color:#E05638;"></i><span>Downtown, Stamford</span></div>
+              <span>Seller: Sarah</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 3 -->
+        <article class="marketplace-card">
+          <div class="item-img-box">
+            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=400&q=80" alt="Canon Camera" />
+            <button class="item-save-btn"><i data-lucide="bookmark" style="width:16px; height:16px;"></i></button>
+            <span class="item-price-badge">$650</span>
+          </div>
+          <div class="item-details">
+            <h3 class="item-title">Canon EOS 80D DSLR Camera with 18-135mm Lens</h3>
+            <div class="item-tags"><span class="badge-blue">Good Condition</span><span class="tag-badge">Electronics</span></div>
+            <div class="item-footer">
+              <div style="display:flex; align-items:center; gap:0.3rem;"><i data-lucide="map-pin" style="width:13px; height:13px; color:#E05638;"></i><span>SoNo, Norwalk</span></div>
+              <span>Seller: Marcus</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Item 4 -->
+        <article class="marketplace-card">
+          <div class="item-img-box">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" alt="Construction Equipment" />
+            <button class="item-save-btn"><i data-lucide="bookmark" style="width:16px; height:16px;"></i></button>
+            <span class="item-price-badge">$1200</span>
+          </div>
+          <div class="item-details">
+            <h3 class="item-title">Heavy Duty Jobsite Table Saw & Stand Kit</h3>
+            <div class="item-tags"><span class="badge-blue">Brand New</span><span class="tag-badge">Tools</span></div>
+            <div class="item-footer">
+              <div style="display:flex; align-items:center; gap:0.3rem;"><i data-lucide="map-pin" style="width:13px; height:13px; color:#E05638;"></i><span>East Norwalk</span></div>
+              <span>Seller: John</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Services Section -->
+  <section style="padding: 3.5rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="studio-section-kicker">
+            <i data-lucide="wrench" style="width:14px; height:14px;"></i> Local Professionals
+          </span>
+          <h2 class="section-title">Top Rated Services in All Connecticut</h2>
+          <p class="section-subtitle">Handymen, cleaners, plumbers, and independent local contractors</p>
+        </div>
+        <a href="#" class="see-all-link" style="display: flex; align-items: center; gap: 0.3rem;">
+          <span>Explore all services</span>
+          <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
+        </a>
+      </div>
+
+      <div class="grid-3">
+        <!-- Service 1 -->
+        <article class="service-card">
+          <div class="provider-header">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Dr. Pet Grooming" class="provider-avatar" />
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; gap: 0.4rem;">
+                <h4 class="provider-name">Carlos Mendez</h4>
+                <i data-lucide="shield-check" style="width:16px; height:16px; color:#2563EB;"></i>
+              </div>
+              <div class="rating-badge">
+                <i data-lucide="star" style="width:14px; height:14px; color:#D97706; fill:#D97706;"></i>
+                <span>5.0</span>
+                <span style="color: #64748B; font-weight: 500; font-size: 0.8rem;">(19 reviews)</span>
+              </div>
+            </div>
+            <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-title">Dr. Pet Grooming & At-Home Veterinary Care</h3>
+            <p class="service-desc">Mobile pet grooming, bath, nail trimming, and wellness checks at your doorstep.</p>
+            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #64748B; margin-bottom: 0.75rem;">
+              <i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i>
+              <span>Cranbury, Norwalk CT · Serves 20 mi radius</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem;">
+              <div>
+                <span style="font-size: 0.75rem; color: #64748B; display: block;">Pricing</span>
+                <span class="price-indicator">From $55</span>
+              </div>
+              <span style="font-size: 0.75rem; font-weight: 600; color: #059669; background-color: #ECFDF5; padding: 0.2rem 0.6rem; border-radius: 4px;">Responds in ~15 mins</span>
+            </div>
+          </div>
+          <div style="border-top: 1px solid #E2E8F0; padding-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a href="#" class="btn btn-outline btn-sm" style="flex: 1;">View Profile</a>
+            <a href="#" class="btn btn-primary btn-sm" style="flex: 1; background-color:#16845d;">Request Quote</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Businesses Hiring (Local Employers) Section -->
+  <section style="background-color: #FFFFFF; border-top: 1px solid #ece7df; padding: 3.5rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="studio-section-kicker">
+            <i data-lucide="building-2" style="width:14px; height:14px;"></i> Local Employers
+          </span>
+          <h2 class="section-title">Businesses Hiring in All Connecticut</h2>
+          <p class="section-subtitle">Verified local employers actively seeking local talent</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Business 1 -->
+        <article class="business-hiring-card">
+          <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=120&q=80" alt="Coastal Climate Control & HVAC" class="business-logo" />
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem;">
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: #0e3b2e;">Coastal Climate Control & HVAC</h3>
+              <i data-lucide="shield-check" style="width:18px; height:18px; color:#2563EB;"></i>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.6rem;">
+              Skilled Trades · East Norwalk, CT
+            </div>
+            <p style="font-size: 0.875rem; color: #475569; margin-bottom: 1rem; line-height: 1.4;">
+              Heating, ventilation, air conditioning, and indoor air quality specialists for homes and businesses.
+            </p>
+            <button class="btn btn-outline btn-sm">View Open Jobs</button>
+          </div>
+        </article>
+
+        <!-- Business 2 -->
+        <article class="business-hiring-card">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=120&q=80" alt="Stamford Executive Suites" class="business-logo" />
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem;">
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: #0e3b2e;">Stamford Executive Suites & Co-Working</h3>
+              <i data-lucide="shield-check" style="width:18px; height:18px; color:#2563EB;"></i>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.6rem;">
+              Office & Administration · Downtown Stamford, CT
+            </div>
+            <p style="font-size: 0.875rem; color: #475569; margin-bottom: 1rem; line-height: 1.4;">
+              Premium flexible office space and executive business service center in Fairfield County.
+            </p>
+            <button class="btn btn-outline btn-sm">View Open Jobs</button>
+          </div>
+        </article>
+
+        <!-- Business 3 -->
+        <article class="business-hiring-card">
+          <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=120&q=80" alt="SoNo Craft Coffee" class="business-logo" />
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem;">
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: #0e3b2e;">SoNo Craft Coffee & Bakery</h3>
+              <i data-lucide="shield-check" style="width:18px; height:18px; color:#2563EB;"></i>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.6rem;">
+              Restaurant & Hospitality · South Norwalk (SoNo), CT
+            </div>
+            <p style="font-size: 0.875rem; color: #475569; margin-bottom: 1rem; line-height: 1.4;">
+              Artisanal coffee roasters and fresh pastry bakery in the heart of South Norwalk.
+            </p>
+            <button class="btn btn-outline btn-sm">View Open Jobs</button>
+          </div>
+        </article>
+
+        <!-- Business 4 -->
+        <article class="business-hiring-card">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=120&q=80" alt="Panadería Qué Delicia" class="business-logo" />
+          <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem;">
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: #0e3b2e;">Panadería Qué Delicia</h3>
+              <i data-lucide="shield-check" style="width:18px; height:18px; color:#2563EB;"></i>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748B; margin-bottom: 0.6rem;">
+              Panadería & Restaurante · South Norwalk (SoNo), CT
+            </div>
+            <p style="font-size: 0.875rem; color: #475569; margin-bottom: 1rem; line-height: 1.4;">
+              Panadería artesanal en Norwalk. Deliciosas empanadas recién horneadas, pan fresco y productos latinos.
+            </p>
+            <button class="btn btn-outline btn-sm">View Open Jobs</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lucide icons trigger -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
+

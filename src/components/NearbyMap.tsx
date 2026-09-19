@@ -34,6 +34,7 @@ export default function NearbyMap({
         center: [center.lat, center.lng],
         zoom: 13,
         zoomControl: false,
+        scrollWheelZoom: false,
       });
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

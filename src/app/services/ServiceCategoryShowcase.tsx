@@ -36,6 +36,7 @@ interface ServiceCategoryShowcaseProps {
 const CATEGORY_VISUALS: Record<string, {
   emoji: string;
   iconComponent: React.ComponentType<any>;
+  photoUrl?: string;
   gradient: string;
   glowColor: string;
   badge?: string;
@@ -44,6 +45,7 @@ const CATEGORY_VISUALS: Record<string, {
   restaurants: {
     emoji: '🍔',
     iconComponent: Utensils,
+    photoUrl: '/images/categories/restaurants.png',
     gradient: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
     glowColor: 'rgba(255, 107, 107, 0.35)',
     badge: 'DELICIOUS',
@@ -52,6 +54,7 @@ const CATEGORY_VISUALS: Record<string, {
   automotive: {
     emoji: '🚗',
     iconComponent: Car,
+    photoUrl: '/images/categories/automotive.png',
     gradient: 'linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%)',
     glowColor: 'rgba(33, 147, 176, 0.35)',
     badge: 'AUTO PRO',
@@ -60,6 +63,7 @@ const CATEGORY_VISUALS: Record<string, {
   beauty: {
     emoji: '💇‍♀️',
     iconComponent: Scissors,
+    photoUrl: '/images/categories/beauty.png',
     gradient: 'linear-gradient(135deg, #ee9ca7 0%, #ff6a88 100%)',
     glowColor: 'rgba(255, 106, 136, 0.35)',
     badge: 'STYLE & SPA',
@@ -68,6 +72,7 @@ const CATEGORY_VISUALS: Record<string, {
   veterinary: {
     emoji: '🐾',
     iconComponent: HeartHandshake,
+    photoUrl: 'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=300&q=80',
     gradient: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
     glowColor: 'rgba(255, 154, 158, 0.35)',
     badge: 'PET CARE',
@@ -76,6 +81,7 @@ const CATEGORY_VISUALS: Record<string, {
   cleaning: {
     emoji: '🧹',
     iconComponent: Sparkles,
+    photoUrl: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=300&q=80',
     gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
     glowColor: 'rgba(56, 239, 125, 0.35)',
     badge: 'EXPRESS',
@@ -84,6 +90,7 @@ const CATEGORY_VISUALS: Record<string, {
   plumbing: {
     emoji: '🔧',
     iconComponent: Droplets,
+    photoUrl: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=300&q=80',
     gradient: 'linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)',
     glowColor: 'rgba(0, 114, 255, 0.35)',
     sublabel: 'Leaks & Drains',
@@ -91,6 +98,7 @@ const CATEGORY_VISUALS: Record<string, {
   electrical: {
     emoji: '⚡',
     iconComponent: Zap,
+    photoUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=300&q=80',
     gradient: 'linear-gradient(135deg, #F9D423 0%, #FF4E50 100%)',
     glowColor: 'rgba(249, 212, 35, 0.4)',
     badge: '24/7 PRO',
@@ -99,6 +107,7 @@ const CATEGORY_VISUALS: Record<string, {
   handyman: {
     emoji: '🔨',
     iconComponent: Hammer,
+    photoUrl: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=300&q=80',
     gradient: 'linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%)',
     glowColor: 'rgba(142, 45, 226, 0.35)',
     badge: 'POPULAR',
@@ -107,6 +116,7 @@ const CATEGORY_VISUALS: Record<string, {
   landscaping: {
     emoji: '🌿',
     iconComponent: Trees,
+    photoUrl: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=300&q=80',
     gradient: 'linear-gradient(135deg, #56ab2f 0%, #a8e063 100%)',
     glowColor: 'rgba(86, 171, 47, 0.35)',
     sublabel: 'Lawn & Patio',
@@ -209,9 +219,25 @@ function ServiceCategoryShowcaseContent({ categories }: ServiceCategoryShowcaseP
             >
               <div
                 className="uber-cat-icon-wrapper"
-                style={{ background: config.gradient }}
+                style={{
+                  background: config.photoUrl ? '#FFFFFF' : config.gradient,
+                  padding: config.photoUrl ? 0 : undefined,
+                }}
               >
-                <IconComp size={30} className="uber-cat-icon" />
+                {config.photoUrl ? (
+                  <img
+                    src={config.photoUrl}
+                    alt={cat.name}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      borderRadius: '22px',
+                    }}
+                  />
+                ) : (
+                  <IconComp size={30} className="uber-cat-icon" />
+                )}
                 <span className="uber-emoji-floating">{config.emoji}</span>
               </div>
               <div className="uber-cat-meta">

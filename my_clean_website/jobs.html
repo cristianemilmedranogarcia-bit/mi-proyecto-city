@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jobs in All Connecticut, CT | PostPlace Jobs</title>
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Top Navbar Header -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="index.html" class="brand-logo" style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em;">
+          <span>Post<span style="color: #16845d;">Place</span></span>
+          <span class="brand-badge-pill">CT <i data-lucide="chevron-down" style="width:12px; height:12px;"></i></span>
+        </a>
+
+        <div class="city-select-pill-btn">
+          <i data-lucide="map-pin" style="width:14px; height:14px; color:#16845d;"></i>
+          <span class="city-pill-text">All Connecticut</span>
+          <i data-lucide="chevron-down" style="width:12px; height:12px;"></i>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a href="jobs.html" class="nav-link active">
+            <i data-lucide="briefcase" style="width:16px; height:16px;"></i>
+            <span>Jobs</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i data-lucide="wrench" style="width:16px; height:16px;"></i>
+            <span>Services</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i data-lucide="shopping-bag" style="width:16px; height:16px;"></i>
+            <span>Buy & Sell</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i data-lucide="map" style="width:16px; height:16px;"></i>
+            <span>Maps</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i data-lucide="bookmark" style="width:16px; height:16px;"></i>
+            <span>Saved</span>
+          </a>
+        </li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <button class="btn btn-primary" style="border-radius: 12px; background-color: #16845d;">
+          <i data-lucide="plus-circle" style="width:16px; height:16px;"></i>
+          <span>Post Something</span>
+        </button>
+        <button class="btn btn-outline" style="border-radius: 10px; padding: 0.5rem 1rem;">Sign In</button>
+        <button class="btn btn-dark" style="border-radius: 10px; padding: 0.5rem 1rem; background-color: #0e3b2e;">Create Account</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Jobs Main Container -->
+  <main class="container" style="padding: 2rem 1.25rem;">
+    
+    <!-- Page Header Title -->
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 700; color: #16845d; text-transform: uppercase;">
+        <i data-lucide="briefcase" style="width:16px; height:16px;"></i> Job Search Engine
+      </div>
+      <h1 style="font-size: 2rem; margin-top: 0.2rem; font-family: var(--font-heading); color: #0e3b2e;">
+        Local Jobs in Connecticut, CT
+      </h1>
+      <p style="color: #64748B; font-size: 0.95rem;">
+        Showing 6 active positions matching your criteria
+      </p>
+    </div>
+
+    <!-- Filter Layout: Sidebar + Grid -->
+    <div class="filter-layout">
+      
+      <!-- Filter Sidebar Left -->
+      <aside class="filter-sidebar">
+        <div class="filter-box">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.4rem; font-weight: 700; font-size: 0.9rem; color: #0e3b2e;">
+              <i data-lucide="filter" style="width:16px; height:16px;"></i> Filters
+            </div>
+            <button style="display: flex; align-items: center; gap: 0.2rem; background: none; border: none; color: #16845d; font-size: 0.8rem; font-weight: 600; cursor: pointer;">
+              <i data-lucide="rotate-ccw" style="width:12px; height:12px;"></i> Reset
+            </button>
+          </div>
+
+          <!-- Location Filter -->
+          <div style="margin-bottom: 1.25rem;">
+            <div class="filter-title">City / Location</div>
+            <select class="form-input" style="width:100%; padding:0.5rem; border:1px solid #e5e0d8; border-radius:8px; font-size:0.85rem;">
+              <option value="All Connecticut" selected>All Connecticut</option>
+              <option value="Norwalk">Norwalk</option>
+              <option value="Stamford">Stamford</option>
+              <option value="Greenwich">Greenwich</option>
+              <option value="Danbury">Danbury</option>
+              <option value="Hartford">Hartford</option>
+              <option value="New Haven">New Haven</option>
+            </select>
+          </div>
+
+          <!-- Category Filter -->
+          <div style="margin-bottom: 1.25rem;">
+            <div class="filter-title">Category</div>
+            <select class="form-input" style="width:100%; padding:0.5rem; border:1px solid #e5e0d8; border-radius:8px; font-size:0.85rem;">
+              <option value="">All Categories</option>
+              <option value="skilled-trades">Skilled Trades & Labor</option>
+              <option value="restaurant">Restaurant & Hospitality</option>
+              <option value="office">Office & Administration</option>
+              <option value="healthcare">Healthcare & Nursing</option>
+            </select>
+          </div>
+
+          <!-- Employment Type -->
+          <div style="margin-bottom: 1.25rem;">
+            <div class="filter-title">Employment Type</div>
+            <label class="filter-option"><input type="radio" name="type" checked /> <span>Full time</span></label>
+            <label class="filter-option"><input type="radio" name="type" /> <span>Part time</span></label>
+            <label class="filter-option"><input type="radio" name="type" /> <span>Contract</span></label>
+            <label class="filter-option"><input type="radio" name="type" /> <span>Temp</span></label>
+          </div>
+
+          <!-- Schedule -->
+          <div style="margin-bottom: 1.25rem;">
+            <div class="filter-title">Schedule</div>
+            <label class="filter-option"><input type="radio" name="schedule" /> <span>Morning</span></label>
+            <label class="filter-option"><input type="radio" name="schedule" /> <span>Evening</span></label>
+            <label class="filter-option"><input type="radio" name="schedule" /> <span>Flexible</span></label>
+            <label class="filter-option"><input type="radio" name="schedule" /> <span>Weekend</span></label>
+          </div>
+
+          <!-- Location Type -->
+          <div style="margin-bottom: 1.25rem;">
+            <div class="filter-title">Location Type</div>
+            <label class="filter-option"><input type="radio" name="remote" /> <span>Onsite</span></label>
+            <label class="filter-option"><input type="radio" name="remote" /> <span>Hybrid</span></label>
+            <label class="filter-option"><input type="radio" name="remote" /> <span>Remote</span></label>
+          </div>
+
+          <!-- Language -->
+          <div style="margin-bottom: 1.25rem;">
+            <div class="filter-title">Language Spoken / Idioma</div>
+            <label class="filter-option"><input type="radio" name="lang" /> <span>English Required</span></label>
+            <label class="filter-option"><input type="radio" name="lang" /> <span>Spanish / Español</span></label>
+            <label class="filter-option"><input type="radio" name="lang" /> <span>Bilingual (EN / ES)</span></label>
+          </div>
+
+          <!-- Sort -->
+          <div>
+            <div class="filter-title">Sort By</div>
+            <select class="form-input" style="width:100%; padding:0.5rem; border:1px solid #e5e0d8; border-radius:8px; font-size:0.85rem;">
+              <option value="newest">Most Recent</option>
+              <option value="salary_high">Highest Salary</option>
+            </select>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Jobs Grid 2 Columns -->
+      <div class="grid-2">
+        
+        <!-- Job Card 1 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=120&q=80" alt="Panadería Qué Delicia" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">Inventory Control Manager & Shipping Coordinator</h3>
+                <div class="job-company">Panadería Qué Delicia</div>
+              </div>
+            </div>
+
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>400 Main Ave, Cranbury, Norwalk CT</span></div>
+              <div class="salary-tag">$27–$33/hr</div>
+            </div>
+
+            <div class="job-tags">
+              <span class="tag-badge">Full-time</span>
+              <span class="tag-badge">Morning Shift</span>
+              <span class="tag-badge">On-site</span>
+            </div>
+          </div>
+
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Job Card 2 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=120&q=80" alt="Metro Freight Express Lines" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">Local CDL Class B Delivery Truck Driver</h3>
+                <div class="job-company">Metro Freight Express Lines</div>
+              </div>
+            </div>
+
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>400 Main Ave, Cranbury, Norwalk CT</span></div>
+              <div class="salary-tag">$28–$34/hr</div>
+            </div>
+
+            <div class="job-tags">
+              <span class="tag-badge">Full-time</span>
+              <span class="tag-badge">Morning Shift</span>
+              <span class="tag-badge">On-site</span>
+            </div>
+          </div>
+
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Job Card 3 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=120&q=80" alt="SoNo Craft Coffee" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">Lead Barista & Morning Cafe Supervisor</h3>
+                <div class="job-company">SoNo Craft Coffee & Bakery</div>
+              </div>
+            </div>
+
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>50 Washington St, South Norwalk CT</span></div>
+              <div class="salary-tag">$18.5–$23/hr</div>
+            </div>
+
+            <div class="job-tags">
+              <span class="tag-badge">Full-time</span>
+              <span class="tag-badge">Morning Shift</span>
+              <span class="tag-badge">On-site</span>
+            </div>
+          </div>
+
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Job Card 4 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=120&q=80" alt="Coastal Climate Control" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">HVAC Service Technician & Maintenance Specialist</h3>
+                <div class="job-company">Coastal Climate Control & HVAC</div>
+              </div>
+            </div>
+
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>220 East Ave, East Norwalk, Norwalk CT</span></div>
+              <div class="salary-tag">$32–$42/hr</div>
+            </div>
+
+            <div class="job-tags">
+              <span class="tag-badge">Full-time</span>
+              <span class="tag-badge">Flexible Hours</span>
+              <span class="tag-badge">On-site</span>
+            </div>
+          </div>
+
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Job Card 5 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=120&q=80" alt="Fairfield Family Dental" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">Licensed Registered Dental Hygienist (RDH)</h3>
+                <div class="job-company">Fairfield Family Dental & Wellness</div>
+              </div>
+            </div>
+
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>400 Main Ave, Cranbury, Norwalk CT</span></div>
+              <div class="salary-tag">$45–$54/hr</div>
+            </div>
+
+            <div class="job-tags">
+              <span class="tag-badge">Part-time</span>
+              <span class="tag-badge">Flexible Hours</span>
+              <span class="tag-badge">On-site</span>
+            </div>
+          </div>
+
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Job Card 6 -->
+        <article class="job-card">
+          <div>
+            <div class="job-card-header">
+              <div class="company-logo-box"><img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=120&q=80" alt="BrightVolt Electrical" /></div>
+              <div style="flex: 1;">
+                <h3 class="job-title">Journeyman Commercial & Residential Electrician</h3>
+                <div class="job-company">BrightVolt Electrical & Solar Solutions</div>
+              </div>
+            </div>
+
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i data-lucide="map-pin" style="width:15px; height:15px; color:#E05638;"></i><span>220 East Ave, East Norwalk, Norwalk CT</span></div>
+              <div class="salary-tag">$38–$48/hr</div>
+            </div>
+
+            <div class="job-tags">
+              <span class="tag-badge">Full-time</span>
+              <span class="tag-badge">Morning Shift</span>
+              <span class="tag-badge">On-site</span>
+            </div>
+          </div>
+
+          <div class="job-card-footer">
+            <div class="posted-time"><i data-lucide="clock" style="width:13px; height:13px;"></i><span>Recently posted</span></div>
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <button class="btn-apply-card"><span>Apply</span><i data-lucide="send" style="width:12px; height:12px;"></i></button>
+              <button class="save-btn"><i data-lucide="bookmark" style="width:18px; height:18px;"></i></button>
+              <button class="share-btn-icon"><i data-lucide="share-2" style="width:18px; height:18px;"></i></button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

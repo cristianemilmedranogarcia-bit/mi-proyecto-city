@@ -235,8 +235,8 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
     <>
       <header className="navbar">
         <div className="navbar-inner">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', flexShrink: 0, minWidth: '350px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div className="nav-brand-group" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
               <Link prefetch={true} href="/" className="brand-logo" style={{ fontSize: '1.6rem', fontWeight: 800, letterSpacing: '-0.03em' }}>
                 <span>Post<span style={{ color: '#16845d' }}>Place</span></span>
               </Link>
@@ -631,10 +631,10 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
           </ul>
 
           {/* Right Header Actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
+          <div className="navbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
             {/* Post Something Primary CTA */}
             {pathname !== '/employer/dashboard' && (
-              <button className="btn btn-primary btn-sm" onClick={() => setShowPostModal(true)}>
+              <button className="btn btn-primary btn-sm nav-post-btn" onClick={() => setShowPostModal(true)}>
                 <PlusCircle size={15} />
                 <span>Post Something</span>
               </button>
@@ -826,15 +826,15 @@ function NavbarContent({ currentUser: initialUser }: NavbarProps) {
                 )}
               </div>
             ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <div className="nav-auth-btns" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Link
                   href="/login"
-                  className="btn btn-outline btn-sm"
-                  style={{ height: '37px', padding: '0 1.15rem', fontSize: '0.85rem', fontWeight: 700 }}
+                  className="btn btn-outline btn-sm nav-signin-btn"
+                  style={{ height: '34px', padding: '0 0.85rem', fontSize: '0.82rem', fontWeight: 700 }}
                 >
                   Sign In
                 </Link>
-                <Link href="/register" className="btn btn-dark btn-sm">
+                <Link href="/register" className="btn btn-dark btn-sm nav-register-btn">
                   Create Account
                 </Link>
               </div>
